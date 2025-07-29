@@ -37,10 +37,7 @@ def export_objects(objs, filepath):
     )
 
 
-def auto_export(collection_name, prefix):
+def auto_export(collection_name, path, prefix):
     for obj in bpy.data.collections[collection_name].objects:
         export_objects([obj], os.path.join(
-            os.path.dirname(bpy.data.filepath),
-            "exported",
-            f"m_tns_{prefix}{obj.name}.dae"
-        ))
+            path, f"{prefix}{obj.name}.dae"))
