@@ -1,4 +1,4 @@
-# テツダン Mod2 - TETSUDAN Train Mod 2
+# テツダン Mod 2 - TETSUDAN Train Mod 2
 
 鉄道向けパーツを追加する Stormworks の Mod です。テツダン Mod (無印) を Component Mod 対応し、一部パーツの改良・追加を行ったものです。今後のアップデートはこちらのみ行います。
 
@@ -6,7 +6,8 @@ Blender から .dae をエクスポートする作業や、.dae を .mesh に変
 
 ## 内容
 
-- 枠なしガラス
+-   枠なしガラス
+-   ハーフブロック、クォーターブロック
 
 ## 規則
 

@@ -17,6 +17,8 @@ env = load_env()
 
 def compile_mesh(target, output_dir):
     # mesh_compiler を呼び出す
+    if not os.path.isfile(target):
+        bail(f"{os.path.basename(target)} がありません")
     cmd = f'"%MESH_COMPILER_PATH%" "{target}" -o "{output_dir}" -s'
     subprocess.run(cmd, shell=True, check=True, env=env)
 

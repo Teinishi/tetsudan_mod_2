@@ -13,12 +13,6 @@
 	<voxels>
 		<voxel flags="1" physics_shape="0" />
 	</voxels>
-	<voxel_min x="0" y="0" z="0"/>
-	<voxel_max x="0" y="0" z="0"/>
-	<voxel_physics_min x="0" y="0" z="0"/>
-	<voxel_physics_max x="0" y="0" z="0"/>
-	<bb_physics_min x="0" y="0" z="0"/>
-	<bb_physics_max x="0" y="0" z="0"/>
 	<tooltip_properties description="Sits flush with walls and ceilings." short_description="Basic window piece."/>
 	<reward_properties number_rewarded="4"/>
 </definition>
