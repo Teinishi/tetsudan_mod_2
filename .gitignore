@@ -1,4 +1,6 @@
 __pycache__
-*.blend1
-blender/exported
+/blender/*.blend1
+/blender/exported
 .env
+/.tmp
+/dist

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition name="(M)(TNS) Frameless Window 1x1" category="15" type="6" mass="1" value="5" flags="48" tags="mod,tetsudan,train,basic" mesh_data_name="m_tns_frameless_window.mesh" mesh_editor_only_name="m_tns_arrow_frameless_window.mesh">
+	<surfaces>
+		<surface orientation="2" shape="0" />
+		<surface orientation="3" shape="0" />
+		<surface orientation="4" shape="0" />
+		<surface orientation="5" shape="0" />
+	</surfaces>
+	<buoyancy_surfaces>
+		<surface orientation="1" shape="1" />
+	</buoyancy_surfaces>
+	<logic_nodes/>
+	<voxels>
+		<voxel flags="1" physics_shape="0" />
+	</voxels>
+	<voxel_min x="0" y="0" z="0"/>
+	<voxel_max x="0" y="0" z="0"/>
+	<voxel_physics_min x="0" y="0" z="0"/>
+	<voxel_physics_max x="0" y="0" z="0"/>
+	<bb_physics_min x="0" y="0" z="0"/>
+	<bb_physics_max x="0" y="0" z="0"/>
+	<tooltip_properties description="Sits flush with walls and ceilings." short_description="Basic window piece."/>
+	<reward_properties number_rewarded="4"/>
+</definition>
