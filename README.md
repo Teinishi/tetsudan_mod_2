@@ -4,6 +4,10 @@
 
 Blender から .dae をエクスポートする作業や、.dae を .mesh に変換する作業、パーツ定義 XML を Component Mod の .bin にする作業などを Python で自動化しています。
 
+## 内容
+
+- 枠なしガラス
+
 ## 規則
 
 -   xml、mesh、ogg ファイルの名前は `m_tns_` で始めること。
