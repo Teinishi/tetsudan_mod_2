@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition name="(M)(TNS) Train Interior Downlight" category="4" type="10" mass="1" value="20" flags="134217728" tags="mod,tetsudan,train,light" mesh_data_name="m_tns_downlight_base.mesh" mesh_0_name="m_tns_downlight_light.mesh" light_intensity="1" light_range="10" light_ies_map="" light_fov="0" light_type="0">
+    <surfaces>
+        <surface orientation="0" shape="1" />
+        <surface orientation="1" shape="1" />
+        <surface orientation="2" shape="0" />
+        <surface orientation="3" shape="1" />
+        <surface orientation="4" shape="1" />
+        <surface orientation="5" shape="1" />
+    </surfaces>
+    <buoyancy_surfaces>
+        <surface orientation="0" shape="1" />
+        <surface orientation="1" shape="1" />
+        <surface orientation="2" shape="1" />
+        <surface orientation="3" shape="1" />
+        <surface orientation="4" shape="1" />
+        <surface orientation="5" shape="1" />
+    </buoyancy_surfaces>
+    <logic_nodes>
+        <logic_node label="Light Switch" mode="1" type="0" description="Controls whether or not the light is switched on." />
+        <logic_node label="Electric" mode="1" type="4" description="Electrical power connection." />
+    </logic_nodes>
+    <voxels>
+        <voxel flags="1" />
+    </voxels>
+    <light_position x="0" y="0" z="0" />
+    <light_color x="1" y="1" z="1" />
+    <light_forward x="0" y="0" z="1" />
+    <tooltip_properties short_description="A basic light that can be controlled using an on/off signal."/>
+</definition>

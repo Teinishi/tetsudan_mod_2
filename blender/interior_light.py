@@ -10,9 +10,9 @@ if module_path not in sys.path:
     sys.path.append(module_path)
 export_utils = importlib.import_module("export_utils")
 
-# auto_export コレクションのオブジェクトをエクスポート
+# downlight コレクションのオブジェクトをエクスポート
 export_utils.auto_export(
-    "auto_export",
+    "downlight",
     os.path.join(dirname, "exported"),
     "m_tns_"
 )

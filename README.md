@@ -8,6 +8,7 @@ Blender から .dae をエクスポートする作業や、.dae を .mesh に変
 
 -   枠なしガラス
 -   ハーフブロック、クォーターブロック
+-   室内灯 (ダウンライト)
 
 ## 規則
 
@@ -26,6 +27,7 @@ Blender から .dae をエクスポートする作業や、.dae を .mesh に変
 2. blender_export.py を実行してください。
     - /blender/\*.py には、対応する .blend から .dae をエクスポートするときの手順を Python スクリプトとして記述しています。
     - blender_export.py は /blender 内の .blend と .py のペアを探し、Blender をバックグラウンドで起動してスクリプトを実行します。
+    - もし同名の .py がなければ、default.py が使用され、auto_export コレクション内の各オブジェクトがエクスポートされます。
     - .dae は /blender/exported にエクスポートされます。
 3. compile_components.py を実行してください。
     - /definitions 以下のパーツ定義 XML ファイルが上記の規則に従っているかチェックし、問題があれば警告を出します。

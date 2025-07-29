@@ -59,7 +59,7 @@ def compile_components():
                     bail(f'{xml_filename} のタグが "{tag}" を含んでいません')
 
             # mesh の列挙
-            for attr_name in ["mesh_data_name", "mesh0_name", "mesh1_name", "mesh2_name", "mesh_editor_only_name"]:
+            for attr_name in ["mesh_data_name", "mesh_0_name", "mesh_1_name", "mesh_2_name", "mesh_editor_only_name"]:
                 mesh = root.attrib.get(attr_name, None)
                 if mesh is not None and mesh != "":
                     if not mesh.startswith(FILENAME_PREFIX):
