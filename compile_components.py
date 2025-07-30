@@ -16,6 +16,10 @@ REQUIRED_TAGS = ["mod", "tetsudan", "train"]
 env = load_env()
 
 
+def is_vanilla_mesh(name):
+    return os.path.isfile(os.path.join(env["STORMWORKS_ROM_PATH"], name))
+
+
 def compile_mesh(target, output_dir):
     # mesh_compiler を呼び出す
     if not os.path.isfile(target):
@@ -47,7 +51,7 @@ def scan_xml(filename, xml):
     for attr_name in ["mesh_data_name", "mesh_0_name", "mesh_1_name", "mesh_2_name", "mesh_editor_only_name"]:
         mesh = root.attrib.get(attr_name, None)
         if mesh is not None and mesh != "":
-            if not mesh.startswith(FILENAME_PREFIX):
+            if not mesh.startswith(FILENAME_PREFIX) and not is_vanilla_mesh(mesh):
                 bail(
                     f'{filename} の {attr_name} が "{FILENAME_PREFIX}" で始まっていません')
             meshes.append(mesh)
@@ -63,7 +67,7 @@ def create_tmp_files(tmp_dir, dae_dir, meshes, filename, xml):
 
     # meshをコンパイル
     for mesh in meshes:
-        if not os.path.isfile(os.path.join(tmp_dir, mesh)):
+        if not os.path.isfile(os.path.join(tmp_dir, mesh)) and not is_vanilla_mesh(mesh):
             mesh_name = os.path.splitext(mesh)[0]
             compile_mesh(
                 os.path.join(dae_dir, mesh_name) + ".dae",
@@ -75,7 +79,8 @@ def compile_component_bin(tmp_dir, dae_dir, dist_components_dir, filename, xml):
     meshes = scan_xml(filename, xml)
     create_tmp_files(tmp_dir, dae_dir, meshes, filename, xml)
 
-    assets = meshes
+    # バニラの mesh でないものだけ対象
+    assets = [mesh for mesh in meshes if not is_vanilla_mesh(mesh)]
 
     # component_mod_compiler を呼び出す
     cmd = f'"%COMPONENT_MOD_COMPILER_PATH%" {filename} -s'
