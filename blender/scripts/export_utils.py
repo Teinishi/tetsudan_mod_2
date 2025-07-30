@@ -75,9 +75,13 @@ def export_objects(objs, filepath):
     )
 
 
-def auto_export(collection_name, path, prefix):
+def auto_export(collection_name, path, prefix, origin_offset=False):
     for obj in bpy.data.collections[collection_name].objects:
+        dup = duplicate_objects([obj])[0]
+        if origin_offset:
+            dup.location = (0, 0, 0)
         export_objects(
-            [obj],
+            [dup],
             os.path.join(path, f"{prefix}{obj.name}.dae")
         )
+        delete_objects([dup])
