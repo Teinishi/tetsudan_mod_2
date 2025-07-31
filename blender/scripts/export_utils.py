@@ -9,6 +9,10 @@ def collection_set_hide(name, val):
         vlayer.layer_collection.children[name].hide_viewport = val
 
 
+def object_exists(name):
+    return name in bpy.data.objects
+
+
 def get_object_by_name(name):
     return bpy.data.objects.get(name)
 
@@ -45,6 +49,19 @@ def duplicate_objects(objs):
     return duplicated
 
 
+def scale_objects(objs, value, center=(0, 0, 0)):
+    select_objects(objs)
+    if isinstance(value, int) or isinstance(value, float):
+        value = (value, value, value)
+    bpy.ops.transform.resize(value=value, center_override=center)
+
+
+def rotate_objects(objs, value, axis, center=(0, 0, 0)):
+    select_objects(objs)
+    bpy.ops.transform.rotate(
+        value=value, orient_axis=axis, center_override=center)
+
+
 def translate_vertices(obj, translate, condition=True):
     if condition == True:
         def condition(): return True
@@ -65,7 +82,27 @@ def translate_vertices(obj, translate, condition=True):
     bpy.ops.object.mode_set(mode='OBJECT')
 
 
-def export_objects(objs, filepath):
+def unparent_objects(objs):
+    for obj in objs:
+        obj.parent = None
+
+
+def apply_modifiers_on_object(obj, modifier_types):
+    bpy.context.view_layer.objects.active = obj
+    for modifier in obj.modifiers:
+        print(modifier.type)
+        if modifier.type in modifier_types:
+            bpy.ops.object.modifier_apply(modifier=modifier.name)
+
+
+def apply_modifiers_on_objects(objs, modifier_types):
+    for obj in objs:
+        apply_modifiers_on_object(obj, modifier_types)
+
+
+def export_objects(objs, filepath, dirname=None):
+    if dirname is not None:
+        filepath = os.path.join(dirname, filepath)
     select_objects(objs)
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     bpy.ops.wm.collada_export(
@@ -75,8 +112,8 @@ def export_objects(objs, filepath):
     )
 
 
-def auto_export(collection_name, path, prefix, origin_offset=False):
-    for obj in bpy.data.collections[collection_name].objects:
+def export_each_object(objs, path, prefix, origin_offset=False):
+    for obj in objs:
         dup = duplicate_objects([obj])[0]
         if origin_offset:
             dup.location = (0, 0, 0)
@@ -85,3 +122,8 @@ def auto_export(collection_name, path, prefix, origin_offset=False):
             os.path.join(path, f"{prefix}{obj.name}.dae")
         )
         delete_objects([dup])
+
+
+def collection_export(collection_name, path, prefix, origin_offset=False):
+    export_each_object(
+        bpy.data.collections[collection_name].objects, path, prefix, origin_offset=origin_offset)
