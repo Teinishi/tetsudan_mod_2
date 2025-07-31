@@ -31,10 +31,10 @@ def template(type_name, name):
 	<voxels>
 		<voxel flags="1" />
 	</voxels>
-	<light_position x="0" y="0" z="0"/>
-	<light_color x="1" y="1" z="1"/>
-	<tooltip_properties short_description="A simple light that can be used as an indicator in logic systems."/>
-	<reward_properties number_rewarded="4"/>
+	<light_position x="0" y="0" z="0" />
+	<light_color x="1" y="1" z="1" />
+	<tooltip_properties short_description="A simple light that can be used as an indicator in logic systems." />
+	<reward_properties number_rewarded="4" />
 </definition>
 '''
 

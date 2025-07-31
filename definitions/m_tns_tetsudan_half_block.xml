@@ -10,12 +10,12 @@
 	<buoyancy_surfaces>
 		<surface orientation="2" shape="1" />
 	</buoyancy_surfaces>
-	<logic_nodes/>
+	<logic_nodes />
 	<voxels>
 		<voxel flags="1" physics_shape="8">
-			<physics_shape_rotation 00="1" 01="0" 02="0" 10="0" 11="-1" 12="0" 20="0" 21="0" 22="1"/>
+			<physics_shape_rotation 00="1" 01="0" 02="0" 10="0" 11="-1" 12="0" 20="0" 21="0" 22="1" />
 		</voxel>
 	</voxels>
-	<tooltip_properties short_description="Basic half-voxel building block."/>
-	<reward_properties tier="0" number_rewarded="2000"/>
+	<tooltip_properties short_description="Basic half-voxel building block." />
+	<reward_properties tier="0" number_rewarded="2000" />
 </definition>

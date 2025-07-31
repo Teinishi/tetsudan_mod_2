@@ -9,10 +9,10 @@
 	<buoyancy_surfaces>
 		<surface orientation="1" shape="1" />
 	</buoyancy_surfaces>
-	<logic_nodes/>
+	<logic_nodes />
 	<voxels>
 		<voxel flags="1" physics_shape="0" />
 	</voxels>
-	<tooltip_properties description="Sits flush with walls and ceilings." short_description="Basic window piece."/>
-	<reward_properties number_rewarded="4"/>
+	<tooltip_properties description="Sits flush with walls and ceilings." short_description="Basic window piece." />
+	<reward_properties number_rewarded="4" />
 </definition>

@@ -18,7 +18,7 @@ def template(mesh_name, name):
 			<position x="0" y="0" z="0" />
 		</voxel>
 	</voxels>
-	<tooltip_properties short_description="A decorative component."/>
+	<tooltip_properties short_description="A decorative component." />
 </definition>
 '''
 

@@ -26,5 +26,5 @@
     <light_position x="0" y="0" z="0" />
     <light_color x="1" y="1" z="1" />
     <light_forward x="0" y="0" z="1" />
-    <tooltip_properties short_description="A basic light that can be controlled using an on/off signal."/>
+    <tooltip_properties short_description="A basic light that can be controlled using an on/off signal." />
 </definition>
