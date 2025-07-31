@@ -7,7 +7,7 @@ def template(mesh_name, name):
 	name="(M)(TNS) {name}"
 	category="4" type="9" mass="1" value="1" flags="0"
 	tags="mod,tetsudan,train"
-	mesh_data_name="m_tns_{mesh_name}.mesh">
+	mesh_data_name="m_tns_tetsudan_{mesh_name}.mesh">
 	<surfaces>
 		<surface orientation="5" shape="0" />
 	</surfaces>
@@ -24,6 +24,6 @@ def template(mesh_name, name):
 
 
 print(json.dumps({
-    "m_tns_train_interior_hook_single": template("hook_type1_single", "Train Interior Hook (Single)"),
-    "m_tns_train_interior_hook_double": template("hook_type1_double", "Train Interior Hook (Double)")
+    "m_tns_tetsudan_interior_hook_single": template("hook_type1_single", "Train Interior Hook (Single)"),
+    "m_tns_tetsudan_interior_hook_double": template("hook_type1_double", "Train Interior Hook (Double)")
 }))

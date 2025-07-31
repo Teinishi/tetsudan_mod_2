@@ -7,7 +7,7 @@ def template_no_back(seat_type, seat_name):
 	name="(M)(TNS) Train Seat {seat_name}"
 	category="4" type="1" mass="2" value="25" flags="8192"
 	tags="mod,tetsudan,train,basic,seat"
-	mesh_data_name="m_tns_train_seat_{seat_type}.mesh"
+	mesh_data_name="m_tns_tetsudan_seat_{seat_type}.mesh"
 	seat_pose="0" seat_health_per_sec="0">
 	<surfaces>
 		<surface orientation="3" shape="0">
@@ -64,7 +64,7 @@ def template_low_back(seat_type, seat_name):
 	name="(M)(TNS) Train Seat {seat_name}"
 	category="4" type="1" mass="2" value="25" flags="8192"
 	tags="mod,tetsudan,train,basic,seat"
-	mesh_data_name="m_tns_train_seat_{seat_type}.mesh"
+	mesh_data_name="m_tns_tetsudan_seat_{seat_type}.mesh"
 	seat_pose="0" seat_health_per_sec="0">
 	<surfaces>
 		<surface orientation="3" shape="0">
@@ -182,7 +182,7 @@ def template_high_back(seat_type, seat_name, low_back_surface=False):
 	name="(M)(TNS) Train Seat {seat_name}"
 	category="4" type="1" mass="2" value="25" flags="8192"
 	tags="mod,tetsudan,train,basic,seat"
-	mesh_data_name="m_tns_train_seat_{seat_type}.mesh"
+	mesh_data_name="m_tns_tetsudan_seat_{seat_type}.mesh"
 	seat_pose="0" seat_health_per_sec="0">
 	<surfaces>
 		<surface orientation="3" shape="0">
@@ -312,7 +312,7 @@ def template_backrest(seat_type, seat_name):
 	name="(M)(TNS) Train Seat {seat_name}"
 	category="4" type="9" mass="1" value="10" flags="0"
 	tags="mod,tetsudan,train,basic,seat"
-	mesh_data_name="m_tns_train_seat_{seat_type}.mesh">
+	mesh_data_name="m_tns_tetsudan_seat_{seat_type}.mesh">
 	<surfaces>
 		<surface orientation="4" shape="0">
 			<position x="1" y="0" z="0" />
@@ -391,14 +391,14 @@ def template_backrest(seat_type, seat_name):
 
 
 print(json.dumps({
-    "m_tns_train_seat_type1.xml": template_no_back("type1", "Type 1"),
-    "m_tns_train_seat_type2.xml": template_no_back("type2", "Type 2"),
-    "m_tns_train_seat_type3.xml": template_high_back("type3", "Type 3"),
-    "m_tns_train_seat_type4.xml": template_high_back("type4", "Type 4"),
-    "m_tns_train_seat_type5.xml": template_high_back("type5", "Type 5", low_back_surface=True),
-    "m_tns_train_seat_type6.xml": template_low_back("type6", "Type 6"),
-    "m_tns_train_seat_type7.xml": template_low_back("type7", "Type 7"),
-    "m_tns_train_seat_type8.xml": template_high_back("type8", "Type 8", low_back_surface=True),
-    "m_tns_train_seat_backrest_type1.xml": template_backrest("backrest_type1", "Backrest Type 1"),
-    "m_tns_train_seat_backrest_type2.xml": template_backrest("backrest_type2", "Backrest Type 2")
+    "m_tns_tetsudan_seat_type1.xml": template_no_back("type1", "Type 1"),
+    "m_tns_tetsudan_seat_type2.xml": template_no_back("type2", "Type 2"),
+    "m_tns_tetsudan_seat_type3.xml": template_high_back("type3", "Type 3"),
+    "m_tns_tetsudan_seat_type4.xml": template_high_back("type4", "Type 4"),
+    "m_tns_tetsudan_seat_type5.xml": template_high_back("type5", "Type 5", low_back_surface=True),
+    "m_tns_tetsudan_seat_type6.xml": template_low_back("type6", "Type 6"),
+    "m_tns_tetsudan_seat_type7.xml": template_low_back("type7", "Type 7"),
+    "m_tns_tetsudan_seat_type8.xml": template_high_back("type8", "Type 8", low_back_surface=True),
+    "m_tns_tetsudan_seat_backrest_type1.xml": template_backrest("backrest_type1", "Backrest Type 1"),
+    "m_tns_tetsudan_seat_backrest_type2.xml": template_backrest("backrest_type2", "Backrest Type 2")
 }))

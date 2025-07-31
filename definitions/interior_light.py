@@ -7,8 +7,8 @@ def template(light_type, light_name, length, is_rgb):
 <definition
     name="(M)(TNS) Train Interior Light {light_name} {length}{" (RGB)" if is_rgb else ""}"
     category="4" type="{38 if is_rgb else 10}" mass="3" value="{125 if is_rgb else 50}" flags="134217728" tags="mod,tetsudan,train,light"
-    mesh_data_name="m_tns_interior_light_{light_type}_{length}_base.mesh"
-    mesh_0_name="m_tns_interior_light_{light_type}_{length}_light.mesh"
+    mesh_data_name="m_tns_tetsudan_interior_light_{light_type}_{length}_base.mesh"
+    mesh_0_name="m_tns_tetsudan_interior_light_{light_type}_{length}_light.mesh"
     light_intensity="1" light_range="10" light_ies_map="" light_fov="0" light_type="0">
     <surfaces>
 '''
@@ -58,13 +58,13 @@ def template(light_type, light_name, length, is_rgb):
 definitions = {}
 for type_num in range(1, 6):
     for length in (3, 5):
-        definitions[f"m_tns_interior_light_type{type_num}_{length}.xml"] = template(
+        definitions[f"m_tns_tetsudan_interior_light_type{type_num}_{length}.xml"] = template(
             light_type=f"type{type_num}",
             light_name=f"Type {type_num}",
             length=length,
             is_rgb=False
         )
-        definitions[f"m_tns_interior_light_type{type_num}_{length}_rgb.xml"] = template(
+        definitions[f"m_tns_tetsudan_interior_light_type{type_num}_{length}_rgb.xml"] = template(
             light_type=f"type{type_num}",
             light_name=f"Type {type_num}",
             length=length,

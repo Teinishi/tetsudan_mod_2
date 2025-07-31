@@ -14,5 +14,5 @@ export_utils = importlib.import_module("export_utils")
 export_utils.collection_export(
     "auto_export",
     os.path.join(dirname, "exported"),
-    "m_tns_"
+    "m_tns_tetsudan_"
 )

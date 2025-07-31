@@ -49,7 +49,7 @@ for strap_type, strap_length in itertools.product(("circle", "pentagon", "triang
         export_utils.scale_objects(objs, SCALE_STRAP)
         export_utils.export_objects(
             objs,
-            f"m_tns_train_strap_{strap_type}_{strap_length}{suffix}.dae",
+            f"m_tns_tetsudan_strap_{strap_type}_{strap_length}{suffix}.dae",
             dirname=export_path
         )
         export_utils.delete_objects(objs)
@@ -59,7 +59,7 @@ for name in ("pipe_straight", "pipe_t", "pipe_curve"):
     export_utils.export_each_object(
         [export_utils.get_object_by_name(name)],
         export_path,
-        "m_tns_train_strap_"
+        "m_tns_tetsudan_strap_"
     )
 
 for support_name in ("pipe_support_1", "pipe_support_2", "pipe_support_3"):
@@ -74,9 +74,9 @@ for support_name in ("pipe_support_1", "pipe_support_2", "pipe_support_3"):
             objs.append(export_utils.get_object_by_name(pipe_obj_name))
         export_utils.export_objects(
             objs,
-            f"m_tns_train_strap_{support_name}{suffix}.dae",
+            f"m_tns_tetsudan_strap_{support_name}{suffix}.dae",
             dirname=export_path
         )
 
 # ワクベ矢印
-export_utils.collection_export("arrow", export_path, "m_tns_train_")
+export_utils.collection_export("arrow", export_path, "m_tns_tetsudan_")

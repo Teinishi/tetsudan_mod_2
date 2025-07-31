@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definition name="(M)(TNS) Train Driver Seat Type 1" category="1" type="1" mass="3" value="50" flags="8192" tags="mod,tetsudan,train,basic,seat,control,pilot" mesh_data_name="m_tns_train_driver_seat_type1.mesh" mesh_0_name="meshes/component_pilot_seat_hat_headset.mesh" mesh_1_name="meshes/component_pilot_seat_hat_pilot.mesh" mesh_2_name="meshes/component_pilot_seat_hat_helmet.mesh" seat_pose="5" seat_health_per_sec="0">
+<definition name="(M)(TNS) Train Driver Seat Type 1" category="1" type="1" mass="3" value="50" flags="8192" tags="mod,tetsudan,train,basic,seat,control,pilot" mesh_data_name="m_tns_tetsudan_driver_seat_type1.mesh" mesh_0_name="meshes/component_pilot_seat_hat_headset.mesh" mesh_1_name="meshes/component_pilot_seat_hat_pilot.mesh" mesh_2_name="meshes/component_pilot_seat_hat_helmet.mesh" seat_pose="5" seat_health_per_sec="0">
 	<surfaces>
 		<surface orientation="3" shape="0">
 			<position x="0" y="-1" z="0"/>

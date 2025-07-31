@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definition name="(M)(TNS) Train Interior Downlight" category="4" type="10" mass="1" value="20" flags="134217728" tags="mod,tetsudan,train,light" mesh_data_name="m_tns_downlight_base.mesh" mesh_0_name="m_tns_downlight_light.mesh" light_intensity="1" light_range="10" light_ies_map="" light_fov="0" light_type="0">
+<definition name="(M)(TNS) Train Interior Downlight" category="4" type="10" mass="1" value="20" flags="134217728" tags="mod,tetsudan,train,light" mesh_data_name="m_tns_tetsudan_downlight_base.mesh" mesh_0_name="m_tns_tetsudan_downlight_light.mesh" light_intensity="1" light_range="10" light_ies_map="" light_fov="0" light_type="0">
     <surfaces>
         <surface orientation="0" shape="1" />
         <surface orientation="1" shape="1" />

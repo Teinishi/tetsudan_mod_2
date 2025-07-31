@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definition name="(M)(TNS) Frameless Window 1x1" category="15" type="6" mass="1" value="5" flags="48" tags="mod,tetsudan,train,basic" mesh_data_name="m_tns_frameless_window.mesh" mesh_editor_only_name="m_tns_arrow_frameless_window.mesh">
+<definition name="(M)(TNS) Frameless Window 1x1" category="15" type="6" mass="1" value="5" flags="48" tags="mod,tetsudan,train,basic" mesh_data_name="m_tns_tetsudan_frameless_window.mesh" mesh_editor_only_name="m_tns_tetsudan_arrow_frameless_window.mesh">
 	<surfaces>
 		<surface orientation="2" shape="0" />
 		<surface orientation="3" shape="0" />

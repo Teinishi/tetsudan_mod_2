@@ -9,7 +9,7 @@ from lib.clear_directory import clear_directory
 from lib.load_env import load_env
 from lib.malformed_xml import fix_malformed_attributes
 
-FILENAME_PREFIX = "m_tns_"
+FILENAME_PREFIX = "m_tns_tetsudan_"
 NAME_PREFIX = "(M)(TNS) "
 REQUIRED_TAGS = ["mod", "tetsudan", "train"]
 

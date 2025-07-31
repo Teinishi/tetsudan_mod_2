@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definition name="(M)(TNS) Half Block" category="0" type="6" mass="0.5" value="1" flags="56" tags="mod,tetsudan,train,basic" mesh_data_name="m_tns_half_block.mesh" mesh_editor_only_name="m_tns_arrow_half_block.mesh">
+<definition name="(M)(TNS) Quarter Block" category="0" type="6" mass="0.5" value="1" flags="56" tags="mod,tetsudan,train,basic" mesh_data_name="m_tns_tetsudan_quarter_block.mesh" mesh_editor_only_name="m_tns_tetsudan_arrow_quarter_block.mesh">
 	<surfaces>
 		<surface orientation="0" />
 		<surface orientation="1" />
@@ -12,10 +12,10 @@
 	</buoyancy_surfaces>
 	<logic_nodes/>
 	<voxels>
-		<voxel flags="1" physics_shape="8">
+		<voxel flags="1" physics_shape="9">
 			<physics_shape_rotation 00="1" 01="0" 02="0" 10="0" 11="-1" 12="0" 20="0" 21="0" 22="1"/>
 		</voxel>
 	</voxels>
-	<tooltip_properties short_description="Basic half-voxel building block."/>
+	<tooltip_properties short_description="Basic plate-shaped building block."/>
 	<reward_properties tier="0" number_rewarded="2000"/>
 </definition>

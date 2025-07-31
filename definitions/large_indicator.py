@@ -5,8 +5,8 @@ def template(type_name, name):
     return f'''<?xml version="1.0" encoding="UTF-8"?>
 <definition name="(M)(TNS) Large Indicator Light {name}"
 	category="6" type="21" mass="1" value="20" flags="8192" tags="mod,tetsudan,train,light"
-	mesh_data_name="m_tns_large_indicator_{type_name}_base.mesh"
-	mesh_0_name="m_tns_large_indicator_{type_name}_light.mesh"
+	mesh_data_name="m_tns_tetsudan_large_indicator_{type_name}_base.mesh"
+	mesh_0_name="m_tns_tetsudan_large_indicator_{type_name}_light.mesh"
 	light_intensity="0" light_range="1" light_ies_map="graphics/ies/ies_default.txtr" light_fov="1" light_type="0" indicator_type="1">
 	<surfaces>
 		<surface orientation="0" shape="1" />
@@ -40,6 +40,6 @@ def template(type_name, name):
 
 
 print(json.dumps({
-    "m_tns_large_indicator_type1": template("type1", "Type 1"),
-    "m_tns_large_indicator_type2": template("type2", "Type 2"),
+    "m_tns_tetsudan_large_indicator_type1": template("type1", "Type 1"),
+    "m_tns_tetsudan_large_indicator_type2": template("type2", "Type 2"),
 }))

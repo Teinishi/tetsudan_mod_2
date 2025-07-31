@@ -17,12 +17,12 @@ objs = [export_utils.get_object_by_name(f"driver_seat_1_{i}")
         for i in range(1, 5)]
 export_utils.export_objects(
     objs + [export_utils.get_object_by_name("driver_seat_1_floor")],
-    f"m_tns_train_driver_seat_type1.dae",
+    f"m_tns_tetsudan_driver_seat_type1.dae",
     dirname=export_path
 )
 export_utils.export_objects(
     objs + [export_utils.get_object_by_name("driver_seat_1_wall")],
-    f"m_tns_train_driver_seat_type2.dae",
+    f"m_tns_tetsudan_driver_seat_type2.dae",
     dirname=export_path
 )
 
@@ -30,6 +30,6 @@ export_utils.export_objects(
 export_utils.collection_export(
     "seats",
     export_path,
-    "m_tns_train_seat_",
+    "m_tns_tetsudan_seat_",
     origin_offset=True
 )
