@@ -24,6 +24,6 @@ def template(mesh_name, name):
 
 
 print(json.dumps({
-    "m_tns_tetsudan_interior_hook_single": template("hook_type1_single", "Train Interior Hook (Single)"),
-    "m_tns_tetsudan_interior_hook_double": template("hook_type1_double", "Train Interior Hook (Double)")
+    "m_tns_tetsudan_interior_hook_single.xml": template("hook_type1_single", "Train Interior Hook (Single)"),
+    "m_tns_tetsudan_interior_hook_double.xml": template("hook_type1_double", "Train Interior Hook (Double)")
 }))

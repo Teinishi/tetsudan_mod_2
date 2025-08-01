@@ -39,6 +39,8 @@ def export_strap(handle_type, handle_offset, belt_type, suffix="", decoratives=[
         export_utils.translate_objects([obj], (0, 0, offset))
         objs.append(obj)
 
+    export_utils.apply_modifiers_on_objects(objs, {"CURVE"})
+    export_utils.scale_objects(objs, 1.5)
     export_utils.export_objects(
         objs,
         f"m_tns_tetsudan_strap_{handle_type}_{belt_type}{suffix}.dae",
