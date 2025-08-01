@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition name="(M)(TNS) Train Strap Triangle 1 Medium 1" category="8" type="66" lua_filename="m_tns_tetsudan_strap.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,strap" mesh_data_name="m_tns_tetsudan_strap_bar_straight.mesh" mesh_0_name="m_tns_tetsudan_strap_triangle1_3_binder.mesh">
+    <surfaces>
+        <surface orientation="0" />
+        <surface orientation="1" />
+    </surfaces>
+    <buoyancy_surfaces />
+    <logic_nodes>
+        <logic_node label="Swing Data" mode="1" type="5" description="The euler angles of swing." />
+    </logic_nodes>
+    <voxels>
+        <voxel flags="1" />
+    </voxels>
+    <tooltip_properties short_description="A hanging strap for train that can swing with a number input."/>
+    <reward_properties number_rewarded="10"/>
+</definition>
+

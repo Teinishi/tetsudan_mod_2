@@ -30,6 +30,7 @@ def compile_mesh(target, output_dir):
 
 def scan_xml(filename, xml):
     meshes = []
+    lua_filename = None
 
     if not filename.startswith(FILENAME_PREFIX):
         bail(f'{filename} のファイル名が "{FILENAME_PREFIX}" で始まっていません')
@@ -56,10 +57,18 @@ def scan_xml(filename, xml):
                     f'{filename} の {attr_name} が "{FILENAME_PREFIX}" で始まっていません')
             meshes.append(mesh)
 
-    return meshes
+    # Lua のチェック
+    if int(root.attrib.get("type")) == 66:
+        lua_filename = root.attrib.get("lua_filename")
+        if not lua_filename.startswith(FILENAME_PREFIX):
+            bail(f'{lua_filename} のファイル名が "{FILENAME_PREFIX}" で始まっていません')
+
+    return (meshes, lua_filename)
 
 
-def create_tmp_files(tmp_dir, dae_dir, meshes, filename, xml):
+def compile_component_bin(tmp_dir, dae_dir, lua_dir, dist_components_dir, filename, xml):
+    meshes, lua_filename = scan_xml(filename, xml)
+
     # 一時ファイルを作成
     os.makedirs(tmp_dir, exist_ok=True)
     with open(os.path.join(tmp_dir, filename), "w", encoding="utf-8") as f:
@@ -74,13 +83,17 @@ def create_tmp_files(tmp_dir, dae_dir, meshes, filename, xml):
                 tmp_dir
             )
 
-
-def compile_component_bin(tmp_dir, dae_dir, dist_components_dir, filename, xml):
-    meshes = scan_xml(filename, xml)
-    create_tmp_files(tmp_dir, dae_dir, meshes, filename, xml)
+    # Lua をコピー
+    if lua_filename is not None:
+        lua_src_path = os.path.join(lua_dir, lua_filename)
+        if not os.path.isfile(lua_src_path):
+            bail(f"{lua_filename} がありません")
+        shutil.copy(lua_src_path, os.path.join(tmp_dir, lua_filename))
 
     # バニラの mesh でないものだけ対象
     assets = [mesh for mesh in meshes if not is_vanilla_mesh(mesh)]
+    if lua_filename is not None:
+        assets.append(lua_filename)
 
     # component_mod_compiler を呼び出す
     cmd = f'"%COMPONENT_MOD_COMPILER_PATH%" {filename} -s'
@@ -104,6 +117,7 @@ def compile_components():
     dirname = os.path.dirname(__file__)
     definitions_dir = os.path.join(dirname, "definitions")
     dae_dir = os.path.join(dirname, "blender", "exported")
+    lua_dir = os.path.join(dirname, "lua")
     tmp_dir = os.path.join(dirname, ".tmp")
     dist_components_dir = os.path.join(dirname, "dist", "data", "components")
 
@@ -117,7 +131,13 @@ def compile_components():
         xml_path = os.path.join(definitions_dir, xml_filename)
         with open(xml_path, "r", encoding="utf-8") as f:
             compile_component_bin(
-                tmp_dir, dae_dir, dist_components_dir, xml_filename, f.read())
+                tmp_dir,
+                dae_dir,
+                lua_dir,
+                dist_components_dir,
+                xml_filename,
+                f.read()
+            )
 
     for py_filename in glob.glob("*.py", root_dir=definitions_dir):
         # definitions/*.py を実行してXMLを生成させる
@@ -130,7 +150,13 @@ def compile_components():
         data = json.loads(proc.stdout)
         for (xml_filename, xml) in data.items():
             compile_component_bin(
-                tmp_dir, dae_dir, dist_components_dir, xml_filename, xml)
+                tmp_dir,
+                dae_dir,
+                lua_dir,
+                dist_components_dir,
+                xml_filename,
+                xml
+            )
 
     # mod フォルダの data/components を置き換える
     mod_path = env.get("MOD_PATH")

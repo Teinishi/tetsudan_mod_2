@@ -17,7 +17,7 @@ Blender から .dae をエクスポートする作業や、.dae を .mesh に変
 
 ## 規則
 
--   xml、mesh、ogg ファイルの名前は `m_tns_tetsudan_` で始めること。
+-   xml、mesh、ogg、lua ファイル等の名前は `m_tns_tetsudan_` で始めること。
 -   パーツ名は `(M)(TNS)` で始めること。
 -   次のタグを含めること。
     -   mod
