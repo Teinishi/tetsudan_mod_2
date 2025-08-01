@@ -14,7 +14,10 @@ def object_exists(name):
 
 
 def get_object_by_name(name):
-    return bpy.data.objects.get(name)
+    obj = bpy.data.objects.get(name)
+    if obj is None:
+        raise NameError(f'No object named "{name}" found')
+    return obj
 
 
 def deselect_all_objects():
@@ -47,6 +50,11 @@ def duplicate_objects(objs):
     duplicated = [o for o in bpy.context.selected_objects]
     deselect_all_objects()
     return duplicated
+
+
+def translate_objects(objs, value):
+    select_objects(objs)
+    bpy.ops.transform.translate(value=value)
 
 
 def scale_objects(objs, value, center=(0, 0, 0)):
