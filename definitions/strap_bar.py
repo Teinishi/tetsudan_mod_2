@@ -29,19 +29,19 @@ print(json.dumps({
         "straight",
         "Straight",
         "A straight section of bar for supporting train straps.",
-        surfaces=[0, 1],
-        flags=8
+        surfaces=[4, 5],
+        flags=32
     ),
     "m_tns_tetsudan_strap_bar_t.xml": template(
         "t",
         "T-Piece",
         "A T-shaped section of bar for supporting train straps.",
-        surfaces=[0, 1, 4],
+        surfaces=[0, 4, 5],
     ),
     "m_tns_tetsudan_strap_bar_curve.xml": template(
         "curve",
         "Curve",
         "A curved section of bar for supporting train straps.",
-        surfaces=[0, 2],
+        surfaces=[4, 2],
     )
 }))

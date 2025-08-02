@@ -98,7 +98,6 @@ def unparent_objects(objs):
 def apply_modifiers_on_object(obj, modifier_types):
     bpy.context.view_layer.objects.active = obj
     for modifier in obj.modifiers:
-        print(modifier.type)
         if modifier.type in modifier_types:
             bpy.ops.object.modifier_apply(modifier=modifier.name)
 
