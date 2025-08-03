@@ -60,13 +60,13 @@ bar_types = {
         "bar_file": "_end1",
         "bar_name": " End",
         "description2": " with a bar terminating on it",
-        "surfaces": {5}
+        "surfaces": {4}
     },
     "end2": {
         "bar_file": "_end2",
         "bar_name": " End (Side)",
         "description2": " with a bar terminating on it",
-        "surfaces": {0}
+        "surfaces": {1}
     }
 }
 

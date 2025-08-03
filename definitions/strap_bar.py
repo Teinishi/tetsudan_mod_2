@@ -36,7 +36,7 @@ print(json.dumps({
         "t",
         "T-Piece",
         "A T-shaped section of bar for supporting train straps.",
-        surfaces=[0, 4, 5],
+        surfaces=[1, 4, 5],
     ),
     "m_tns_tetsudan_strap_bar_curve.xml": template(
         "curve",

@@ -6,12 +6,11 @@
     </surfaces>
     <buoyancy_surfaces />
     <logic_nodes>
-        <logic_node label="Swing Data" mode="1" type="5" description="The euler angles of swing." />
+        <logic_node label="Rottaion Matrix" mode="1" type="5" description="N1-9: Rotation matrix" />
     </logic_nodes>
     <voxels>
         <voxel flags="1" />
     </voxels>
-    <tooltip_properties short_description="A hanging strap for train that can swing with a number input."/>
+    <tooltip_properties short_description="A hanging strap for train that can swing with a composite input."/>
     <reward_properties number_rewarded="10"/>
 </definition>
-

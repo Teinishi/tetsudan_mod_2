@@ -161,4 +161,3 @@
 	<seat_render x="0" y="-0.85" z="-0.22" />
 	<tooltip_properties description="It provides 4 number outputs that produce a standard value ranging from -1 to 1, and 6 on/off outputs. You can get in and out of the compact pilot seat by interacting with it using [$[action_use_seat]]." short_description="The compact pilot seat lets you translate keyboard presses into output signals that can control logic components." />
 </definition>
-
