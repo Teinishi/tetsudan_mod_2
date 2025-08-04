@@ -87,7 +87,7 @@ for support_type, support in support_types.items():
         description2 = bar["description2"]
         bar_surfaces = bar["surfaces"]
 
-        filename = f"m_tns_tetsudan_strap_bar_{support_type}{bar_file}.xml"
+        filename = f"m_tns_tetsudan_strap_{support_type}{bar_file}.xml"
         definitions[filename] = template(
             support_type,
             support_name,
