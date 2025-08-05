@@ -11,7 +11,7 @@ def template(name, mesh_name):
     </surfaces>
     <buoyancy_surfaces />
     <logic_nodes>
-        <logic_node label="Rottaion Data" mode="1" type="5" description="N1-9: Rotation matrix, B1: Random offset" />
+        <logic_node label="Rotation Data" mode="1" type="5" description="N1-9: Rotation matrix, B1: Random offset" />
     </logic_nodes>
     <voxels>
         <voxel flags="1" />
