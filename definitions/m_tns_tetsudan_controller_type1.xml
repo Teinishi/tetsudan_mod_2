@@ -10,6 +10,7 @@
     <buoyancy_surfaces>
         <surface orientation="0" shape="1" />
         <surface orientation="1" shape="1" />
+        <surface orientation="2" shape="1" />
         <surface orientation="3" shape="1" />
         <surface orientation="4" shape="1" />
         <surface orientation="5" shape="1" />

@@ -3,6 +3,7 @@ import glob
 import shutil
 import subprocess
 import json
+import re
 import xml.etree.ElementTree as ET
 from lib.bail import bail
 from lib.clear_directory import clear_directory
@@ -16,7 +17,7 @@ REQUIRED_TAGS = ["mod", "tetsudan", "train"]
 env = load_env()
 
 
-def is_vanilla_mesh(name):
+def is_vanilla_asset(name):
     return os.path.isfile(os.path.join(env["STORMWORKS_ROM_PATH"], name))
 
 
@@ -52,7 +53,7 @@ def scan_xml(filename, xml):
     for attr_name in ["mesh_data_name", "mesh_0_name", "mesh_1_name", "mesh_2_name", "mesh_editor_only_name"]:
         mesh = root.attrib.get(attr_name, None)
         if mesh is not None and mesh != "":
-            if not mesh.startswith(FILENAME_PREFIX) and not is_vanilla_mesh(mesh):
+            if not mesh.startswith(FILENAME_PREFIX) and not is_vanilla_asset(mesh):
                 bail(
                     f'{filename} の {attr_name} が "{FILENAME_PREFIX}" で始まっていません')
             meshes.append(mesh)
@@ -60,13 +61,36 @@ def scan_xml(filename, xml):
     # Lua のチェック
     if int(root.attrib.get("type")) == 66:
         lua_filename = root.attrib.get("lua_filename")
-        if not lua_filename.startswith(FILENAME_PREFIX):
-            bail(f'{lua_filename} のファイル名が "{FILENAME_PREFIX}" で始まっていません')
 
     return (meshes, lua_filename)
 
 
-def compile_component_bin(tmp_dir, dae_dir, lua_dir, dist_components_dir, filename, xml):
+def scan_lua(filename, lua):
+    if not filename.startswith(FILENAME_PREFIX):
+        bail(f'{filename} のファイル名が "{FILENAME_PREFIX}" で始まっていません')
+
+    pattern = re.compile(
+        "--\\s*include\\s+sfx\\s+([0-9]+)\\s+(\"([^\"]*)\"|'([^\']*)')\\s*$", flags=re.MULTILINE)
+    include_sfx = {int(m[0]): m[2] or m[3] for m in pattern.findall(lua)}
+    sfx_files = []
+    if len(include_sfx) > 0:
+        for i in range(max(include_sfx.keys()) + 1):
+            sfx = include_sfx.get(i, None)
+            if sfx is None:
+                bail(f"{filename} の include sfx {i} が抜けています")
+            if not is_vanilla_asset(sfx) and not sfx.startswith(FILENAME_PREFIX):
+                bail(f'{sfx} のファイル名が "{FILENAME_PREFIX}" で始まっていません。')
+            sfx_files.append(sfx)
+    return sfx_files
+
+
+def compile_component_bin(paths, filename, xml):
+    tmp_dir = paths["tmp"]
+    dae_dir = paths["dae"]
+    lua_dir = paths["lua"]
+    audio_dir = paths["audio"]
+    dist_components_dir = paths["dist_components"]
+
     meshes, lua_filename = scan_xml(filename, xml)
 
     # 一時ファイルを作成
@@ -76,29 +100,39 @@ def compile_component_bin(tmp_dir, dae_dir, lua_dir, dist_components_dir, filena
 
     # meshをコンパイル
     for mesh in meshes:
-        if not os.path.isfile(os.path.join(tmp_dir, mesh)) and not is_vanilla_mesh(mesh):
+        if not os.path.isfile(os.path.join(tmp_dir, mesh)) and not is_vanilla_asset(mesh):
             mesh_name = os.path.splitext(mesh)[0]
             compile_mesh(
                 os.path.join(dae_dir, mesh_name) + ".dae",
                 tmp_dir
             )
+    assets = [mesh for mesh in meshes if not is_vanilla_asset(mesh)]
 
-    # Lua をコピー
     if lua_filename is not None:
         lua_src_path = os.path.join(lua_dir, lua_filename)
         if not os.path.isfile(lua_src_path):
             bail(f"{lua_filename} がありません")
-        shutil.copy(lua_src_path, os.path.join(tmp_dir, lua_filename))
 
-    # バニラの mesh でないものだけ対象
-    assets = [mesh for mesh in meshes if not is_vanilla_mesh(mesh)]
-    if lua_filename is not None:
+        with open(lua_src_path, "r") as f:
+            # Lua に書かれている音声ファイルを追加
+            sfx_files = scan_lua(lua_filename, f.read())
+            for sfx in sfx_files:
+                if is_vanilla_asset(sfx):
+                    continue
+                sfx_path = os.path.join(audio_dir, sfx)
+                if not os.path.isfile(sfx_path):
+                    bail(f"{sfx_path} がありません")
+                shutil.copy(sfx_path, os.path.join(tmp_dir, sfx))
+                assets.append(sfx)
+
+        # Lua をコピー
+        shutil.copy(lua_src_path, os.path.join(tmp_dir, lua_filename))
         assets.append(lua_filename)
 
     # component_mod_compiler を呼び出す
     cmd = f'"%COMPONENT_MOD_COMPILER_PATH%" {filename} -s'
-    for mesh in assets:
-        cmd += f" {mesh}"
+    for item in assets:
+        cmd += f" {item}"
     subprocess.run(cmd, shell=True, check=True, env=env, cwd=tmp_dir)
 
     xml_name = os.path.splitext(filename)[0]
@@ -115,33 +149,29 @@ def compile_component_bin(tmp_dir, dae_dir, lua_dir, dist_components_dir, filena
 def compile_components():
     # 一時ファイルを作成して component_mod_compiler を呼び出す
     dirname = os.path.dirname(__file__)
-    definitions_dir = os.path.join(dirname, "definitions")
-    dae_dir = os.path.join(dirname, "blender", "exported")
-    lua_dir = os.path.join(dirname, "lua")
-    tmp_dir = os.path.join(dirname, ".tmp")
-    dist_components_dir = os.path.join(dirname, "dist", "data", "components")
+    paths = {
+        "definitions": os.path.join(dirname, "definitions"),
+        "dae": os.path.join(dirname, "blender", "exported"),
+        "audio": os.path.join(dirname, "audio"),
+        "lua": os.path.join(dirname, "lua"),
+        "tmp": os.path.join(dirname, ".tmp"),
+        "dist_components": os.path.join(dirname, "dist", "data", "components")
+    }
 
     # dist/data/components を削除
-    clear_directory(dist_components_dir)
+    clear_directory(paths["dist_components"])
     # 一時ファイルを削除
-    clear_directory(tmp_dir)
+    clear_directory(paths["tmp"])
 
-    for xml_filename in glob.glob("*.xml", root_dir=definitions_dir):
+    for xml_filename in glob.glob("*.xml", root_dir=paths["definitions"]):
         # definitions/*.xml をコンパイル
-        xml_path = os.path.join(definitions_dir, xml_filename)
+        xml_path = os.path.join(paths["definitions"], xml_filename)
         with open(xml_path, "r", encoding="utf-8") as f:
-            compile_component_bin(
-                tmp_dir,
-                dae_dir,
-                lua_dir,
-                dist_components_dir,
-                xml_filename,
-                f.read()
-            )
+            compile_component_bin(paths, xml_filename, f.read())
 
-    for py_filename in glob.glob("*.py", root_dir=definitions_dir):
+    for py_filename in glob.glob("*.py", root_dir=paths["definitions"]):
         # definitions/*.py を実行してXMLを生成させる
-        py_filepath = os.path.join(definitions_dir, py_filename)
+        py_filepath = os.path.join(paths["definitions"], py_filename)
         proc = subprocess.run(
             ["python", py_filepath],
             stdout=subprocess.PIPE,
@@ -149,14 +179,7 @@ def compile_components():
         )
         data = json.loads(proc.stdout)
         for (xml_filename, xml) in data.items():
-            compile_component_bin(
-                tmp_dir,
-                dae_dir,
-                lua_dir,
-                dist_components_dir,
-                xml_filename,
-                xml
-            )
+            compile_component_bin(paths, xml_filename, xml)
 
     # mod フォルダの data/components を置き換える
     mod_path = env.get("MOD_PATH")
@@ -166,7 +189,7 @@ def compile_components():
             bail(f'Mod フォルダがありません。"{mod_path}"')
         os.makedirs(mod_components_dir, exist_ok=True)
         shutil.rmtree(mod_components_dir)
-        shutil.copytree(dist_components_dir, mod_components_dir)
+        shutil.copytree(paths["dist_components"], mod_components_dir)
 
 
 if __name__ == "__main__":
