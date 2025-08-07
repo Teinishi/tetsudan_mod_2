@@ -1,3 +1,4 @@
+import argparse
 import os
 import glob
 import shutil
@@ -146,7 +147,7 @@ def compile_component_bin(paths, filename, xml):
     )
 
 
-def compile_components():
+def compile_components(definition_pattern=None):
     # 一時ファイルを作成して component_mod_compiler を呼び出す
     dirname = os.path.dirname(__file__)
     paths = {
@@ -163,23 +164,28 @@ def compile_components():
     # 一時ファイルを削除
     clear_directory(paths["tmp"])
 
-    for xml_filename in glob.glob("*.xml", root_dir=paths["definitions"]):
-        # definitions/*.xml をコンパイル
-        xml_path = os.path.join(paths["definitions"], xml_filename)
-        with open(xml_path, "r", encoding="utf-8") as f:
-            compile_component_bin(paths, xml_filename, f.read())
-
-    for py_filename in glob.glob("*.py", root_dir=paths["definitions"]):
-        # definitions/*.py を実行してXMLを生成させる
-        py_filepath = os.path.join(paths["definitions"], py_filename)
-        proc = subprocess.run(
-            ["python", py_filepath],
-            stdout=subprocess.PIPE,
-            text=True
-        )
-        data = json.loads(proc.stdout)
-        for (xml_filename, xml) in data.items():
-            compile_component_bin(paths, xml_filename, xml)
+    definition_pattern = definition_pattern or "*"
+    for filename in glob.glob(definition_pattern, root_dir=paths["definitions"]):
+        ext = os.path.splitext(filename)[1]
+        ext = ext.lower()
+        if ext == ".xml":
+            # definitions/*.xml をコンパイル
+            xml_path = os.path.join(paths["definitions"], filename)
+            with open(xml_path, "r", encoding="utf-8") as f:
+                compile_component_bin(paths, xml_filename, f.read())
+        elif ext == ".py":
+            # definitions/*.py を実行してXMLを生成させる
+            py_filepath = os.path.join(paths["definitions"], filename)
+            proc = subprocess.run(
+                ["python", py_filepath],
+                stdout=subprocess.PIPE,
+                text=True
+            )
+            data = json.loads(proc.stdout)
+            for (xml_filename, xml) in data.items():
+                compile_component_bin(paths, xml_filename, xml)
+        else:
+            print(f"WARNING: .xml でも .py でもない {filename} は処理されません")
 
     # mod フォルダの data/components を置き換える
     mod_path = env.get("MOD_PATH")
@@ -193,4 +199,7 @@ def compile_components():
 
 
 if __name__ == "__main__":
-    compile_components()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--pattern", type=str)
+    args = parser.parse_args()
+    compile_components(args.pattern)
