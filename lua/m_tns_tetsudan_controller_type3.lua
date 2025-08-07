@@ -7,27 +7,27 @@ function lerp(a, b, t)
 end
 
 local smooth = true
-local t = 1
+local inserted, t = false, 0.9
 local up = nil
-local show_mesh1 = false
 local transform0, transform1 = matrix.identity(), matrix.identity()
 
-function update(inserted, t_tgt)
-	if inserted and t == t_tgt then
+function update(t_tgt)
+	if inserted and math.abs(t - t_tgt) < 1e-3 then
 		smooth = false
 	elseif not inserted then
 		smooth = true
 	end
-	t_tgt = (not inserted or up > 1e-5) and 0.9 or t_tgt
-	t = smooth and clamp(t_tgt, t - 0.05, t + 0.05) or t_tgt
-	local up_tgt = (not inserted and math.abs(t - 0.9) < 1e-5) and 1 or 0
+	t_tgt = (not inserted or up == nil or up > 1e-3) and 0.9 or t_tgt
+	t = smooth and lerp(t, t_tgt, 0.1) or t_tgt
+	local up_tgt = (not inserted and math.abs(t - 0.9) < 0.03) and 1 or 0
 	up = up and clamp(up_tgt, up - 0.1, up + 0.1) or up_tgt
 	local theta = lerp(90, -60, t)/180*math.pi
 	transform0 = matrix.rotationY(theta)
-	transform1 = matrix.multiply(transform0, matrix.translation(0, 0.1*up, 0))
+	transform1 = matrix.multiply(transform0, matrix.translation(0, 0.1*up^2, 0))
 end
 
 function onParse()
+	inserted, _ = parser.parseBool("inserted", inserted)
 	t, _ = parser.parseNumber("t", t)
 	update(t)
 end
@@ -35,15 +35,15 @@ end
 function onTick()
 	local composite, success = component.getInputLogicSlotComposite(0)
 	if success then
-		local inserted = composite.bool_values[1]
+		inserted = composite.bool_values[1]
 		local value = composite.float_values[1]
-		update(inserted, clamp(value, 0, 1))
+		update(clamp(value, 0, 1))
 	end
 end
 
 function onRender()
 	component.renderMesh0(transform0)
-	if up ~= nil and up < 0.99 then
+	if up ~= nil and up < 0.999 then
 		component.renderMesh1(transform1)
 	end
 end
