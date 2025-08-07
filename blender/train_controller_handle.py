@@ -14,6 +14,7 @@ export_path = os.path.join(dirname, "exported")
 
 PREFIX = "m_tns_tetsudan_controller_"
 
+export_utils.collection_export("decorative", export_path, PREFIX)
 export_utils.collection_export("type1", export_path, PREFIX)
 export_utils.collection_export("type2", export_path, PREFIX)
 export_utils.collection_export("type3", export_path, PREFIX)
