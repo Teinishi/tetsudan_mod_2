@@ -30,13 +30,16 @@ local pos_a, pos_b = DEFAULT_POS_A, DEFAULT_POS_B
 local theta_a, theta_b = DEFAULT_THETA_A, DEFAULT_THETA_B
 local pos = nil
 local theta = nil
-local transform = matrix.identity()
+local btn_press = 0
+local transform0, transform1 = matrix.identity(), matrix.identity()
 
 function update()
 	if not pos then return end
 	local theta_tgt = lerp(theta_a, theta_b, invlerp(pos, pos_a, pos_b))
 	theta = theta ~= nil and lerp(theta, theta_tgt, 0.4) or theta_tgt
-	transform = matrix.rotationY(theta)
+	btn_press = lerp(btn_press, pos ~= 0 and 1 or 0, 0.7)
+	transform0 = matrix.rotationY(theta)
+	transform1 = matrix.multiply(transform0, matrix.translation(0, 0, 0.012*btn_press))
 end
 
 function onParse()
@@ -70,5 +73,6 @@ function onTick()
 end
 
 function onRender()
-	component.renderMesh0(transform)
+	component.renderMesh0(transform0)
+	component.renderMesh1(transform1)
 end

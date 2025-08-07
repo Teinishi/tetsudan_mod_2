@@ -37,15 +37,18 @@ end
 
 local pos = nil
 local theta = nil
-local transform = matrix.identity()
+local btn_press = 0
+local transform0, transform1 = matrix.identity(), matrix.identity
 
 function update()
 	if not pos then return end
 	local theta_tgt = STEP_ANGLES[clamp(pos, STEP_START, STEP_LAST)]
 	theta = theta ~= nil and lerp(theta, theta_tgt, 0.4) or theta_tgt
-	transform = matrix.translation(-PIVOT[1], -PIVOT[2], -PIVOT[3])
-	transform = matrix.multiply(matrix.rotationX(theta), transform)
-	transform = matrix.multiply(matrix.translation(PIVOT[1], PIVOT[2], PIVOT[3]), transform)
+	btn_press = lerp(btn_press, pos > 0 and 1 or 0, 0.7)
+	transform0 = matrix.translation(-PIVOT[1], -PIVOT[2], -PIVOT[3])
+	transform0 = matrix.multiply(matrix.rotationX(theta), transform0)
+	transform0 = matrix.multiply(matrix.translation(PIVOT[1], PIVOT[2], PIVOT[3]), transform0)
+	transform1 = matrix.multiply(transform0, matrix.translation(-0.012*btn_press, 0, 0))
 end
 
 function onParse()
@@ -69,5 +72,6 @@ function onTick()
 end
 
 function onRender()
-	component.renderMesh0(transform)
+	component.renderMesh0(transform0)
+	component.renderMesh1(transform1)
 end

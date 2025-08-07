@@ -1,5 +1,7 @@
 -- include sfx 0 "m_tns_tetsudan_controller_4.ogg"
 
+local PIVOT = {0.05, 0, 0}
+
 function clamp(x, a, b)
 	return math.min(math.max(x, a), b)
 end
@@ -16,7 +18,9 @@ function update()
 	if not pos then return end
 	local theta_tgt = -pos*45/180*math.pi
 	theta = theta ~= nil and lerp(theta, theta_tgt, 0.4) or theta_tgt
-	transform = matrix.rotationY(theta)
+	transform = matrix.translation(-PIVOT[1], -PIVOT[2], -PIVOT[3])
+	transform = matrix.multiply(matrix.rotationY(theta), transform)
+	transform = matrix.multiply(matrix.translation(PIVOT[1], PIVOT[2], PIVOT[3]), transform)
 end
 
 function onParse()
