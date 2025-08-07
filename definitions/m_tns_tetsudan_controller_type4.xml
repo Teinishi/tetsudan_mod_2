@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition name="(M)(TNS) Master Controller Type 2" category="6" type="66" lua_filename="m_tns_tetsudan_controller_type4.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,controller,handle" mesh_0_name="m_tns_tetsudan_controller_type4_dynamic.mesh">
+    <surfaces>
+        <surface orientation="3" shape="0" />
+    </surfaces>
+    <buoyancy_surfaces />
+    <logic_nodes>
+        <logic_node label="Position" mode="1" type="1" description="The position of the handle." />
+        <logic_node label="Property" mode="1" type="5" description="N1-N2: Position range, N3-4: Angle range" />
+    </logic_nodes>
+    <voxels>
+        <voxel flags="1" />
+    </voxels>
+    <tooltip_properties short_description="A master controller handle for trains."/>
+    <reward_properties number_rewarded="10"/>
+</definition>

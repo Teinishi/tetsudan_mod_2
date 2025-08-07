@@ -113,7 +113,7 @@ def compile_component_bin(paths, filename, xml):
         if not os.path.isfile(lua_src_path):
             bail(f"{lua_filename} がありません")
 
-        with open(lua_src_path, "r") as f:
+        with open(lua_src_path, "r", encoding="utf-8") as f:
             # Lua に書かれている音声ファイルを追加
             sfx_files = scan_lua(lua_filename, f.read())
             for sfx in sfx_files:

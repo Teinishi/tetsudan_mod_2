@@ -1,24 +1,11 @@
--- include sfx 0 "m_tns_tetsudan_controller_1.ogg"
--- include sfx 1 "m_tns_tetsudan_controller_2.ogg"
+-- include sfx 0 "m_tns_tetsudan_controller_3.ogg"
 
-local PIVOT = {0, 0.05, 0}
-local STEP_START = -9
+local PIVOT = {0, 0.05, 0.03}
+local STEP_START = -1
 local STEP_POS = {
-	{0, 0.125, 0.072169},
-	{0, 0.125, 0.057831},
-	{0, 0.125, 0.047831},
-	{0, 0.125, 0.038831},
-	{0, 0.125, 0.029831},
-	{0, 0.125, 0.021831},
-	{0, 0.125, 0.013831},
-	{0, 0.125, 0.005831},
-	{0, 0.125, -0.002169},
-	{0, 0.125, -0.012},
-	{0, 0.125, -0.022169},
-	{0, 0.125, -0.032169},
-	{0, 0.125, -0.043169},
-	{0, 0.125, -0.057169},
-	{0, 0.125, -0.072169},
+	{0, 0.125, -0.005},
+	{0, 0.125, 0.03},
+	{0, 0.125, 0.065},
 }
 
 local STEP_LAST = STEP_START + #STEP_POS - 1
@@ -58,9 +45,6 @@ function onTick()
 	if success then
 		local npos = clamp(math.floor(value + 0.5), STEP_START, STEP_LAST)
 		if pos ~= nil and npos ~= pos then
-			if npos == 0 or pos == 0 or npos == STEP_START or pos == STEP_START then
-				component.sfxPlayOnce(1, 1, 0, 0, 0, 1, 6, 1, 1, 0.5)
-			end
 			component.sfxPlayOnce(0, 0, 0, 0, 0, 1, 6, 1, 1, 0.5)
 		end
 		pos = npos
