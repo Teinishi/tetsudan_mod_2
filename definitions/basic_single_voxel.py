@@ -48,12 +48,12 @@ class Surface:
             return ""
 
 
-def template(name: str, mass: float, surfaces: list[Surface], mesh_name: str = None, arrow: bool = False, physics_shape: int = 1, flags: int = 1):
+def template(name: str, mass: float, surfaces: list[Surface], mesh_name: str | None = None, arrow_name: str | None = None, physics_shape: int = 1, flags: int = 1):
     xml = f'''<?xml version="1.0" encoding="UTF-8"?>
 <definition name="(M)(TNS) {name}" category="0" type="6" mass="{mass}" value="1" flags="{flags}" tags="mod,tetsudan,train,basic"{
         f' mesh_data_name="m_tns_tetsudan_{mesh_name}.mesh"' if mesh_name is not None else ""
     }{
-        f' mesh_editor_only_name="m_tns_tetsudan_arrow_{mesh_name}.mesh"' if arrow and mesh_name is not None else ""
+        f' mesh_editor_only_name="m_tns_tetsudan_{arrow_name}.mesh"' if arrow_name is not None else ""
     }>
     <surfaces>{"".join([s.surface_xml() for s in surfaces])}</surfaces>
     <buoyancy_surfaces>{"".join([s.buoyancy_surface_xml() for s in surfaces])}</buoyancy_surfaces>
@@ -69,31 +69,90 @@ def template(name: str, mass: float, surfaces: list[Surface], mesh_name: str = N
 
 
 print(json.dumps({
-    "m_tns_tetsudan_basic_half.xml": template(
-        "Half Block",
-        0.5,
-        [Surface(0), Surface(1), Surface(3, 1), Surface(4), Surface(5)],
-        "basic_half",
-        arrow=True,
-        physics_shape=8,
-        flags=DRAGGABLE_X | DRAGGABLE_Z
-    ),
-    "m_tns_tetsudan_basic_quarter.xml": template(
+    "m_tns_tetsudan_basic_slab_0001.xml": template(
         "Quarter Block",
         0.25,
         [Surface(0), Surface(1), Surface(3, 1), Surface(4), Surface(5)],
-        "basic_quarter",
-        arrow=True,
+        "basic_slab_0001",
+        arrow_name="arrow_basic_physics_9",
         physics_shape=9,
         flags=DRAGGABLE_X | DRAGGABLE_Z
     ),
-    "m_tns_tetsudan_basic_three_quarter.xml": template(
-        "Three-Quater Block",
+    "m_tns_tetsudan_basic_slab_0010.xml": template(
+        "Quarter Block (Middle)",
+        0.25,
+        [Surface(0), Surface(1), Surface(4), Surface(5)],
+        "basic_slab_0010",
+        arrow_name="arrow_basic_physics_8",
+        physics_shape=8,
+        flags=DRAGGABLE_X | DRAGGABLE_Z
+    ),
+    "m_tns_tetsudan_basic_slab_0011.xml": template(
+        "Half Block",
+        0.5,
+        [Surface(0), Surface(1), Surface(3, 1), Surface(4), Surface(5)],
+        "basic_slab_0011",
+        arrow_name="arrow_basic_physics_8",
+        physics_shape=8,
+        flags=DRAGGABLE_X | DRAGGABLE_Z
+    ),
+    "m_tns_tetsudan_basic_slab_0101.xml": template(
+        "Double Quarter Block (A)",
+        0.5,
+        [Surface(0), Surface(1), Surface(3, 1), Surface(4), Surface(5)],
+        "basic_slab_0101",
+        arrow_name="arrow_basic_physics_1",
+        physics_shape=1,
+        flags=DRAGGABLE_X | DRAGGABLE_Z
+    ),
+    "m_tns_tetsudan_basic_slab_0110.xml": template(
+        "Half Block (Middle)",
+        0.5,
+        [Surface(0), Surface(1), Surface(4), Surface(5)],
+        "basic_slab_0110",
+        arrow_name="arrow_basic_physics_1",
+        physics_shape=1,
+        flags=DRAGGABLE_X | DRAGGABLE_Z
+    ),
+    "m_tns_tetsudan_basic_slab_0111.xml": template(
+        "Three-Quarter Block",
         0.75,
         [Surface(0), Surface(1), Surface(3, 1), Surface(4), Surface(5)],
-        "basic_three_quarter",
-        arrow=True,
+        "basic_slab_0111",
+        arrow_name="arrow_basic_physics_7",
         physics_shape=7,
+        flags=DRAGGABLE_X | DRAGGABLE_Z
+    ),
+    "m_tns_tetsudan_basic_slab_1001.xml": template(
+        "Double Quarter Block (B)",
+        0.5,
+        [
+            Surface(0),
+            Surface(1),
+            Surface(2, 1),
+            Surface(3, 1),
+            Surface(4),
+            Surface(5)
+        ],
+        "basic_slab_1001",
+        arrow_name="arrow_basic_physics_1",
+        physics_shape=1,
+        flags=DRAGGABLE_X | DRAGGABLE_Z
+    ),
+    "m_tns_tetsudan_basic_slab_1011.xml": template(
+        "Half + Quarter Block",
+        0.75,
+        [
+            Surface(0),
+            Surface(1),
+            Surface(2, 1),
+            Surface(3, 1),
+            Surface(4),
+            Surface(5)
+        ],
+        "basic_slab_1011",
+        arrow_name="arrow_basic_physics_1",
+        physics_shape=1,
         flags=DRAGGABLE_X | DRAGGABLE_Z
     ),
     "m_tns_tetsudan_basic_wedge2_1.xml": template(
