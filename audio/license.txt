@@ -3,4 +3,3 @@ Following files are provided by https://otologic.jp/ under CC BY 4.0, modified b
 -   m_tns_tetsudan_controller_2.ogg
 -   m_tns_tetsudan_controller_3.ogg
 -   m_tns_tetsudan_controller_4.ogg
--   m_tns_tetsudan_controller_5.ogg
