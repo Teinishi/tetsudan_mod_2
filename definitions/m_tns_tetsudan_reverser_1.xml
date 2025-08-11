@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definition name="(M)(TNS) Reverser Type 1" category="6" type="66" lua_filename="m_tns_tetsudan_controller_type2.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,controller,handle" mesh_data_name="m_tns_tetsudan_controller_type2_base.mesh" mesh_0_name="m_tns_tetsudan_controller_type2_dynamic.mesh">
+<definition name="(M)(TNS) Reverser Type 1" category="6" type="66" lua_filename="m_tns_tetsudan_reverser_1.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,controller,handle" mesh_data_name="m_tns_tetsudan_reverser_1_static.mesh" mesh_0_name="m_tns_tetsudan_reverser_1_dynamic.mesh">
     <surfaces>
         <surface orientation="0" shape="1" />
         <surface orientation="1" shape="1" />

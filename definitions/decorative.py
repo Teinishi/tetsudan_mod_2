@@ -28,6 +28,6 @@ def template(mesh_name, name, surfaces):
 print(json.dumps({
     "m_tns_tetsudan_interior_hook_single.xml": template("hook_type1_single", "Train Interior Hook (Single)", {5}),
     "m_tns_tetsudan_interior_hook_double.xml": template("hook_type1_double", "Train Interior Hook (Double)", {5}),
-    "m_tns_tetsudan_controller_decorative_1.xml": template("controller_decorative1", "Handle Type 1", {3}),
-    "m_tns_tetsudan_controller_decorative_2.xml": template("controller_decorative2", "Handle Type 2", {3}),
+    "m_tns_tetsudan_controller_decorative_1.xml": template("controller_decorative_1", "Handle Type 1", {3}),
+    "m_tns_tetsudan_controller_decorative_2.xml": template("controller_decorative_2", "Handle Type 2", {3}),
 }))

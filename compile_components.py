@@ -172,7 +172,7 @@ def compile_components(definition_pattern=None):
             # definitions/*.xml をコンパイル
             xml_path = os.path.join(paths["definitions"], filename)
             with open(xml_path, "r", encoding="utf-8") as f:
-                compile_component_bin(paths, xml_filename, f.read())
+                compile_component_bin(paths, filename, f.read())
         elif ext == ".py":
             # definitions/*.py を実行してXMLを生成させる
             py_filepath = os.path.join(paths["definitions"], filename)

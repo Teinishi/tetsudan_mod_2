@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definition name="(M)(TNS) Master Controller Type 2" category="6" type="66" lua_filename="m_tns_tetsudan_controller_type4.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,controller,handle" mesh_0_name="m_tns_tetsudan_controller_type4_dynamic.mesh">
+<definition name="(M)(TNS) Master Controller Type 3" category="6" type="66" lua_filename="m_tns_tetsudan_master_controller_3.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,controller,handle" mesh_data_name="m_tns_tetsudan_master_controller_3_static.mesh" mesh_0_name="m_tns_tetsudan_master_controller_3_dynamic1.mesh" mesh_1_name="m_tns_tetsudan_master_controller_3_dynamic2.mesh">
     <surfaces>
         <surface orientation="3" shape="0" />
     </surfaces>
