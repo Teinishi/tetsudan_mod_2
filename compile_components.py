@@ -85,8 +85,8 @@ def scan_lua(filename, lua):
     return sfx_files
 
 
-def compile_component_bin(paths, filename, xml):
-    tmp_dir = paths["tmp"]
+def compile_component_bin(paths, filename, xml, lua_prefix=None):
+    tmp_dir = os.path.join(paths["tmp"], filename)
     dae_dir = paths["dae"]
     lua_dir = paths["lua"]
     audio_dir = paths["audio"]
@@ -115,8 +115,12 @@ def compile_component_bin(paths, filename, xml):
             bail(f"{lua_filename} がありません")
 
         with open(lua_src_path, "r", encoding="utf-8") as f:
+            lua = f.read()
+            if lua_prefix is not None:
+                lua = lua_prefix + lua
+
             # Lua に書かれている音声ファイルを追加
-            sfx_files = scan_lua(lua_filename, f.read())
+            sfx_files = scan_lua(lua_filename, lua)
             for sfx in sfx_files:
                 if is_vanilla_asset(sfx):
                     continue
@@ -126,8 +130,10 @@ def compile_component_bin(paths, filename, xml):
                 shutil.copy(sfx_path, os.path.join(tmp_dir, sfx))
                 assets.append(sfx)
 
-        # Lua をコピー
-        shutil.copy(lua_src_path, os.path.join(tmp_dir, lua_filename))
+            # Luaをコピー
+            with open(os.path.join(tmp_dir, lua_filename), "w", encoding="utf-8") as fw:
+                fw.write(lua)
+
         assets.append(lua_filename)
 
     # component_mod_compiler を呼び出す
@@ -182,8 +188,20 @@ def compile_components(definition_pattern=None):
                 text=True
             )
             data = json.loads(proc.stdout)
-            for (xml_filename, xml) in data.items():
-                compile_component_bin(paths, xml_filename, xml)
+            for (xml_filename, definition) in data.items():
+                if isinstance(definition, dict) and "xml" in definition:
+                    # 追加オプションがある場合
+                    compile_component_bin(
+                        paths,
+                        xml_filename,
+                        definition["xml"],
+                        lua_prefix=definition.get("luaPrefix")
+                    )
+                elif type(definition) is str:
+                    # 文字列ベタ書きの場合
+                    compile_component_bin(paths, xml_filename, definition)
+                else:
+                    bail(f"{filename} の {xml_filename} が処理できません")
         else:
             print(f"WARNING: .xml でも .py でもない {filename} は処理されません")
 
