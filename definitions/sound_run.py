@@ -10,7 +10,7 @@ RUN_TYPES = {
 }
 
 
-def template(name):
+def template(name, n):
     return f'''<?xml version="1.0" encoding="UTF-8"?>
 <definition name="(M)(TNS) Train Running Sound {name}" category="6" type="66" lua_filename="m_tns_tetsudan_sound_run.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,sound,buzzer" mesh_data_name="meshes/component_buzzer.mesh">
     <surfaces>
@@ -28,7 +28,7 @@ def template(name):
         <surface orientation="5" shape="1" />
     </buoyancy_surfaces>
     <logic_nodes>
-        <logic_node label="Sound Data" mode="1" type="5" description="N1:Index1, N2:Speed1, N3:Index2, N4:Speed2, ..., N8:Speed4" />
+        <logic_node label="Sound Data" mode="1" type="5" description="N1:Index1, N2:Speed1, N3:Index2, N4:Speed2, ..., N{2 * n}:Speed{n}" />
     </logic_nodes>
     <voxels>
         <voxel flags="1" />
@@ -80,7 +80,7 @@ for name_raw, name in RUN_TYPES:
         base_speed.append((i + 1, item[1]))
 
     definitions[f"m_tns_tetsudan_sound_run_{name_raw}.xml"] = {
-        "xml": template(name),
+        "xml": template(name, len(sound_files)),
         "luaPrefix": lua_prefix(sound_files, base_speed),
     }
 

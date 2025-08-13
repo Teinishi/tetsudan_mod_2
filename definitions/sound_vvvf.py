@@ -11,7 +11,7 @@ VVVF_TYPES = [
 ]
 
 
-def template(name):
+def template(name, n):
     return f'''<?xml version="1.0" encoding="UTF-8"?>
 <definition name="(M)(TNS) Train Sound {name}" category="6" type="66" lua_filename="m_tns_tetsudan_sound_vvvf.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,sound,buzzer" mesh_data_name="meshes/component_buzzer.mesh">
     <surfaces>
@@ -29,7 +29,7 @@ def template(name):
         <surface orientation="5" shape="1" />
     </buoyancy_surfaces>
     <logic_nodes>
-        <logic_node label="Sound Data" mode="1" type="5" description="N1:Volume1, N2:Pitch1, N3:Volume2, N4:Pitch2, ..., N8: Pitch4" />
+        <logic_node label="Sound Data" mode="1" type="5" description="N1:Volume1, N2:Pitch1, N3:Volume2, N4:Pitch2, ..., N{2 * n}: Pitch{n}" />
     </logic_nodes>
     <voxels>
         <voxel flags="1" />
@@ -54,10 +54,10 @@ data = {}
 
 for filename, name in VVVF_TYPES:
     files = glob.glob(
-        f"m_tns_tetsudan_sound_{filename}_*.ogg", root_dir=audio_dir)
+        f"m_tns_tetsudan_{filename}_*.ogg", root_dir=audio_dir)
     files.sort()
     data[f"m_tns_tetsudan_vvvf_{filename}.xml"] = {
-        "xml": template(name),
+        "xml": template(name, len(files)),
         "luaPrefix": lua_prefix(files),
     }
 
