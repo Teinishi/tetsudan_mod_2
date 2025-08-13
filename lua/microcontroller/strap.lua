@@ -1,5 +1,7 @@
 local GRAVITY = {0, -10, 0}
 
+local random_offset = property.getBool("Random Offset")
+
 local sin, cos = math.sin, math.cos
 
 local function dot(a, b) return a[1]*b[1] + a[2]*b[2] + a[3]*b[3] end
@@ -142,5 +144,5 @@ function onTick()
 	for i = 1, 9 do
 		output.setNumber(i, mat3[i])
 	end
-	output.setNumber(10, 0.03)
+	output.setBool(1, random_offset)
 end

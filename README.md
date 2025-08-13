@@ -1,6 +1,8 @@
 # テツダン Mod 2 - TETSUDAN Train Mod 2
 
-鉄道向けパーツを追加する Stormworks の Mod です。テツダン Mod (無印) を Component Mod 対応し、一部パーツの改良・追加を行ったものです。今後のアップデートはこちらのみ行います。
+[Steam Workshop 公開ページ](https://steamcommunity.com/sharedfiles/filedetails/?id=3548142983)
+
+鉄道向けパーツを追加する Stormworks の Mod です。[テツダン Mod (無印)](https://steamcommunity.com/sharedfiles/filedetails/?id=3397503269) を Component Mod 対応し、一部パーツの改良・追加を行ったものです。今後のアップデートはこちらのみ行います。
 
 Blender から .dae をエクスポートする作業や、.dae を .mesh に変換する作業、パーツ定義 XML を Component Mod の .bin にする作業などを Python で自動化しています。
 
@@ -22,7 +24,7 @@ Blender から .dae をエクスポートする作業や、.dae を .mesh に変
 
 握り部の形状は 丸 (Circle)、五角形 (Pentagon)、三角形 (Triangle)、二等辺三角形 (Triangle 2) の 4 種類。丸、五角形、三角形はベルトの長さが三段階あり、短と中はベルトの留め金が露出しているタイプとカバーがかけられたタイプの 2 種類。二等辺三角形は E233 系等のタイプで短と中のみ、ベルトに六角柱のカバー。
 
-揺れのシミュレーションは別途マイコンで計算してください。
+揺れのシミュレーションは[マイコン](https://steamcommunity.com/sharedfiles/filedetails/?id=3548141507)で計算してください。
 
 #### コンポジット入力
 
@@ -37,6 +39,8 @@ Blender から .dae をエクスポートする作業や、.dae を .mesh に変
 -   MB SiC: 三菱 SiC-MOSFET (E235 系 1000 番台)
 
 使用する際は別途マイコンと組み合わせて鳴らす音を制御し、惰性走行音と組み合わせてください。同時に再生できるのは 4 音声までです。
+
+VVVF 用マイコンは今後提供予定です。
 
 #### コンポジット入力
 
@@ -136,3 +140,7 @@ Component Lua API から音声を使う場合、Lua ファイルに次のよう�
 ```
 
 バニラに存在するファイルの場合、以上の処理はスキップされます。
+
+## 更新履歴
+
+-   2025/08/13 v0.1.0 試用版リリース
