@@ -1,20 +1,6 @@
--- include sfx 0 "m_tns_tetsudan_run_1.ogg"
--- include sfx 1 "m_tns_tetsudan_run_2.ogg"
--- include sfx 2 "m_tns_tetsudan_run_3.ogg"
--- include sfx 3 "m_tns_tetsudan_run_4.ogg"
--- include sfx 4 "m_tns_tetsudan_run_5.ogg"
-
 RADIUS_INNER = 20
 RADIUS_OUTER = 200
-SPEED_MAX_VOLUME = 100
-
-BASE_SPEED = {
-    [1] = 60,
-    [2] = 115,
-    [3] = 90,
-    [4] = 90,
-    [5] = 90
-}
+SPEED_MAX_VOLUME = 50
 
 local function clamp(x, a, b)
     return math.min(math.max(x, a), b)
@@ -56,7 +42,7 @@ function onTick()
 
             if base ~= nil then
                 local pitch = speed / base
-                local volume = clamp((speed - 0.1 * base) / (SPEED_MAX_VOLUME - 0.1 * base), 0, 1)
+                local volume = clamp((speed - 0.1 * base) / (0.4 * base), 0, 1)
                 if volume > 0 then
                     sfx_update(i, index - 1, volume, pitch)
                 else
