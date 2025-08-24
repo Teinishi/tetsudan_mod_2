@@ -1,11 +1,11 @@
 import json
 
 
-def template(light_type, light_name, length, is_rgb):
+def template(light_type, light_name, length, length_name, is_rgb):
     ez = int(length / 2)
     xml = f'''<?xml version="1.0" encoding="UTF-8"?>
 <definition
-    name="(M)(TNS) Train Interior Light {light_name} {length}{" (RGB)" if is_rgb else ""}"
+    name="(M)(TNS) Train Interior Light {light_name} {length_name}{" (RGB)" if is_rgb else ""}"
     category="4" type="{38 if is_rgb else 10}" mass="3" value="{125 if is_rgb else 50}" flags="134217728" tags="mod,tetsudan,train,light"
     mesh_data_name="m_tns_tetsudan_interior_light_{light_type}_{length}_base.mesh"
     mesh_0_name="m_tns_tetsudan_interior_light_{light_type}_{length}_light.mesh"
@@ -57,17 +57,19 @@ def template(light_type, light_name, length, is_rgb):
 
 definitions = {}
 for type_num in range(1, 6):
-    for length in (3, 5):
+    for length, length_name in [(3, "Short"), (5, "Long")]:
         definitions[f"m_tns_tetsudan_interior_light_type{type_num}_{length}.xml"] = template(
             light_type=f"type{type_num}",
             light_name=f"Type {type_num}",
             length=length,
+            length_name=length_name,
             is_rgb=False
         )
         definitions[f"m_tns_tetsudan_interior_light_type{type_num}_{length}_rgb.xml"] = template(
             light_type=f"type{type_num}",
             light_name=f"Type {type_num}",
             length=length,
+            length_name=length_name,
             is_rgb=True
         )
 
