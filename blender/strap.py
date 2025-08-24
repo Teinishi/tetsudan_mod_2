@@ -81,7 +81,7 @@ export_strap("triangle2", -0.12, 2, decoratives=[("hexagonal_cover", -0.07)])
 export_strap("triangle3", -0.1, 1, decoratives=[("hexagonal_cover", -0.06)])
 
 # 吊り棒
-for name in ("bar_straight", "bar_t", "bar_curve"):
+for name in ("bar_straight", "bar_straight_paint", "bar_t", "bar_curve"):
     export_utils.export_each_object(
         [export_utils.get_object_by_name(name)],
         export_path,

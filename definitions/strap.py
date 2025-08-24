@@ -4,7 +4,7 @@ import json
 
 def template(name, mesh_name):
     return f'''<?xml version="1.0" encoding="UTF-8"?>
-<definition name="(M)(TNS) Train Strap {name}" category="8" type="66" lua_filename="m_tns_tetsudan_strap.lua" mass="1" value="10" flags="32" tags="mod,tetsudan,train,strap" mesh_data_name="m_tns_tetsudan_strap_bar_straight.mesh" mesh_0_name="m_tns_tetsudan_strap_{mesh_name}.mesh">
+<definition name="(M)(TNS) Train Strap {name}" category="8" type="66" lua_filename="m_tns_tetsudan_strap.lua" mass="1" value="10" flags="32" tags="mod,tetsudan,train,strap" mesh_data_name="m_tns_tetsudan_strap_bar_straight_paint.mesh" mesh_0_name="m_tns_tetsudan_strap_{mesh_name}.mesh">
     <surfaces>
         <surface orientation="4" />
         <surface orientation="5" />
