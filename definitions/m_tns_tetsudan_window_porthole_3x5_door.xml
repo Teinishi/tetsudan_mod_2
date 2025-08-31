@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition name="(M)(TNS) Porthole (Reduced Voxel)" category="15" type="9" mass="8" value="50" tags="mod,tetsudan,train,basic" mesh_data_name="meshes/component_window_thick.mesh">
+    <surfaces>
+        <surface orientation="3" shape="1">
+            <position x="0" y="-2" z="-1"/>
+        </surface>
+        <surface orientation="3" shape="1">
+            <position x="0" y="-2" z="0"/>
+        </surface>
+        <surface orientation="3" shape="1">
+            <position x="0" y="-2" z="1"/>
+        </surface>
+        <surface orientation="5" shape="1">
+            <position x="0" y="-2" z="-1"/>
+        </surface>
+        <surface orientation="4" shape="1">
+            <position x="0" y="-2" z="1"/>
+        </surface>
+        <surface orientation="5" shape="1">
+            <position x="0" y="-1" z="-1"/>
+        </surface>
+        <surface orientation="4" shape="1">
+            <position x="0" y="-1" z="1"/>
+        </surface>
+        <surface orientation="5" shape="1">
+            <position x="0" y="0" z="-1"/>
+        </surface>
+        <surface orientation="4" shape="1">
+            <position x="0" y="0" z="1"/>
+        </surface>
+        <surface orientation="5" shape="1">
+            <position x="0" y="1" z="-1"/>
+        </surface>
+        <surface orientation="4" shape="1">
+            <position x="0" y="1" z="1"/>
+        </surface>
+        <surface orientation="5" shape="1">
+            <position x="0" y="2" z="-1"/>
+        </surface>
+        <surface orientation="4" shape="1">
+            <position x="0" y="2" z="1"/>
+        </surface>
+        <surface orientation="2" shape="1">
+            <position x="0" y="2" z="-1"/>
+        </surface>
+        <surface orientation="2" shape="1">
+            <position x="0" y="2" z="0"/>
+        </surface>
+        <surface orientation="2" shape="1">
+            <position x="0" y="2" z="1"/>
+        </surface>
+    </surfaces>
+    <buoyancy_surfaces>
+        <surface orientation="1" shape="1">
+            <position x="0" y="-2" z="-1"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="-2" z="0"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="-2" z="1"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="-1" z="-1"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="-1" z="0"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="-1" z="1"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="0" z="-1"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="0" z="0"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="0" z="1"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="1" z="-1"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="1" z="0"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="1" z="1"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="2" z="-1"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="2" z="0"/>
+        </surface>
+        <surface orientation="1" shape="1">
+            <position x="0" y="2" z="1"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="-2" z="-1"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="-2" z="0"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="-2" z="1"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="-1" z="-1"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="-1" z="0"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="-1" z="1"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="0" z="-1"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="0" z="0"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="0" z="1"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="1" z="-1"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="1" z="0"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="1" z="1"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="2" z="-1"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="2" z="0"/>
+        </surface>
+        <surface orientation="0" shape="1">
+            <position x="0" y="2" z="1"/>
+        </surface>
+        <surface orientation="3" shape="1">
+            <position x="0" y="-2" z="-1"/>
+        </surface>
+        <surface orientation="3" shape="1">
+            <position x="0" y="-2" z="0"/>
+        </surface>
+        <surface orientation="3" shape="1">
+            <position x="0" y="-2" z="1"/>
+        </surface>
+        <surface orientation="5" shape="1">
+            <position x="0" y="-2" z="-1"/>
+        </surface>
+        <surface orientation="4" shape="1">
+            <position x="0" y="-2" z="1"/>
+        </surface>
+        <surface orientation="5" shape="1">
+            <position x="0" y="-1" z="-1"/>
+        </surface>
+        <surface orientation="4" shape="1">
+            <position x="0" y="-1" z="1"/>
+        </surface>
+        <surface orientation="5" shape="1">
+            <position x="0" y="0" z="-1"/>
+        </surface>
+        <surface orientation="4" shape="1">
+            <position x="0" y="0" z="1"/>
+        </surface>
+        <surface orientation="5" shape="1">
+            <position x="0" y="1" z="-1"/>
+        </surface>
+        <surface orientation="4" shape="1">
+            <position x="0" y="1" z="1"/>
+        </surface>
+        <surface orientation="5" shape="1">
+            <position x="0" y="2" z="-1"/>
+        </surface>
+        <surface orientation="4" shape="1">
+            <position x="0" y="2" z="1"/>
+        </surface>
+        <surface orientation="2" shape="1">
+            <position x="0" y="2" z="-1"/>
+        </surface>
+        <surface orientation="2" shape="1">
+            <position x="0" y="2" z="0"/>
+        </surface>
+        <surface orientation="2" shape="1">
+            <position x="0" y="2" z="1"/>
+        </surface>
+    </buoyancy_surfaces>
+    <logic_nodes/>
+    <voxels>
+        <voxel flags="1">
+            <position x="0" y="-2" z="-1"/>
+        </voxel>
+        <voxel flags="1">
+            <position x="0" y="-2" z="0"/>
+        </voxel>
+        <voxel flags="1">
+            <position x="0" y="-2" z="1"/>
+        </voxel>
+        <voxel flags="1">
+            <position x="0" y="0" z="-1"/>
+        </voxel>
+        <voxel flags="1">
+            <position x="0" y="0" z="0"/>
+        </voxel>
+        <voxel flags="1">
+            <position x="0" y="0" z="1"/>
+        </voxel>
+        <voxel flags="1">
+            <position x="0" y="2" z="-1"/>
+        </voxel>
+        <voxel flags="1">
+            <position x="0" y="2" z="0"/>
+        </voxel>
+        <voxel flags="1">
+            <position x="0" y="2" z="1"/>
+        </voxel>
+    </voxels>
+    <voxel_min x="0" y="-2" z="-1"/>
+    <voxel_max x="0" y="2" z="1"/>
+    <voxel_physics_min x="0" y="-2" z="-1"/>
+    <voxel_physics_max x="0" y="2" z="1"/>
+    <tooltip_properties description="Useful for train doors that slide into stretched blocks." short_description="Large 3x5 window piece with a thick frame."/>
+    <reward_properties tier="4" number_rewarded="6"/>
+</definition>
