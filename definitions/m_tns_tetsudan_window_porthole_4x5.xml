@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definition name="(M)(TNS) Porthole 4x5" category="15" type="9" mass="8" value="50" tags="mod,tetsudan,train,basic" mesh_data_name="m_tns_tetsudan_porthole_4x5.mesh">
+<definition name="(M)(TNS) Porthole 4x5" category="15" type="9" mass="9" value="70" tags="mod,tetsudan,train,basic" mesh_data_name="m_tns_tetsudan_porthole_4x5.mesh">
     <surfaces>
         <surface orientation="3" shape="1">
             <position x="0" y="-2" z="-1"/>
@@ -299,6 +299,6 @@
     <voxel_max x="0" y="2" z="1"/>
     <voxel_physics_min x="0" y="-2" z="-1"/>
     <voxel_physics_max x="0" y="2" z="1"/>
-    <tooltip_properties description="Useful for train doors that slide into stretched blocks." short_description="Large 3x5 window piece with a thick frame."/>
+    <tooltip_properties description="Useful for large vehicles that require windows with a more robust appearance." short_description="Large 4x5 window piece with a thick frame."/>
     <reward_properties tier="4" number_rewarded="6"/>
 </definition>
