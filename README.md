@@ -144,3 +144,4 @@ Component Lua API から音声を使う場合、Lua ファイルに次のよう�
 ## 更新履歴
 
 -   2025/08/13 v0.1.0 試用版リリース
+-   2025/08/31 v0.1.1 XML戸袋用 Porthole、4x5 Porthole を追加
