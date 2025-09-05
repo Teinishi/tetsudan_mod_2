@@ -22,7 +22,17 @@ def blender_export(pattern: str | None):
             py_path = os.path.join(blender_dir, "default.py")
 
         cmd = f'"%BLENDER_PATH%" --background "{blend_path}" --python "{py_path}"'
-        subprocess.run(cmd, shell=True, check=True, env=env)
+        r = subprocess.run(
+            cmd, shell=True, check=True, capture_output=True, text=True, encoding="utf-8", env=env)
+
+        if r.stderr is not None and len(r.stderr.strip()) > 0:
+            print(f"[{filename}]")
+            print(r.stderr)
+            if "Traceback (most recent call last):" in r.stderr:
+                print(f"Blender script failed!")
+                return
+
+    print("Done")
 
 
 if __name__ == "__main__":
