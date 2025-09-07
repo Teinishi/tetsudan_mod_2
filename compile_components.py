@@ -172,6 +172,8 @@ def compile_components(definition_pattern=None):
 
     definition_pattern = definition_pattern or "*"
     for filename in glob.glob(definition_pattern, root_dir=paths["definitions"]):
+        if not os.path.isfile(os.path.join(paths["definitions"], filename)):
+            continue
         ext = os.path.splitext(filename)[1]
         ext = ext.lower()
         if ext == ".xml":
