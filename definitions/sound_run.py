@@ -4,15 +4,14 @@ import re
 import json
 
 RUN_TYPES = {
-    ("1", "1"),
-    ("2", "2"),
-    ("point", "Point")
+    ("1", ""),
+    ("point", " Point")
 }
 
 
 def template(name, n):
     return f'''<?xml version="1.0" encoding="UTF-8"?>
-<definition name="(M)(TNS) Train Running Sound {name}" category="6" type="66" lua_filename="m_tns_tetsudan_sound_run.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,sound,buzzer" mesh_data_name="meshes/component_buzzer.mesh">
+<definition name="(M)(TNS) Train Running Sound{name}" category="6" type="66" lua_filename="m_tns_tetsudan_sound_run.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,sound,buzzer" mesh_data_name="meshes/component_buzzer.mesh">
     <surfaces>
         <surface orientation="0" shape="1" />
         <surface orientation="1" shape="1" />
@@ -28,7 +27,7 @@ def template(name, n):
         <surface orientation="5" shape="1" />
     </buoyancy_surfaces>
     <logic_nodes>
-        <logic_node label="Sound Data" mode="1" type="5" description="N1:Index1, N2:Speed1, N3:Index2, N4:Speed2, ..., N{2 * n}:Speed{n}" />
+        <logic_node label="Sound Data" mode="1" type="5" description="N1:Volume1, N2:Speed1, N3:Volume2, N4:Speed2, ..., N{2 * n - 1}:Volume{n}, N{2 * n}:Speed{n}" />
     </logic_nodes>
     <voxels>
         <voxel flags="1" />
