@@ -33,10 +33,10 @@ Blender から .dae をエクスポートする作業や、.dae を .mesh に変
 
 ### VVVF サウンド
 
--   TY GTO: 東洋 GTO (京成 3700 形未更新車)
--   TY IGBT: 東洋 IGBT (京成 3200 形)
--   MB IGBT: 三菱 IGBT (相鉄 10000 系未更新車)
--   MB SiC: 三菱 SiC-MOSFET (E235 系 1000 番台)
+-   TD GTO: 東洋 GTO (京成 3700 形未更新車)
+-   TD IGBT: 東洋 IGBT (京成 3200 形)
+-   ME IGBT: 三菱 IGBT (相鉄 10000 系未更新車)
+-   ME SiC: 三菱 SiC-MOSFET (E235 系 1000 番台)
 
 使用する際は別途マイコンと組み合わせて鳴らす音を制御し、惰性走行音と組み合わせてください。同時に再生できるのは 4 音声までです。
 

@@ -4,10 +4,10 @@ import json
 
 
 VVVF_TYPES = [
-    ("ty_igbt_1", "TY IGBT"),
-    ("ty_gto_1", "TY GTO"),
-    ("mb_igbt_1", "MB IGBT"),
-    ("mb_sic_1", "MB SiC"),
+    ("td_igbt_1", "TD IGBT"),
+    ("td_gto_1", "TD GTO"),
+    ("me_igbt_1", "ME IGBT"),
+    ("me_sic_1", "ME SiC"),
 ]
 
 
