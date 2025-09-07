@@ -399,6 +399,7 @@ print(json.dumps({
     "m_tns_tetsudan_seat_type6.xml": template_low_back("type6", "Type 6"),
     "m_tns_tetsudan_seat_type7.xml": template_low_back("type7", "Type 7"),
     "m_tns_tetsudan_seat_type8.xml": template_high_back("type8", "Type 8", low_back_surface=True),
+    "m_tns_tetsudan_seat_type9.xml": template_low_back("type9", "Type 9"),
     "m_tns_tetsudan_seat_backrest_type1.xml": template_backrest("backrest_type1", "Backrest Type 1"),
     "m_tns_tetsudan_seat_backrest_type2.xml": template_backrest("backrest_type2", "Backrest Type 2")
 }))
