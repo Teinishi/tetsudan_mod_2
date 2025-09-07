@@ -1,6 +1,5 @@
 local GRAVITY = {0, -10, 0}
-
-local random_offset = property.getBool("Random Offset")
+local TAU = math.pi * 2
 
 local sin, cos = math.sin, math.cos
 
@@ -98,11 +97,6 @@ local function rodrigues(axis, s)
 	}
 end
 
-local function rotation_from_to(from, to)
-	local axis = cross(normalize(to), normalize(from))
-	return rodrigues(axis, norm(axis))
-end
-
 local function simulate_pendulum(dir, omega, g, k, d, dt)
 	local axis = cross(dir, normalize(g))
 	local alpha = add(mul(axis, k), mul(omega, -d))
@@ -111,6 +105,17 @@ local function simulate_pendulum(dir, omega, g, k, d, dt)
 	local dir_new = mat3_mul_vec3(rodrigues(omega, math.sin(math.sqrt(omega2) * dt)), dir)
 
 	return dir_new, omega_new
+end
+
+local function vector_to_angles(vec)
+	local x, y, z = vec[1], vec[2], vec[3]
+	local r_xy = math.sqrt(x*x + y*y)
+	local alpha = math.atan(-z, r_xy)
+	local beta = 0
+	if r_xy > 1e-5 then
+		beta = math.atan(x, -y)
+	end
+	return alpha, beta
 end
 
 local v_local = {0, 0, 0}
@@ -139,10 +144,10 @@ function onTick()
 	local g = apparent_gravity(R, v_local, omega_local, a_local)
 	p_dir, p_omega = simulate_pendulum(p_dir, p_omega, g, 25, 2, 1/60)
 
-	local mat3 = rotation_from_to({0, -1, 0}, p_dir)
-
-	for i = 1, 9 do
-		output.setNumber(i, mat3[i])
-	end
-	output.setBool(1, random_offset)
+	local alpha1, beta1 = vector_to_angles(p_dir)
+	local alpha2, beta2 = vector_to_angles({p_dir[3], p_dir[2], -p_dir[1]})
+	output.setNumber(1, beta1 / TAU) -- Pivot Rotation (Right+)
+	output.setNumber(2, alpha1 / 2.1363) -- Pitch Rotation (Back+)
+	output.setNumber(3, beta2 / TAU) -- Pivot Rotation (Forward+)
+	output.setNumber(4, alpha2 / 2.1363) -- Pitch Rotation (Right+)
 end
