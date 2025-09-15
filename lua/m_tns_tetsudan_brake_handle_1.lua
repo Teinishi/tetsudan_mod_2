@@ -1,3 +1,9 @@
+THETA_ZERO = 80
+THETA_ONE = -80
+THETA_OUT = -55
+
+T_OUT = (THETA_OUT - THETA_ZERO) / (THETA_ONE - THETA_ZERO)
+
 function clamp(x, a, b)
 	return math.min(math.max(x, a), b)
 end
@@ -7,7 +13,7 @@ function lerp(a, b, t)
 end
 
 local smooth = true
-local inserted, t = false, 0.9
+local inserted, t = false, T_OUT
 local up = nil
 local transform0, transform1 = matrix.identity(), matrix.identity()
 
@@ -17,11 +23,11 @@ function update(t_tgt)
 	elseif not inserted then
 		smooth = true
 	end
-	t_tgt = (not inserted or up == nil or up > 1e-3) and 0.9 or t_tgt
+	t_tgt = (not inserted or up == nil or up > 1e-3) and T_OUT or t_tgt
 	t = smooth and lerp(t, t_tgt, 0.1) or t_tgt
-	local up_tgt = (not inserted and math.abs(t - 0.9) < 0.03) and 1 or 0
+	local up_tgt = (not inserted and math.abs(t - T_OUT) < 0.03) and 1 or 0
 	up = up and clamp(up_tgt, up - 0.1, up + 0.1) or up_tgt
-	local theta = lerp(90, -60, t)/180*math.pi
+	local theta = lerp(THETA_ZERO, THETA_ONE, t)/180*math.pi
 	transform0 = matrix.rotationY(theta)
 	transform1 = matrix.multiply(transform0, matrix.translation(0, 0.1*up^2, 0))
 end

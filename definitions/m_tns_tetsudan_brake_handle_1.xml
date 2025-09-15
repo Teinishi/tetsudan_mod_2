@@ -5,7 +5,7 @@
     </surfaces>
     <buoyancy_surfaces />
     <logic_nodes>
-        <logic_node label="Handle Data" mode="1" type="5" description="B1: Inserted, N1: Position beween 0 and 1" />
+        <logic_node label="Handle Data" mode="1" type="5" description="B1: Inserted, N1: Position beween 0 and 1 (80deg to -80deg)" />
     </logic_nodes>
     <voxels>
         <voxel flags="1" />
