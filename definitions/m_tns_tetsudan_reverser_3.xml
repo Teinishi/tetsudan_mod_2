@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition name="(M)(TNS) Reverser Type 3" category="6" type="66" lua_filename="m_tns_tetsudan_reverser_3.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,controller,handle" mesh_data_name="m_tns_tetsudan_reverser_3_static.mesh" mesh_0_name="m_tns_tetsudan_reverser_3_dynamic.mesh">
+    <surfaces>
+        <surface orientation="0" shape="1" />
+        <surface orientation="1" shape="1" />
+        <surface orientation="3" shape="1" />
+        <surface orientation="4" shape="1" />
+        <surface orientation="5" shape="1" />
+    </surfaces>
+    <buoyancy_surfaces>
+        <surface orientation="0" shape="1" />
+        <surface orientation="1" shape="1" />
+        <surface orientation="2" shape="1" />
+        <surface orientation="3" shape="1" />
+        <surface orientation="4" shape="1" />
+        <surface orientation="5" shape="1" />
+    </buoyancy_surfaces>
+    <logic_nodes>
+        <logic_node label="Position" mode="1" type="1" description="The position of the controller handle between -1 and 1." />
+    </logic_nodes>
+    <voxels>
+        <voxel flags="1" />
+    </voxels>
+    <tooltip_properties short_description="A reverser handle for trains."/>
+    <reward_properties number_rewarded="10"/>
+</definition>

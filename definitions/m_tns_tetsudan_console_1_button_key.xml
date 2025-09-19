@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition name="(M)(TNS) Driving Console Key Button 1" category="2" type="8" button_type="2" mass="1" value="1" flags="8192" tags="mod,tetsudan,train" mesh_data_name="m_tns_tetsudan_console_1_key_static.mesh" mesh_0_name="m_tns_tetsudan_console_1_key_dynamic.mesh" audio_filename_start="audio/ui/sfx_hud_examine.ogg">
+    <sfx_datas>
+        <sfx_data sfx_name="button" sfx_range_inner="3.0" sfx_range_outer="6.0" sfx_priority="0.2" sfx_is_underwater_affected="true">
+            <sfx_layers>
+                <sfx_layer sfx_filename_start="audio/fx5/button_toggle_on.ogg" sfx_filename_loop="" sfx_filename_end="audio/fx5/button_push.ogg" sfx_gain="1.0" sfx_loop_start_time="0.75" sfx_loop_blend_duration="10.0" sfx_volume_fade_speed="1.0" sfx_pitch_fade_speed="1.0"/>
+            </sfx_layers>
+        </sfx_data>
+        <sfx_data sfx_name="button2" sfx_range_inner="3.0" sfx_range_outer="6.0" sfx_priority="0.2" sfx_is_underwater_affected="true">
+            <sfx_layers>
+                <sfx_layer sfx_filename_start="audio/fx5/button_key_turn_04.ogg" sfx_filename_loop="" sfx_filename_end="" sfx_gain="1.0" sfx_loop_start_time="0.75" sfx_loop_blend_duration="10.0" sfx_volume_fade_speed="1.0" sfx_pitch_fade_speed="1.0"/>
+            </sfx_layers>
+        </sfx_data>
+    </sfx_datas>
+    <surfaces>
+        <surface orientation="0" shape="0" />
+        <surface orientation="1" shape="0" />
+        <surface orientation="3" shape="1" />
+        <surface orientation="5" shape="0" />
+    </surfaces>
+    <buoyancy_surfaces>
+        <surface orientation="3" shape="1" />
+    </buoyancy_surfaces>
+    <logic_nodes>
+        <logic_node label="Activated" mode="0" type="0" description="Outputs an on signal when interacting with the button for the set duration." />
+        <logic_node label="Electric" mode="1" type="4" description="Electrical power connection." />
+    </logic_nodes>
+    <voxels>
+        <voxel flags="1" physics_shape="9">
+            <physics_shape_rotation 00="-1" 01="0" 02="0" 10="0" 11="1" 12="0" 20="0" 21="0" 22="-1"/>
+        </voxel>
+    </voxels>
+    <tooltip_properties short_description="A button that outputs an on signal when you interact with [$[action_interact_left]]/[$[action_interact_right]], and an off signal when not interacting. Fits with the master controller type 4." />
+</definition>
