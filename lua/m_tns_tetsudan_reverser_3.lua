@@ -1,6 +1,6 @@
 -- include sfx 0 "m_tns_tetsudan_controller_3.ogg"
 
-local PIVOT = {-0.075, 0.0625, 0.0125}
+local PIVOT = {-0.0125, 0.0625, 0.0125}
 local STEP_ANGLES = {math.rad(-40), 0, math.rad(40)}
 
 function clamp(x, a, b)
