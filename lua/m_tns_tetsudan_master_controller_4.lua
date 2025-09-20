@@ -1,10 +1,10 @@
 -- include sfx 0 "m_tns_tetsudan_controller_1.ogg"
 -- include sfx 1 "m_tns_tetsudan_controller_2.ogg"
 
-local PIVOT = {0, -0.025, 0.044}
+local PIVOT = {0, 0, 0.02}
 local STEP_START = -8
 local STEP_LAST = 4
-local STEP_ANGLES = {8, -2, -7, -12, -17, -22, -27, -33, -40, -48, -56, -64, -72}
+local STEP_ANGLES = {8, -2, -7, -12, -17, -22, -27, -33, -40, -49, -58, -66, -74}
 for i, v in ipairs(STEP_ANGLES) do
 	STEP_ANGLES[i] = math.rad(v)
 end
