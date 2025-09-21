@@ -1,6 +1,4 @@
-import sys
-import os
-from .bail import bail
+from pathlib import Path
 
 REQUIRED_ENV_KEYS = [
     "BLENDER_PATH",
@@ -8,15 +6,12 @@ REQUIRED_ENV_KEYS = [
     "COMPONENT_MOD_COMPILER_PATH"
 ]
 
-env_path = os.path.join(os.path.dirname(__file__), "../.env")
+env_file = Path.cwd().joinpath(".env")
 
 
 def load_env():
-    if not os.path.isfile(env_path):
-        bail(".env ファイルがありません。.env.sample を参考に、各々の環境に合わせて設定してください。")
-
     env = {}
-    with open(env_path, "r", encoding="utf-8") as f:
+    with env_file.open("r", encoding="utf-8") as f:
         for line in f.readlines():
             key, value = line.split("=", maxsplit=1)
             value = value.strip()
@@ -26,6 +21,6 @@ def load_env():
 
     for key in REQUIRED_ENV_KEYS:
         if key not in env:
-            bail(f".env ファイルに {key} の項目が不足しています。")
+            raise KeyError(f'.env file missing key "{key}"')
 
     return env

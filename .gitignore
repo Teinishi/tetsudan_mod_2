@@ -3,5 +3,6 @@ __pycache__
 /blender/exported
 .env
 /.tmp
+.compiler
 /dist
 desktop.ini
