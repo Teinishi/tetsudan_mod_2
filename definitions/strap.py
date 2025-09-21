@@ -1,5 +1,4 @@
 import itertools
-import json
 
 
 def template(name, mesh_name, arrow_name):
@@ -54,12 +53,12 @@ for (handle_type, handle_name), (belt_type, belt_name, arrow_name) in itertools.
     handle_types,
     [(1, "Short", "short"), (3, "Medium", "medium")]
 ):
-    definitions[f"m_tns_tetsudan_strap_{handle_type}_{belt_type}_binder.xml"] = template(
+    definitions[f"m_tns_tetsudan_strap_{handle_type}_{belt_type}_binder"] = template(
         f"{handle_name} {belt_name} 1",
         f"{handle_type}_{belt_type}_binder",
         arrow_name
     )
-    definitions[f"m_tns_tetsudan_strap_{handle_type}_{belt_type}_cover.xml"] = template(
+    definitions[f"m_tns_tetsudan_strap_{handle_type}_{belt_type}_cover"] = template(
         f"{handle_name} {belt_name} 2",
         f"{handle_type}_{belt_type}_cover",
         arrow_name
@@ -67,22 +66,20 @@ for (handle_type, handle_name), (belt_type, belt_name, arrow_name) in itertools.
 
 # Long
 for handle_type, handle_name in handle_types:
-    definitions[f"m_tns_tetsudan_strap_{handle_type}_4.xml"] = template(
+    definitions[f"m_tns_tetsudan_strap_{handle_type}_4"] = template(
         f"{handle_name} Long",
         f"{handle_type}_4",
         "long"
     )
 
 # 六角カバー・二等辺三角形
-definitions["m_tns_tetsudan_strap_triangle2_2.xml"] = template(
+definitions["m_tns_tetsudan_strap_triangle2_2"] = template(
     "Triangle 2 Medium",
     "triangle2_2",
     "medium"
 )
-definitions["m_tns_tetsudan_strap_triangle3_1.xml"] = template(
+definitions["m_tns_tetsudan_strap_triangle3_1"] = template(
     "Triangle 2 Short",
     "triangle3_1",
     "short"
 )
-
-print(json.dumps(definitions))

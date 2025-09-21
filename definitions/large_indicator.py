@@ -1,6 +1,3 @@
-import json
-
-
 def template(type_name, name):
     return f'''<?xml version="1.0" encoding="UTF-8"?>
 <definition name="(M)(TNS) Large Indicator Light {name}"
@@ -39,7 +36,7 @@ def template(type_name, name):
 '''
 
 
-print(json.dumps({
-    "m_tns_tetsudan_large_indicator_type1.xml": template("type1", "Type 1"),
-    "m_tns_tetsudan_large_indicator_type2.xml": template("type2", "Type 2"),
-}))
+definitions = {
+    "m_tns_tetsudan_large_indicator_type1": template("type1", "Type 1"),
+    "m_tns_tetsudan_large_indicator_type2": template("type2", "Type 2"),
+}

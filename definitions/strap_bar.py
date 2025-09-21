@@ -1,6 +1,3 @@
-import json
-
-
 def template(bar_type, bar_name, description, surfaces=None, flags=0):
     if surfaces is None:
         surfaces = []
@@ -24,24 +21,24 @@ def template(bar_type, bar_name, description, surfaces=None, flags=0):
 '''
 
 
-print(json.dumps({
-    "m_tns_tetsudan_strap_bar_straight.xml": template(
+definitions = {
+    "m_tns_tetsudan_strap_bar_straight": template(
         "straight",
         "Straight",
         "A straight section of bar for supporting train straps.",
         surfaces=[4, 5],
         flags=32
     ),
-    "m_tns_tetsudan_strap_bar_t.xml": template(
+    "m_tns_tetsudan_strap_bar_t": template(
         "t",
         "T-Piece",
         "A T-shaped section of bar for supporting train straps.",
         surfaces=[1, 4, 5],
     ),
-    "m_tns_tetsudan_strap_bar_curve.xml": template(
+    "m_tns_tetsudan_strap_bar_curve": template(
         "curve",
         "Curve",
         "A curved section of bar for supporting train straps.",
         surfaces=[4, 2],
     )
-}))
+}

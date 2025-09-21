@@ -1,7 +1,6 @@
 import os
 import glob
 import re
-import json
 
 RUN_TYPES = {
     ("1", ""),
@@ -66,7 +65,6 @@ for file in glob.glob("m_tns_tetsudan_run_*.ogg", root_dir=audio_dir):
     data[name_raw][key] = (file, speed)
 
 definitions = {}
-
 for name_raw, name in RUN_TYPES:
     items = data.get(name_raw)
     if items is None:
@@ -78,9 +76,7 @@ for name_raw, name in RUN_TYPES:
         sound_files.append(item[0])
         base_speed.append((i + 1, item[1]))
 
-    definitions[f"m_tns_tetsudan_sound_run_{name_raw}.xml"] = {
+    definitions[f"m_tns_tetsudan_sound_run_{name_raw}"] = {
         "xml": template(name, len(sound_files)),
         "luaPrefix": lua_prefix(sound_files, base_speed),
     }
-
-print(json.dumps(definitions))

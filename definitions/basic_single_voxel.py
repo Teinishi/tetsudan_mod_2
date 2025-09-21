@@ -1,4 +1,3 @@
-import json
 from definition_lib.surface import Surface
 
 DRAGGABLE_X = 8
@@ -26,8 +25,8 @@ def template(name: str, mass: float, surfaces: list[Surface], mesh_name: str | N
     return xml
 
 
-print(json.dumps({
-    "m_tns_tetsudan_basic_slab_0001.xml": template(
+definitions = {
+    "m_tns_tetsudan_basic_slab_0001": template(
         "Quarter Block",
         0.25,
         [Surface(0), Surface(1), Surface(3, 1), Surface(4), Surface(5)],
@@ -36,7 +35,7 @@ print(json.dumps({
         physics_shape=9,
         flags=DRAGGABLE_X | DRAGGABLE_Z
     ),
-    "m_tns_tetsudan_basic_slab_0010.xml": template(
+    "m_tns_tetsudan_basic_slab_0010": template(
         "Quarter Block (Middle)",
         0.25,
         [Surface(0), Surface(1), Surface(4), Surface(5)],
@@ -45,7 +44,7 @@ print(json.dumps({
         physics_shape=8,
         flags=DRAGGABLE_X | DRAGGABLE_Z
     ),
-    "m_tns_tetsudan_basic_slab_0011.xml": template(
+    "m_tns_tetsudan_basic_slab_0011": template(
         "Half Block",
         0.5,
         [Surface(0), Surface(1), Surface(3, 1), Surface(4), Surface(5)],
@@ -54,7 +53,7 @@ print(json.dumps({
         physics_shape=8,
         flags=DRAGGABLE_X | DRAGGABLE_Z
     ),
-    "m_tns_tetsudan_basic_slab_0101.xml": template(
+    "m_tns_tetsudan_basic_slab_0101": template(
         "Double Quarter Block (A)",
         0.5,
         [Surface(0), Surface(1), Surface(3, 1), Surface(4), Surface(5)],
@@ -63,7 +62,7 @@ print(json.dumps({
         physics_shape=1,
         flags=DRAGGABLE_X | DRAGGABLE_Z
     ),
-    "m_tns_tetsudan_basic_slab_0110.xml": template(
+    "m_tns_tetsudan_basic_slab_0110": template(
         "Half Block (Middle)",
         0.5,
         [Surface(0), Surface(1), Surface(4), Surface(5)],
@@ -72,7 +71,7 @@ print(json.dumps({
         physics_shape=1,
         flags=DRAGGABLE_X | DRAGGABLE_Z
     ),
-    "m_tns_tetsudan_basic_slab_0111.xml": template(
+    "m_tns_tetsudan_basic_slab_0111": template(
         "Three-Quarter Block",
         0.75,
         [Surface(0), Surface(1), Surface(3, 1), Surface(4), Surface(5)],
@@ -81,7 +80,7 @@ print(json.dumps({
         physics_shape=7,
         flags=DRAGGABLE_X | DRAGGABLE_Z
     ),
-    "m_tns_tetsudan_basic_slab_1001.xml": template(
+    "m_tns_tetsudan_basic_slab_1001": template(
         "Double Quarter Block (B)",
         0.5,
         [
@@ -97,7 +96,7 @@ print(json.dumps({
         physics_shape=1,
         flags=DRAGGABLE_X | DRAGGABLE_Z
     ),
-    "m_tns_tetsudan_basic_slab_1011.xml": template(
+    "m_tns_tetsudan_basic_slab_1011": template(
         "Half + Quarter Block",
         0.75,
         [
@@ -113,7 +112,7 @@ print(json.dumps({
         physics_shape=1,
         flags=DRAGGABLE_X | DRAGGABLE_Z
     ),
-    "m_tns_tetsudan_basic_wedge2_1.xml": template(
+    "m_tns_tetsudan_basic_wedge2_1": template(
         "Wedge 1x2 Voxel 1",
         0.75,
         [
@@ -128,7 +127,7 @@ print(json.dumps({
         physics_shape=4,
         flags=DRAGGABLE_X
     ),
-    "m_tns_tetsudan_basic_wedge2_2.xml": template(
+    "m_tns_tetsudan_basic_wedge2_2": template(
         "Wedge 1x2 Voxel 2",
         0.25,
         [
@@ -142,7 +141,7 @@ print(json.dumps({
         physics_shape=5,
         flags=DRAGGABLE_X
     ),
-    "m_tns_tetsudan_basic_pyramid2_1.xml": template(
+    "m_tns_tetsudan_basic_pyramid2_1": template(
         "Pyramid 1x2 Voxel 1",
         0.4,
         [
@@ -155,7 +154,7 @@ print(json.dumps({
         "basic_pyramid2_1",
         physics_shape=10,
     ),
-    "m_tns_tetsudan_basic_pyramid2_2.xml": template(
+    "m_tns_tetsudan_basic_pyramid2_2": template(
         "Pyramid 1x2 Voxel 2",
         0.1,
         [
@@ -167,7 +166,7 @@ print(json.dumps({
         "basic_pyramid2_2",
         physics_shape=11,
     ),
-    "m_tns_tetsudan_basic_invpyramid2_1.xml": template(
+    "m_tns_tetsudan_basic_invpyramid2_1": template(
         "Inverse Pyramid 1x2 Voxel 1",
         0.86,
         [
@@ -182,7 +181,7 @@ print(json.dumps({
         "basic_invpyramid2_1",
         physics_shape=26,
     ),
-    "m_tns_tetsudan_basic_invpyramid2_2.xml": template(
+    "m_tns_tetsudan_basic_invpyramid2_2": template(
         "Inverse Pyramid 1x2 Voxel 2",
         0.64,
         [
@@ -197,7 +196,7 @@ print(json.dumps({
         "basic_invpyramid2_2",
         physics_shape=27,
     ),
-    "m_tns_tetsudan_basic_wedge4_1.xml": template(
+    "m_tns_tetsudan_basic_wedge4_1": template(
         "Wedge 1x4 Voxel 1",
         0.875,
         [
@@ -212,7 +211,7 @@ print(json.dumps({
         physics_shape=6,
         flags=DRAGGABLE_X
     ),
-    "m_tns_tetsudan_basic_wedge4_2.xml": template(
+    "m_tns_tetsudan_basic_wedge4_2": template(
         "Wedge 1x4 Voxel 2",
         0.625,
         [
@@ -227,7 +226,7 @@ print(json.dumps({
         physics_shape=7,
         flags=DRAGGABLE_X
     ),
-    "m_tns_tetsudan_basic_wedge4_3.xml": template(
+    "m_tns_tetsudan_basic_wedge4_3": template(
         "Wedge 1x4 Voxel 3",
         0.375,
         [
@@ -242,7 +241,7 @@ print(json.dumps({
         physics_shape=8,
         flags=DRAGGABLE_X
     ),
-    "m_tns_tetsudan_basic_wedge4_4.xml": template(
+    "m_tns_tetsudan_basic_wedge4_4": template(
         "Wedge 1x4 Voxel 4",
         0.125,
         [
@@ -256,7 +255,7 @@ print(json.dumps({
         physics_shape=9,
         flags=DRAGGABLE_X
     ),
-    "m_tns_tetsudan_basic_pyramid4_1.xml": template(
+    "m_tns_tetsudan_basic_pyramid4_1": template(
         "Pyramid 1x4 Voxel 1",
         0.57,
         [
@@ -268,7 +267,7 @@ print(json.dumps({
         "basic_pyramid4_1",
         physics_shape=12,
     ),
-    "m_tns_tetsudan_basic_pyramid4_2.xml": template(
+    "m_tns_tetsudan_basic_pyramid4_2": template(
         "Pyramid 1x4 Voxel 2",
         0.3,
         [
@@ -281,7 +280,7 @@ print(json.dumps({
         "basic_pyramid4_2",
         physics_shape=13,
     ),
-    "m_tns_tetsudan_basic_pyramid4_3.xml": template(
+    "m_tns_tetsudan_basic_pyramid4_3": template(
         "Pyramid 1x4 Voxel 3",
         0.11,
         [
@@ -294,7 +293,7 @@ print(json.dumps({
         "basic_pyramid4_3",
         physics_shape=14,
     ),
-    "m_tns_tetsudan_basic_pyramid4_4.xml": template(
+    "m_tns_tetsudan_basic_pyramid4_4": template(
         "Pyramid 1x4 Voxel 4",
         0.02,
         [
@@ -306,7 +305,7 @@ print(json.dumps({
         "basic_pyramid4_4",
         physics_shape=15,
     ),
-    "m_tns_tetsudan_basic_invpyramid4_1.xml": template(
+    "m_tns_tetsudan_basic_invpyramid4_1": template(
         "Inverse Pyramid 1x4 Voxel 1",
         0.88,
         [
@@ -321,7 +320,7 @@ print(json.dumps({
         "basic_invpyramid4_1",
         physics_shape=28,
     ),
-    "m_tns_tetsudan_basic_invpyramid4_2.xml": template(
+    "m_tns_tetsudan_basic_invpyramid4_2": template(
         "Inverse Pyramid 1x4 Voxel 2",
         0.84,
         [
@@ -336,7 +335,7 @@ print(json.dumps({
         "basic_invpyramid4_2",
         physics_shape=29,
     ),
-    "m_tns_tetsudan_basic_invpyramid4_3.xml": template(
+    "m_tns_tetsudan_basic_invpyramid4_3": template(
         "Inverse Pyramid 1x4 Voxel 3",
         0.72,
         [
@@ -351,7 +350,7 @@ print(json.dumps({
         "basic_invpyramid4_3",
         physics_shape=30,
     ),
-    "m_tns_tetsudan_basic_invpyramid4_4.xml": template(
+    "m_tns_tetsudan_basic_invpyramid4_4": template(
         "Inverse Pyramid 1x4 Voxel 4",
         0.55,
         [
@@ -366,7 +365,7 @@ print(json.dumps({
         "basic_invpyramid4_4",
         physics_shape=31,
     ),
-    "m_tns_tetsudan_basic_pyramid2x2_1.xml": template(
+    "m_tns_tetsudan_basic_pyramid2x2_1": template(
         "Pyramid 2x2 Voxel 1",
         0.5,
         [
@@ -379,7 +378,7 @@ print(json.dumps({
         ],
         physics_shape=16,
     ),
-    "m_tns_tetsudan_basic_pyramid2x2_2.xml": template(
+    "m_tns_tetsudan_basic_pyramid2x2_2": template(
         "Pyramid 2x2 Voxel 2",
         0.25,
         [
@@ -390,7 +389,7 @@ print(json.dumps({
         ],
         physics_shape=17,
     ),
-    "m_tns_tetsudan_basic_pyramid2x4_1.xml": template(
+    "m_tns_tetsudan_basic_pyramid2x4_1": template(
         "Pyramid 2x4 Voxel 1",
         0.9375,
         [
@@ -404,7 +403,7 @@ print(json.dumps({
         "basic_pyramid2x4_1",
         physics_shape=18,
     ),
-    "m_tns_tetsudan_basic_pyramid2x4_2.xml": template(
+    "m_tns_tetsudan_basic_pyramid2x4_2": template(
         "Pyramid 2x4 Voxel 2",
         0.5625,
         [
@@ -418,7 +417,7 @@ print(json.dumps({
         "basic_pyramid2x4_2",
         physics_shape=19,
     ),
-    "m_tns_tetsudan_basic_pyramid2x4_3.xml": template(
+    "m_tns_tetsudan_basic_pyramid2x4_3": template(
         "Pyramid 2x4 Voxel 3",
         0.21875,
         [
@@ -431,7 +430,7 @@ print(json.dumps({
         "basic_pyramid2x4_3",
         physics_shape=20,
     ),
-    "m_tns_tetsudan_basic_pyramid2x4_4.xml": template(
+    "m_tns_tetsudan_basic_pyramid2x4_4": template(
         "Pyramid 2x4 Voxel 4",
         0.03125,
         [
@@ -443,7 +442,7 @@ print(json.dumps({
         "basic_pyramid2x4_4",
         physics_shape=21,
     ),
-    "m_tns_tetsudan_basic_pyramid4x4_1.xml": template(
+    "m_tns_tetsudan_basic_pyramid4x4_1": template(
         "Pyramid 4x4 Voxel 1",
         1.125,
         [
@@ -456,7 +455,7 @@ print(json.dumps({
         ],
         physics_shape=22,
     ),
-    "m_tns_tetsudan_basic_pyramid4x4_2.xml": template(
+    "m_tns_tetsudan_basic_pyramid4x4_2": template(
         "Pyramid 4x4 Voxel 2",
         0.75,
         [
@@ -469,7 +468,7 @@ print(json.dumps({
         ],
         physics_shape=23,
     ),
-    "m_tns_tetsudan_basic_pyramid4x4_3.xml": template(
+    "m_tns_tetsudan_basic_pyramid4x4_3": template(
         "Pyramid 4x4 Voxel 3",
         0.375,
         [
@@ -482,7 +481,7 @@ print(json.dumps({
         ],
         physics_shape=24,
     ),
-    "m_tns_tetsudan_basic_pyramid4x4_4.xml": template(
+    "m_tns_tetsudan_basic_pyramid4x4_4": template(
         "Pyramid 4x4 Voxel 4",
         0.0625,
         [
@@ -493,7 +492,7 @@ print(json.dumps({
         ],
         physics_shape=25,
     ),
-    "m_tns_tetsudan_basic_invpyramid2x2_1.xml": template(
+    "m_tns_tetsudan_basic_invpyramid2x2_1": template(
         "Inverse Pyramid 2x2 Voxel 1",
         0.825,
         [
@@ -507,7 +506,7 @@ print(json.dumps({
         ],
         physics_shape=32,
     ),
-    "m_tns_tetsudan_basic_invpyramid2x2_2.xml": template(
+    "m_tns_tetsudan_basic_invpyramid2x2_2": template(
         "Inverse Pyramid 2x2 Voxel 2",
         0.45,
         [
@@ -520,7 +519,7 @@ print(json.dumps({
         ],
         physics_shape=33,
     ),
-    "m_tns_tetsudan_basic_invpyramid2x4_1.xml": template(
+    "m_tns_tetsudan_basic_invpyramid2x4_1": template(
         "Inverse Pyramid 2x4 Voxel 1",
         0.88125,
         [
@@ -535,7 +534,7 @@ print(json.dumps({
         "basic_invpyramid2x4_1",
         physics_shape=34,
     ),
-    "m_tns_tetsudan_basic_invpyramid2x4_2.xml": template(
+    "m_tns_tetsudan_basic_invpyramid2x4_2": template(
         "Inverse Pyramid 2x4 Voxel 2",
         0.76875,
         [
@@ -549,7 +548,7 @@ print(json.dumps({
         "basic_invpyramid2x4_2",
         physics_shape=35,
     ),
-    "m_tns_tetsudan_basic_invpyramid2x4_3.xml": template(
+    "m_tns_tetsudan_basic_invpyramid2x4_3": template(
         "Inverse Pyramid 2x4 Voxel 3",
         0.5625,
         [
@@ -562,7 +561,7 @@ print(json.dumps({
         "basic_invpyramid2x4_3",
         physics_shape=36,
     ),
-    "m_tns_tetsudan_basic_invpyramid2x4_4.xml": template(
+    "m_tns_tetsudan_basic_invpyramid2x4_4": template(
         "Inverse Pyramid 2x4 Voxel 4",
         0.3375,
         [
@@ -575,7 +574,7 @@ print(json.dumps({
         "basic_invpyramid2x4_4",
         physics_shape=37,
     ),
-    "m_tns_tetsudan_basic_invpyramid4x4_1.xml": template(
+    "m_tns_tetsudan_basic_invpyramid4x4_1": template(
         "Inverse Pyramid 4x4 Voxel 1",
         0.8625,
         [
@@ -589,7 +588,7 @@ print(json.dumps({
         ],
         physics_shape=38,
     ),
-    "m_tns_tetsudan_basic_invpyramid4x4_2.xml": template(
+    "m_tns_tetsudan_basic_invpyramid4x4_2": template(
         "Inverse Pyramid 4x4 Voxel 2",
         0.675,
         [
@@ -602,7 +601,7 @@ print(json.dumps({
         ],
         physics_shape=39,
     ),
-    "m_tns_tetsudan_basic_invpyramid4x4_3.xml": template(
+    "m_tns_tetsudan_basic_invpyramid4x4_3": template(
         "Inverse Pyramid 4x4 Voxel 3",
         0.45,
         [
@@ -615,7 +614,7 @@ print(json.dumps({
         ],
         physics_shape=40,
     ),
-    "m_tns_tetsudan_basic_invpyramid4x4_4.xml": template(
+    "m_tns_tetsudan_basic_invpyramid4x4_4": template(
         "Inverse Pyramid 4x4 Voxel 4",
         0.225,
         [
@@ -628,4 +627,4 @@ print(json.dumps({
         ],
         physics_shape=41,
     ),
-}))
+}

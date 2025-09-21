@@ -1,4 +1,3 @@
-import json
 from definition_lib.surface import Surfaces
 from definition_lib.voxel import Voxels
 
@@ -147,22 +146,20 @@ def template_high_back(seat_type, seat_name, low_back_surface=False):
     return template(seat_name, seat_type, surfaces, voxels)
 
 
-files = {
-    "m_tns_tetsudan_seat_type1.xml": template_no_back("type1", "Type 1"),
-    "m_tns_tetsudan_seat_type2.xml": template_no_back("type2", "Type 2"),
-    "m_tns_tetsudan_seat_type3.xml": template_high_back("type3", "Type 3"),
-    "m_tns_tetsudan_seat_type4.xml": template_high_back("type4", "Type 4"),
-    "m_tns_tetsudan_seat_type5.xml": template_high_back("type5", "Type 5", low_back_surface=True),
-    "m_tns_tetsudan_seat_type6.xml": template_low_back("type6", "Type 6"),
-    "m_tns_tetsudan_seat_type7.xml": template_low_back("type7", "Type 7"),
-    "m_tns_tetsudan_seat_type8.xml": template_high_back("type8", "Type 8", low_back_surface=True),
-    "m_tns_tetsudan_seat_type9.xml": template_low_back("type9", "Type 9"),
-    "m_tns_tetsudan_seat_backrest_type1.xml": template_backrest("type1", "Type 1"),
-    "m_tns_tetsudan_seat_backrest_type2.xml": template_backrest("type2", "Type 2"),
-    "m_tns_tetsudan_seat_spacer_type1.xml": template_spacer("type1", "Type 1,2"),
-    "m_tns_tetsudan_seat_spacer_type6.xml": template_spacer("type6", "Type 6"),
-    "m_tns_tetsudan_seat_spacer_type7.xml": template_spacer("type7", "Type 7"),
-    "m_tns_tetsudan_seat_spacer_type9.xml": template_spacer("type9", "Type 9")
+definitions = {
+    "m_tns_tetsudan_seat_type1": template_no_back("type1", "Type 1"),
+    "m_tns_tetsudan_seat_type2": template_no_back("type2", "Type 2"),
+    "m_tns_tetsudan_seat_type3": template_high_back("type3", "Type 3"),
+    "m_tns_tetsudan_seat_type4": template_high_back("type4", "Type 4"),
+    "m_tns_tetsudan_seat_type5": template_high_back("type5", "Type 5", low_back_surface=True),
+    "m_tns_tetsudan_seat_type6": template_low_back("type6", "Type 6"),
+    "m_tns_tetsudan_seat_type7": template_low_back("type7", "Type 7"),
+    "m_tns_tetsudan_seat_type8": template_high_back("type8", "Type 8", low_back_surface=True),
+    "m_tns_tetsudan_seat_type9": template_low_back("type9", "Type 9"),
+    "m_tns_tetsudan_seat_backrest_type1": template_backrest("type1", "Type 1"),
+    "m_tns_tetsudan_seat_backrest_type2": template_backrest("type2", "Type 2"),
+    "m_tns_tetsudan_seat_spacer_type1": template_spacer("type1", "Type 1,2"),
+    "m_tns_tetsudan_seat_spacer_type6": template_spacer("type6", "Type 6"),
+    "m_tns_tetsudan_seat_spacer_type7": template_spacer("type7", "Type 7"),
+    "m_tns_tetsudan_seat_spacer_type9": template_spacer("type9", "Type 9")
 }
-
-print(json.dumps(files))

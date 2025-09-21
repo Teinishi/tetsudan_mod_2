@@ -1,4 +1,3 @@
-import json
 from definition_lib.surface import Surface
 
 DRAGGABLE_X = 8
@@ -21,29 +20,29 @@ def template(name, mesh_name, arrow_name, surfaces: list[Surface], flags=0):
 '''
 
 
-print(json.dumps({
-    "m_tns_tetsudan_window_frame_corner_1.xml": template(
+definitions = {
+    "m_tns_tetsudan_window_frame_corner_1": template(
         "Window Frame Corner 1",
         "window_frame_glass_corner_1",
         "arrow_framed_window_corner",
         [Surface(0), Surface(1, buoyancy=1), Surface(2),
          Surface(3, 1), Surface(4), Surface(5, 1)],
     ),
-    "m_tns_tetsudan_window_frame_corner_2.xml": template(
+    "m_tns_tetsudan_window_frame_corner_2": template(
         "Window Frame Corner 2",
         "window_frame_glass_corner_2",
         "arrow_framed_window_corner",
         [Surface(1, buoyancy=1), Surface(2),
          Surface(3), Surface(4), Surface(5)],
     ),
-    "m_tns_tetsudan_window_frame_corner_3.xml": template(
+    "m_tns_tetsudan_window_frame_corner_3": template(
         "Window Frame Corner 3",
         "window_frame_glass_corner_3",
         "arrow_framed_window_corner",
         [Surface(1, buoyancy=1), Surface(2),
          Surface(3), Surface(4), Surface(5)],
     ),
-    "m_tns_tetsudan_window_frame_edge_1.xml": template(
+    "m_tns_tetsudan_window_frame_edge_1": template(
         "Window Frame Edge 1",
         "window_frame_glass_edge_1",
         "arrow_framed_window_edge",
@@ -51,7 +50,7 @@ print(json.dumps({
          Surface(3, 1), Surface(4), Surface(5)],
         flags=DRAGGABLE_Z
     ),
-    "m_tns_tetsudan_window_frame_edge_2.xml": template(
+    "m_tns_tetsudan_window_frame_edge_2": template(
         "Window Frame Edge 2",
         "window_frame_glass_edge_2",
         "arrow_framed_window_edge",
@@ -59,7 +58,7 @@ print(json.dumps({
          Surface(3), Surface(4), Surface(5)],
         flags=DRAGGABLE_Z
     ),
-    "m_tns_tetsudan_window_frame_edge_3.xml": template(
+    "m_tns_tetsudan_window_frame_edge_3": template(
         "Window Frame Edge 3",
         "window_frame_glass_edge_3",
         "arrow_framed_window_edge",
@@ -67,7 +66,7 @@ print(json.dumps({
          Surface(3), Surface(4), Surface(5)],
         flags=DRAGGABLE_Z
     ),
-    "m_tns_tetsudan_window_frame_pillar_1.xml": template(
+    "m_tns_tetsudan_window_frame_pillar_1": template(
         "Window Frame Pillar 1",
         "window_frame_glass_pillar_1",
         "arrow_framed_window_pillar",
@@ -75,7 +74,7 @@ print(json.dumps({
          Surface(3), Surface(4), Surface(5)],
         flags=DRAGGABLE_Y
     ),
-    "m_tns_tetsudan_window_frame_pillar_2.xml": template(
+    "m_tns_tetsudan_window_frame_pillar_2": template(
         "Window Frame Pillar 2",
         "window_frame_glass_pillar_2",
         "arrow_framed_window_pillar",
@@ -83,7 +82,7 @@ print(json.dumps({
          Surface(3), Surface(4), Surface(5)],
         flags=DRAGGABLE_Y
     ),
-    "m_tns_tetsudan_window_frame_edge_pillar_1.xml": template(
+    "m_tns_tetsudan_window_frame_edge_pillar_1": template(
         "Window Frame Edge Pillar 1",
         "window_frame_glass_edge_pillar_1",
         "arrow_framed_window_edge_pillar",
@@ -91,7 +90,7 @@ print(json.dumps({
          Surface(3, 1), Surface(4), Surface(5)],
         flags=DRAGGABLE_Z
     ),
-    "m_tns_tetsudan_window_frame_edge_pillar_2.xml": template(
+    "m_tns_tetsudan_window_frame_edge_pillar_2": template(
         "Window Frame Edge Pillar 2",
         "window_frame_glass_edge_pillar_2",
         "arrow_framed_window_edge_pillar",
@@ -99,4 +98,4 @@ print(json.dumps({
          Surface(3), Surface(4), Surface(5)],
         flags=DRAGGABLE_Z
     )
-}))
+}

@@ -1,6 +1,3 @@
-import json
-
-
 def template(mesh_name, name, surfaces):
     xml = f'''<?xml version="1.0" encoding="UTF-8"?>
 <definition
@@ -25,9 +22,9 @@ def template(mesh_name, name, surfaces):
     return xml
 
 
-print(json.dumps({
-    "m_tns_tetsudan_interior_hook_single.xml": template("hook_type1_single", "Train Interior Hook (Single)", {5}),
-    "m_tns_tetsudan_interior_hook_double.xml": template("hook_type1_double", "Train Interior Hook (Double)", {5}),
-    "m_tns_tetsudan_console_decorative_1.xml": template("console_decorative_1", "Handle Type 1", {3}),
-    "m_tns_tetsudan_console_decorative_2.xml": template("console_decorative_2", "Handle Type 2", {3})
-}))
+definitions = {
+    "m_tns_tetsudan_interior_hook_single": template("hook_type1_single", "Train Interior Hook (Single)", {5}),
+    "m_tns_tetsudan_interior_hook_double": template("hook_type1_double", "Train Interior Hook (Double)", {5}),
+    "m_tns_tetsudan_console_decorative_1": template("console_decorative_1", "Handle Type 1", {3}),
+    "m_tns_tetsudan_console_decorative_2": template("console_decorative_2", "Handle Type 2", {3})
+}

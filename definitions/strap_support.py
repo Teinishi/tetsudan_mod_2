@@ -1,6 +1,3 @@
-import json
-
-
 def template(support_type, support_name, bar_file, bar_name, description, surfaces=None):
     if surfaces is None:
         surfaces = []
@@ -71,7 +68,6 @@ bar_types = {
 }
 
 definitions = {}
-
 for support_type, support in support_types.items():
     support_name = support["support_name"]
     description1 = support["description1"]
@@ -87,7 +83,7 @@ for support_type, support in support_types.items():
         description2 = bar["description2"]
         bar_surfaces = bar["surfaces"]
 
-        filename = f"m_tns_tetsudan_strap_{support_type}{bar_file}.xml"
+        filename = f"m_tns_tetsudan_strap_{support_type}{bar_file}"
         definitions[filename] = template(
             support_type,
             support_name,
@@ -96,5 +92,3 @@ for support_type, support in support_types.items():
             description1 + description2 + description3,
             surfaces=list(sorted(support_surfaces | bar_surfaces))
         )
-
-print(json.dumps(definitions))

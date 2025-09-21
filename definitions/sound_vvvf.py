@@ -50,15 +50,12 @@ def lua_prefix(sound_files):
 
 audio_dir = os.path.join(os.path.dirname(__file__), "..", "audio")
 
-data = {}
-
+definitions = {}
 for filename, name in VVVF_TYPES:
     files = glob.glob(
         f"m_tns_tetsudan_{filename}_*.ogg", root_dir=audio_dir)
     files.sort()
-    data[f"m_tns_tetsudan_vvvf_{filename}.xml"] = {
+    definitions[f"m_tns_tetsudan_vvvf_{filename}"] = {
         "xml": template(name, len(files)),
         "luaPrefix": lua_prefix(files),
     }
-
-print(json.dumps(data))

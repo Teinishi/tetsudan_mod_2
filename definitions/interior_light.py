@@ -1,6 +1,3 @@
-import json
-
-
 def template(light_type, light_name, length, length_name, is_rgb):
     ez = int(length / 2)
     xml = f'''<?xml version="1.0" encoding="UTF-8"?>
@@ -58,19 +55,17 @@ def template(light_type, light_name, length, length_name, is_rgb):
 definitions = {}
 for type_num in range(1, 6):
     for length, length_name in [(3, "Short"), (5, "Long")]:
-        definitions[f"m_tns_tetsudan_interior_light_type{type_num}_{length}.xml"] = template(
+        definitions[f"m_tns_tetsudan_interior_light_type{type_num}_{length}"] = template(
             light_type=f"type{type_num}",
             light_name=f"Type {type_num}",
             length=length,
             length_name=length_name,
             is_rgb=False
         )
-        definitions[f"m_tns_tetsudan_interior_light_type{type_num}_{length}_rgb.xml"] = template(
+        definitions[f"m_tns_tetsudan_interior_light_type{type_num}_{length}_rgb"] = template(
             light_type=f"type{type_num}",
             light_name=f"Type {type_num}",
             length=length,
             length_name=length_name,
             is_rgb=True
         )
-
-print(json.dumps(definitions))
