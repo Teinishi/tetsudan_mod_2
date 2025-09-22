@@ -1,6 +1,24 @@
 import os
 import bpy  # type: ignore
 import bmesh  # type: ignore
+from typing import Literal
+from contextlib import contextmanager
+
+
+@contextmanager
+def _edit_mode(obj, mode: Literal['VERT', 'EDGE', 'FACE'] | None = None, deselect: bool = False, select_all: bool = False):
+    bpy.context.view_layer.objects.active = obj
+    bpy.ops.object.mode_set(mode='EDIT')
+    if mode is not None:
+        bpy.ops.mesh.select_mode(type=mode)
+    if deselect:
+        bpy.ops.mesh.select_all(action='DESELECT')
+    if select_all:
+        bpy.ops.mesh.select_all(action='SELECT')
+    try:
+        yield bpy.context.active_object
+    finally:
+        bpy.ops.object.mode_set(mode='OBJECT')
 
 
 def collection_set_hide(name, val):
@@ -74,20 +92,21 @@ def translate_vertices(obj, translate, condition=True):
     if condition == True:
         def condition(): return True
 
-    bpy.context.view_layer.objects.active = obj
-    bpy.ops.object.mode_set(mode='EDIT')
-    bpy.ops.mesh.select_mode(type='VERT')
-    bpy.ops.mesh.select_all(action='DESELECT')
-    bm = bmesh.from_edit_mesh(bpy.context.object.data)
-    obj = bpy.context.active_object
+    with _edit_mode(obj, mode='VERT', deselect=True) as obj:
+        bm = bmesh.from_edit_mesh(bpy.context.object.data)
+        for _, v in enumerate(bm.verts):
+            coord = obj.matrix_world @ v.co
+            if condition(coord):
+                v.select = True
+        bpy.ops.transform.translate(value=translate)
 
-    for _, v in enumerate(bm.verts):
-        coord = obj.matrix_world @ v.co
-        if condition(coord):
-            v.select = True
-    bpy.ops.transform.translate(value=translate)
 
-    bpy.ops.object.mode_set(mode='OBJECT')
+def flip_normals(objs):
+    for obj in objs:
+        with _edit_mode(obj, select_all=True) as obj:
+            bm = bmesh.from_edit_mesh(obj.data)
+            if any(f.select for f in bm.faces):
+                bpy.ops.mesh.flip_normals()
 
 
 def unparent_objects(objs):
