@@ -1,22 +1,10 @@
-import itertools
-import os
-import sys
-import importlib
 import math
+import itertools
+from lib import export_utils
 
 OFFSET_SHORT = -0.1
 OFFSET_MEDIUM = -0.16
 OFFSET_LONG = -0.28
-
-dirname = os.path.dirname(os.path.realpath(__file__))
-
-# 共通スクリプトインポート
-module_path = os.path.join(dirname, "scripts")
-if module_path not in sys.path:
-    sys.path.append(module_path)
-export_utils = importlib.import_module("export_utils")
-
-export_path = os.path.join(dirname, "exported")
 
 
 def export_strap(handle_type, handle_offset, belt_type, suffix="", decoratives=[]):
@@ -50,8 +38,7 @@ def export_strap(handle_type, handle_offset, belt_type, suffix="", decoratives=[
     export_utils.rotate_objects(objs, math.radians(-90), "X")
     export_utils.export_objects(
         objs,
-        f"m_tns_tetsudan_strap_{handle_type}_{belt_type}{suffix}.dae",
-        dirname=export_path
+        f"m_tns_tetsudan_strap_{handle_type}_{belt_type}{suffix}.dae"
     )
     export_utils.delete_objects(objs)
 
@@ -91,7 +78,6 @@ export_strap("triangle3", -0.1, 1, decoratives=[("hexagonal_cover", -0.06)])
 for name in ("bar_straight", "bar_straight_paint", "bar_t", "bar_curve"):
     export_utils.export_each_object(
         [export_utils.get_object_by_name(name)],
-        export_path,
         "m_tns_tetsudan_strap_"
     )
 
@@ -101,8 +87,7 @@ objs = export_utils.duplicate_objects(
 export_utils.rotate_objects(objs, math.radians(-90), "X")
 export_utils.export_objects(
     objs,
-    "m_tns_tetsudan_strap_bar_straight_paint_c.dae",
-    dirname=export_path
+    "m_tns_tetsudan_strap_bar_straight_paint_c.dae"
 )
 export_utils.delete_objects(objs)
 
@@ -119,15 +104,13 @@ for support_name in ("support_1", "support_2", "support_3"):
             objs.append(export_utils.get_object_by_name(bar_obj_name))
         export_utils.export_objects(
             objs,
-            f"m_tns_tetsudan_strap_{support_name}{suffix}.dae",
-            dirname=export_path
+            f"m_tns_tetsudan_strap_{support_name}{suffix}.dae"
         )
 
 # 無のメッシュ
 export_utils.export_objects(
     [export_utils.get_object_by_name("nothing")],
-    "m_tns_tetsudan_nothing.dae",
-    dirname=export_path
+    "m_tns_tetsudan_nothing.dae"
 )
 
 # 矢印
@@ -141,7 +124,6 @@ for name, offset in [("short", OFFSET_SHORT), ("medium", OFFSET_MEDIUM), ("long"
     export_utils.rotate_objects(objs, math.radians(-90), "X")
     export_utils.export_objects(
         objs,
-        f"m_tns_tetsudan_arrow_strap_{name}.dae",
-        dirname=export_path
+        f"m_tns_tetsudan_arrow_strap_{name}.dae"
     )
     export_utils.delete_objects(objs)

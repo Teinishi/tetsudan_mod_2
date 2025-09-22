@@ -1,19 +1,7 @@
-import os
-import sys
-import importlib
-
-dirname = os.path.dirname(os.path.realpath(__file__))
-
-# 共通スクリプトインポート
-module_path = os.path.join(dirname, "scripts")
-if module_path not in sys.path:
-    sys.path.append(module_path)
-export_utils = importlib.import_module("export_utils")
-
-export_path = os.path.join(dirname, "exported")
+from lib import export_utils
 
 # downlight コレクションのオブジェクトをエクスポート
-export_utils.collection_export("downlight", export_path, "m_tns_tetsudan_")
+export_utils.collection_export("downlight", "m_tns_tetsudan_")
 
 # 蛍光灯型のオブジェクトをエクスポート
 for type_name in [f"type{i}" for i in range(1, 6)]:
@@ -22,7 +10,6 @@ for type_name in [f"type{i}" for i in range(1, 6)]:
         export_utils.export_objects(
             [obj],
             f"m_tns_tetsudan_interior_light_{type_name}_5{suffix}.dae",
-            dirname=export_path
         )
 
         # 長さを変更したバージョンをエクスポート
@@ -34,6 +21,5 @@ for type_name in [f"type{i}" for i in range(1, 6)]:
         export_utils.export_objects(
             [dup_obj],
             f"m_tns_tetsudan_interior_light_{type_name}_3{suffix}.dae",
-            dirname=export_path
         )
         export_utils.delete_objects([dup_obj])

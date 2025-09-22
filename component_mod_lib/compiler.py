@@ -31,11 +31,12 @@ def _is_vanilla_asset(name: str) -> bool:
     return Path(env["STORMWORKS_ROM_PATH"]).joinpath(name).is_file()
 
 
-def _export_blend_file(blend_file: Path, py_file: Path):
+def _export_blend_file(blend_file: Path, py_file: Path, cwd=Path):
     # blender.exe を実行
     result = subprocess.run(
-        f'"%BLENDER_PATH%" --background "{blend_file}" --python "{py_file}"',
-        shell=True, check=True, capture_output=True, text=True, encoding="utf-8", env=env
+        f'"%BLENDER_PATH%" --background "{blend_file}" --python "{py_file}" --python-exit-code 1 --python-use-system-env',
+        shell=True, check=True, capture_output=True, text=True, encoding="utf-8", cwd=cwd,
+        env={**env, "PYTHONPATH": str(cwd.resolve())}
     )
     if result.stderr is not None and len(result.stderr.strip()) > 0:
         raise RuntimeError(
@@ -304,7 +305,7 @@ class Compiler:
             if not py_file.is_file():
                 py_file = self._blender_path.joinpath("default.py")
 
-            _export_blend_file(blend_file, py_file)
+            _export_blend_file(blend_file, py_file, self._blender_path)
 
             # .mesh の出力先を空にしておく
             if meshes_path.is_dir():
@@ -316,6 +317,10 @@ class Compiler:
                 _compile_mesh(dae_file, meshes_path)
                 self._dependency_cache.add_mesh(
                     dae_file.with_suffix(".mesh").name, blend_name)
+
+        # エクスポート先を空にしておく
+        for dae_file in self._dae_path.glob("*.dae"):
+            os.remove(dae_file)
 
         # .blend が存在しない meshes フォルダは削除
         for entry in self._meshes_path.iterdir():

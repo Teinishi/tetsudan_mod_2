@@ -1,23 +1,7 @@
-import os
-import sys
-import importlib
-
-dirname = os.path.dirname(os.path.realpath(__file__))
-
-# 共通スクリプトインポート
-module_path = os.path.join(dirname, "scripts")
-if module_path not in sys.path:
-    sys.path.append(module_path)
-export_utils = importlib.import_module("export_utils")
-
-export_path = os.path.join(dirname, "exported")
+from lib import export_utils
 
 # auto_export コレクションのオブジェクトをエクスポート
-export_utils.collection_export(
-    "auto_export",
-    export_path,
-    "m_tns_tetsudan_"
-)
+export_utils.collection_export("auto_export", "m_tns_tetsudan_")
 
 # 窓枠とガラス
 for name, i in [
@@ -38,5 +22,4 @@ for name, i in [
             export_utils.get_object_by_name(f"window_glass_{name}")
         ],
         f"m_tns_tetsudan_window_frame_glass_{name}_{i}",
-        dirname=export_path
     )

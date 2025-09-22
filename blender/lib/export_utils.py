@@ -1,8 +1,11 @@
-import os
 import bpy  # type: ignore
 import bmesh  # type: ignore
+import os
+from pathlib import Path
 from typing import Literal
 from contextlib import contextmanager
+
+EXPORT_PATH = Path(__file__).parent.parent.joinpath("exported")
 
 
 @contextmanager
@@ -126,30 +129,28 @@ def apply_modifiers_on_objects(objs, modifier_types):
         apply_modifiers_on_object(obj, modifier_types)
 
 
-def export_objects(objs, filepath, dirname=None):
-    if dirname is not None:
-        filepath = os.path.join(dirname, filepath)
+def export_objects(objs, filename):
     select_objects(objs)
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    os.makedirs(EXPORT_PATH, exist_ok=True)
     bpy.ops.wm.collada_export(
-        filepath=filepath,
+        filepath=str(EXPORT_PATH.joinpath(filename)),
         apply_modifiers=True,
         selected=True
     )
 
 
-def export_each_object(objs, path, prefix, origin_offset=False):
+def export_each_object(objs, prefix, origin_offset=False):
     for obj in objs:
         dup = duplicate_objects([obj])[0]
         if origin_offset:
             dup.location = (0, 0, 0)
-        export_objects(
-            [dup],
-            os.path.join(path, f"{prefix}{obj.name}.dae")
-        )
+        export_objects([dup], f"{prefix}{obj.name}.dae")
         delete_objects([dup])
 
 
-def collection_export(collection_name, path, prefix, origin_offset=False):
+def collection_export(collection_name, prefix, origin_offset=False):
     export_each_object(
-        bpy.data.collections[collection_name].objects, path, prefix, origin_offset=origin_offset)
+        bpy.data.collections[collection_name].objects,
+        prefix,
+        origin_offset=origin_offset
+    )
