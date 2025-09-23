@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definition name="(M)(TNS) Master Controller Type 4" category="6" type="66" lua_filename="m_tns_tetsudan_master_controller_4.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,controller,handle" mesh_data_name="m_tns_tetsudan_master_controller_4_static.mesh" mesh_0_name="m_tns_tetsudan_master_controller_4_dynamic1.mesh" mesh_1_name="m_tns_tetsudan_master_controller_4_dynamic2.mesh">
+<definition name="(M)(TNS) Master Controller Type 5" category="6" type="66" lua_filename="m_tns_tetsudan_master_controller_5.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,controller,handle" mesh_data_name="m_tns_tetsudan_master_controller_5_static.mesh" mesh_0_name="m_tns_tetsudan_master_controller_5_dynamic.mesh">
     <surfaces>
         <surface orientation="0" shape="1" />
         <surface orientation="1" shape="1" />
@@ -24,6 +24,6 @@
             <physics_shape_rotation 00="1" 01="0" 02="0" 10="0" 11="0" 12="-1" 20="0" 21="-1" 22="0"/>
         </voxel>
     </voxels>
-    <tooltip_properties short_description="A master controller handle for trains. Put driving console type 1 on the sides."/>
+    <tooltip_properties short_description="A master controller handle for trains. Put driving console type 2 on the sides."/>
     <reward_properties number_rewarded="10"/>
 </definition>
