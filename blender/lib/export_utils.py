@@ -104,12 +104,21 @@ def translate_vertices(obj, translate, condition=True):
         bpy.ops.transform.translate(value=translate)
 
 
+def reset_normals(objs):
+    for obj in objs:
+        with _edit_mode(obj, select_all=True) as obj:
+            bm = bmesh.from_edit_mesh(obj.data)
+            if any(f.select for f in bm.faces):
+                bpy.ops.mesh.normals_make_consistent(inside=False)
+
+
 def flip_normals(objs):
     for obj in objs:
         with _edit_mode(obj, select_all=True) as obj:
             bm = bmesh.from_edit_mesh(obj.data)
             if any(f.select for f in bm.faces):
                 bpy.ops.mesh.flip_normals()
+                bpy.ops.mesh.normals_make_consistent(inside=False)
 
 
 def unparent_objects(objs):
