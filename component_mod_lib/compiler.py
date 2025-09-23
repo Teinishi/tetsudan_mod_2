@@ -291,8 +291,13 @@ class Compiler:
 
             blend_name = blend_file.with_suffix("").name
             known_blend_names.add(blend_name)
+            py_file = blend_file.with_suffix(".py")
+            if not py_file.is_file():
+                py_file = self._blender_path.joinpath("default.py")
+
             meshes_path = self._meshes_path.joinpath(blend_name)
-            if meshes_path.is_dir() and not self._dependency_cache.newer_than_last_mesh_compile(blend_file):
+            # todo: py ファイルが切り替わっている場合もチェック
+            if meshes_path.is_dir() and not self._dependency_cache.newer_than_last_mesh_compile(blend_file) and not self._dependency_cache.newer_than_last_mesh_compile(py_file):
                 continue
             print(f'Exporting meshes from blend file: "{blend_file}"')
             self._dependency_cache.remove_blend_name(blend_name)
@@ -300,10 +305,6 @@ class Compiler:
             # エクスポート先を空にしておく
             for dae_file in self._dae_path.glob("*.dae"):
                 os.remove(dae_file)
-
-            py_file = blend_file.with_suffix(".py")
-            if not py_file.is_file():
-                py_file = self._blender_path.joinpath("default.py")
 
             _export_blend_file(blend_file, py_file, self._blender_path)
 
