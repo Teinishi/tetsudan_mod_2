@@ -195,7 +195,10 @@ class Compiler:
             raise ValueError(
                 f'File name does not start with "{self._filename_prefix}": {filename}')
 
-    def compile(self, sync_mod_folder: bool = False):
+    def compile(self, sync_mod_folder: bool = False, clear_cache: bool = False):
+        if clear_cache and self._tmp_path.is_dir():
+            shutil.rmtree(self._tmp_path)
+
         cache_file = self._tmp_path.joinpath("cache.json")
         compile_path = self._tmp_path.joinpath("compile")
         self._dependency_cache.open(cache_file)
