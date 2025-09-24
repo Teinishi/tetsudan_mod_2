@@ -36,6 +36,7 @@ local transform0, transform1 = matrix.identity(), matrix.identity()
 function update()
 	if not pos then return end
 	local theta_tgt = lerp(theta_a, theta_b, invlerp(pos, pos_a, pos_b))
+	if theta == theta_tgt then return end
 	theta = theta ~= nil and lerp(theta, theta_tgt, 0.4) or theta_tgt
 	btn_press = lerp(btn_press, pos ~= 0 and 1 or 0, 0.7)
 	transform0 = matrix.rotationY(theta)

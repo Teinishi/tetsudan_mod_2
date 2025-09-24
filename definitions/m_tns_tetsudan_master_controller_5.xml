@@ -5,6 +5,15 @@
         <surface orientation="1" shape="1" />
         <surface orientation="3" shape="1" />
         <surface orientation="4" shape="1" />
+        <surface orientation="0" shape="0">
+            <position z="-1" />
+        </surface>
+        <surface orientation="1" shape="0">
+            <position z="-1" />
+        </surface>
+        <surface orientation="3" shape="0">
+            <position z="-1" />
+        </surface>
     </surfaces>
     <buoyancy_surfaces>
         <surface orientation="0" shape="1" />

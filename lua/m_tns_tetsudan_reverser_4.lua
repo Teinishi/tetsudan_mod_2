@@ -1,9 +1,9 @@
--- include sfx 0 "m_tns_tetsudan_controller_1.ogg"
--- include sfx 1 "m_tns_tetsudan_controller_2.ogg"
+-- include sfx 0 "m_tns_tetsudan_controller_3.ogg"
 
-local PIVOT = {0, 0, 0.02}
-local STEP_START = -8
-local STEP_ANGLES = {8, -2, -7, -12, -17, -22, -27, -33, -40, -49, -58, -66, -74}
+local PIVOT = {0.07, -0.21178, 0.0}
+local STEP_ANGLES = {-20, 0, 20}
+local STEP_START = -1
+local PLATE_Y = -0.10875
 
 local mat_pivot = matrix.translation(PIVOT[1], PIVOT[2], PIVOT[3])
 local mat_pivot_neg = matrix.translation(-PIVOT[1], -PIVOT[2], -PIVOT[3])
@@ -22,7 +22,7 @@ end
 
 local pos = nil
 local theta = nil
-local transform = matrix.identity()
+local transform1, transform2 = matrix.identity(), matrix.identity()
 
 function update(npos)
 	if npos == nil then return end
@@ -34,8 +34,9 @@ function update(npos)
 	else
 		theta = lerp(theta, theta_tgt, 0.4)
 	end
-	transform = matrix.multiply(matrix.rotationX(theta), mat_pivot_neg)
-	transform = matrix.multiply(mat_pivot, transform)
+	transform1 = matrix.multiply(matrix.rotationX(theta), mat_pivot_neg)
+	transform1 = matrix.multiply(mat_pivot, transform1)
+	transform2 = matrix.translation(0, 0, math.tan(theta)*(PLATE_Y - PIVOT[2]))
 end
 
 function onTick()
@@ -43,9 +44,6 @@ function onTick()
 	if success then
 		local npos = clamp(math.floor(value + 0.5), STEP_START, STEP_START + #STEP_ANGLES - 1)
 		if pos ~= nil and npos ~= pos then
-			if npos == 0 or npos == STEP_START then
-				component.sfxPlayOnce(1, 1, 0, 0, 0, 1, 6, 1, 1, 0.5)
-			end
 			component.sfxPlayOnce(0, 0, 0, 0, 0, 1, 6, 1, 1, 0.5)
 		end
 		update(npos)
@@ -53,6 +51,6 @@ function onTick()
 end
 
 function onRender()
-	component.renderMesh0(transform)
-	component.renderMesh1(transform)
+	component.renderMesh0(transform1)
+	component.renderMesh1(transform2)
 end
