@@ -18,7 +18,53 @@ def template(
     <surfaces>{"".join([s.surface_xml() for s in surfaces])}</surfaces>
     <buoyancy_surfaces>{"".join([s.buoyancy_surface_xml() for s in surfaces])}</buoyancy_surfaces>
     <logic_nodes>
-        <logic_node label="Seat data" mode="0" type="5" description="Outputs the axis, hotkey and occupied data from the helm. (On/Off 1+ : Hotkeys) (On/Off 31 : Trigger) (On/Off 32 : Occupied) (Value 1 : [$[action_left]]/[$[action_right]]) (Value 2 : [$[action_up]]/[$[action_down]]) (Value 3 : [$[action_pedal_left]]/[$[action_pedal_right]]) (Value 4 : [$[action_throttle_up]]/[$[action_throttle_down]]) (Value 9 : Look X)  (Value 10 : Look Y)" />
+		<logic_node label="UNUSED" description="This node is not used by anything.">
+			<position y="-1000" />
+		</logic_node>
+		<logic_node label="Trigger [$[action_trigger]]" description="Outputs an on signal when [$[action_trigger]] is held, and off when it is not." />
+		<logic_node label="UNUSED" type="1" description="This node is not used by anything.">
+			<position y="-1002" />
+		</logic_node>
+		<logic_node label="UNUSED" type="1" description="This node is not used by anything.">
+			<position y="-1003" />
+		</logic_node>
+		<logic_node label="UNUSED" type="1" description="This node is not used by anything.">
+			<position y="-1004" />
+		</logic_node>
+		<logic_node label="UNUSED" type="1" description="This node is not used by anything.">
+			<position y="-1005" />
+		</logic_node>
+		<logic_node label="UNUSED" type="1" description="This node is not used by anything.">
+			<position y="-1006" />
+		</logic_node>
+		<logic_node label="UNUSED" type="1" description="This node is not used by anything.">
+			<position y="-1007" />
+		</logic_node>
+		<logic_node label="UNUSED" description="This node is not used by anything.">
+			<position y="-1008" />
+		</logic_node>
+		<logic_node label="UNUSED" description="This node is not used by anything.">
+			<position y="-1009" />
+		</logic_node>
+		<logic_node label="UNUSED" description="This node is not used by anything.">
+			<position y="-1010" />
+		</logic_node>
+		<logic_node label="UNUSED" description="This node is not used by anything.">
+			<position y="-1011" />
+		</logic_node>
+		<logic_node label="UNUSED" description="This node is not used by anything.">
+			<position y="-10012" />
+		</logic_node>
+		<logic_node label="UNUSED" description="This node is not used by anything.">
+			<position y="-10013" />
+		</logic_node>
+        <logic_node label="Seat data" type="5" description="Outputs the axis, hotkey and occupied data from the helm. (On/Off 1+ : Hotkeys) (On/Off 31 : Trigger) (On/Off 32 : Occupied) (Value 1 : [$[action_left]]/[$[action_right]]) (Value 2 : [$[action_up]]/[$[action_down]]) (Value 3 : [$[action_pedal_left]]/[$[action_pedal_right]]) (Value 4 : [$[action_throttle_up]]/[$[action_throttle_down]]) (Value 9 : Look X)  (Value 10 : Look Y)" />
+		<logic_node label="UNUSED" type="7" description="This node is not used by anything.">
+			<position y="-1014" />
+		</logic_node>
+		<logic_node label="UNUSED" mode="1" type="7" description="This node is not used by anything.">
+			<position y="-1015" />
+		</logic_node>
         <logic_node label="Headset Video" mode="1" type="6" description="Displays video UI overlay on a helmet mounted display." />
     </logic_nodes>
     <voxels>

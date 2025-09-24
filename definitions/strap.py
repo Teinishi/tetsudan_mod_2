@@ -13,7 +13,7 @@ def template(name, mesh_name, arrow_name):
 		<logic_node label="Electric" mode="1" type="4" description="">
 			<position x="0" y="0" z="0"/>
 		</logic_node>
-		<logic_node label="Unused" mode="1" type="1" description="This node is not used by anything.">
+		<logic_node label="UNUSED" mode="1" type="1" description="This node is not used by anything.">
 			<position x="0" y="0" z="1000"/>
 		</logic_node>
 		<logic_node label="Pivot Rotation" mode="1" type="1" description="Rotation around the bar axis. [rot]">
