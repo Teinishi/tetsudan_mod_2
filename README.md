@@ -185,3 +185,5 @@ Component Lua API から音声を使う場合、Lua ファイルに次のよう�
     -   T 字マスコンと組み合わせて、運転台手前の面取りを表現するパーツを追加 (Driving Console Type 1, 2)
     -   逆転ハンドル 2 種を追加 (Reverser Type 3, 4)
     -   箱乗り用ハンドルを追加 (Lean Out Handle)
+-   2025/09/24 v0.1.6
+    -   箱乗り用ハンドルの操作入力設定ができなかったのを修正 (Lean Out Handle)
