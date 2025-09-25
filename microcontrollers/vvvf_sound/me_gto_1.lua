@@ -1,5 +1,5 @@
 local cch, sch = property.getNumber"Motor Current Ch.", property.getNumber"Speed Ch."
-local VOLUME = property.getNumber"Volume"
+local VOLUME = property.getNumber"VVVF Sound Volume"
 
 local abs, min, max = math.abs, math.min, math.max
 function onTick()

@@ -35,7 +35,7 @@
 			</c>
 			<c type="56">
 				<object id="3" script='local cch, sch = property.getNumber"Motor Current Ch.", property.getNumber"Speed Ch."
-local VOLUME = property.getNumber"Volume"
+local VOLUME = property.getNumber"VVVF Sound Volume"
 
 local abs, min, max = math.abs, math.min, math.max
 function onTick()
@@ -147,7 +147,7 @@ end
 				<v text="4" value="4"/>
 			</c1>
 			<c2 id="3" script='local cch, sch = property.getNumber"Motor Current Ch.", property.getNumber"Speed Ch."
-local VOLUME = property.getNumber"Volume"
+local VOLUME = property.getNumber"VVVF Sound Volume"
 
 local abs, min, max = math.abs, math.min, math.max
 function onTick()
