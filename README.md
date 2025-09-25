@@ -43,15 +43,13 @@ T 字マスコン (Master Controller Type 4, 5) は運転台手前の面取り�
 
 ### VVVF サウンド
 
--   TD GTO: 東洋 GTO (京成 3700 形未更新車)
--   TD IGBT: 東洋 IGBT (京成 3200 形)
+-   TD GTO: 東洋 GTO (京成 3700 形未更新車) [マイコン](https://steamcommunity.com/sharedfiles/filedetails/?id=3574471337)
+-   TD IGBT: 東洋 IGBT (京成 3200 形) [マイコン](https://steamcommunity.com/sharedfiles/filedetails/?id=3574471442)
 -   ME IGBT: 三菱 IGBT (相鉄 10000 系未更新車)
--   ME SiC: 三菱 SiC-MOSFET (E235 系 1000 番台)
--   ME GTO: 三菱 GTO (阪神 9000 系)
+-   ME SiC: 三菱 SiC-MOSFET (E235 系 1000 番台) [マイコン](https://steamcommunity.com/sharedfiles/filedetails/?id=3574470719)
+-   ME GTO: 三菱 GTO (阪神 9000 系) [マイコン](https://steamcommunity.com/sharedfiles/filedetails/?id=3574470846)
 
 使用する際は別途マイコンと組み合わせて鳴らす音を制御し、惰性走行音と組み合わせてください。同時に再生できるのは 4 音声までです。
-
-VVVF 用マイコンは今後提供予定です。
 
 #### コンポジット入力
 
@@ -188,3 +186,6 @@ Component Lua API から音声を使う場合、Lua ファイルに次のよう�
     -   箱乗り用ハンドルを追加 (Lean Out Handle)
 -   2025/09/24 v0.1.6
     -   箱乗り用ハンドルの操作入力設定ができなかったのを修正 (Lean Out Handle)
+-   2025/09/25 v0.1.7
+    -   ME GTO の VVVF サウンドを追加
+    -   VVVF サウンドマイコンを配布
