@@ -36,7 +36,10 @@ def _export_blend_file(blend_file: Path, py_file: Path, cwd=Path):
     result = subprocess.run(
         f'"%BLENDER_PATH%" --background "{blend_file}" --python "{py_file}" --python-exit-code 1 --python-use-system-env',
         shell=True, check=True, capture_output=True, text=True, encoding="utf-8", cwd=cwd,
-        env={**env, "PYTHONPATH": str(cwd.resolve())}
+        env={
+            "BLENDER_PATH": env["BLENDER_PATH"],
+            "PYTHONPATH": str(cwd.resolve())
+        }
     )
     if result.stderr is not None and len(result.stderr.strip()) > 0:
         raise RuntimeError(
@@ -47,7 +50,8 @@ def _compile_mesh(dae_file: Path, output_dir: Path):
     # mesh_compiler を呼び出す
     subprocess.run(
         f'"%MESH_COMPILER_PATH%" "{dae_file}" -o "{output_dir}" -s',
-        shell=True, check=True, env=env
+        shell=True, check=True,
+        env={"MESH_COMPILER_PATH": env["MESH_COMPILER_PATH"]}
     )
 
 
@@ -272,10 +276,13 @@ class Compiler:
 
         if sync_mod_folder:
             # Mod フォルダも過不足ない状態にする
-            mod_path = Path(env["MOD_PATH"]) if "MOD_PATH" in env else None
-            if not mod_path.is_dir():
-                print(f'WARNING: MOD_PATH in env does not exist: "{mod_path}"')
-                mod_path = None
+            mod_path = env.get("MOD_PATH", None)
+            if mod_path is not None:
+                mod_path = Path(mod_path)
+                if not mod_path.is_dir():
+                    print(
+                        f'WARNING: MOD_PATH in env does not exist: "{mod_path}"')
+                    mod_path = None
             if mod_path is not None:
                 self._sync_bin_files(
                     compile_path, mod_path.joinpath("data", "components"))
@@ -417,7 +424,13 @@ class Compiler:
         cmd = f'"%COMPONENT_MOD_COMPILER_PATH%" "{xml_file.relative_to(compile_path)}" -s'
         for item in dependency.assets():
             cmd += f" {item}"
-        subprocess.run(cmd, shell=True, check=True, env=env, cwd=compile_path)
+        subprocess.run(
+            cmd,
+            env={
+                "COMPONENT_MOD_COMPILER_PATH": env["COMPONENT_MOD_COMPILER_PATH"]
+            },
+            shell=True, check=True, cwd=compile_path
+        )
 
         return xml_file.with_suffix(".bin")
 
