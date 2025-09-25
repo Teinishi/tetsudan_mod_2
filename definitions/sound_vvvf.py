@@ -1,6 +1,5 @@
 import os
 import glob
-import json
 
 
 VVVF_TYPES = [
@@ -8,6 +7,7 @@ VVVF_TYPES = [
     ("td_gto_1", "TD GTO"),
     ("me_igbt_1", "ME IGBT"),
     ("me_sic_1", "ME SiC"),
+    ("me_gto_1", "ME GTO")
 ]
 
 
