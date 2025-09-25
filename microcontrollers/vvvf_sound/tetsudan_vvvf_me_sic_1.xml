@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<microprocessor name="TETSUDAN VVVF Sound (ME SiC)" width="1" length="3" id_counter="54" id_counter_node="4" sym1="2112" sym2="4704" sym3="5240" sym4="5496" sym5="5240" sym6="4704" sym7="2112" sym10="9284" sym11="9284" sym12="60074" sym13="10922" sym14="60074">
+	<nodes>
+		<n id="1" component_id="5">
+			<node label="Status" mode="1" type="5"/>
+		</n>
+		<n id="2" component_id="8">
+			<node label="ME SiC" type="5">
+				<position z="2"/>
+			</node>
+		</n>
+		<n id="3" component_id="11">
+			<node label="Running" type="5">
+				<position z="1"/>
+			</node>
+		</n>
+	</nodes>
+	<group>
+		<data>
+			<inputs/>
+			<outputs/>
+		</data>
+		<components>
+			<c type="34">
+				<object id="1" n="Speed Ch.">
+					<pos x="-1" y="-1.5"/>
+					<v text="7" value="7"/>
+				</object>
+			</c>
+			<c type="34">
+				<object id="2" n="Motor Current Ch.">
+					<pos x="-1" y="-2"/>
+					<v text="4" value="4"/>
+				</object>
+			</c>
+			<c type="56">
+				<object id="3" script='local cch, sch = property.getNumber"Motor Current Ch.", property.getNumber"Speed Ch."
+local VOLUME = property.getNumber"Volume"
+
+local abs, min, max = math.abs, math.min, math.max
+function onTick()
+	local c, s = input.getNumber(cch), input.getNumber(sch)*3.6
+	local volume, pitch = {}, {}
+	if abs(c) &gt; 0 then
+		volume[1] = min(min(2.5*s, 0.5), -1*s + 44.5)
+		pitch[1] = 1
+		if s &lt; 45 then
+			volume[2] = min(0.5*s, 1)
+		end
+		pitch[2] = 1
+		volume[3] = -0.2*s + 3
+		pitch[3] = 0.15432*s
+		volume[4] = -0.071429*s + 3.1429
+		pitch[4] = 0.041667*s
+		if s &lt; 45 then
+			volume[5] = min(0.25*s - 4, 1)
+		end
+		pitch[5] = 0.027778*s
+		if 45 &lt;= s then
+			volume[6] = min(1, -0.1*s + 6)
+		end
+		pitch[6] = 0.019183*s
+		if 45 &lt;= s then
+			volume[7] = min(1, -0.05*s + 5.25)
+		end
+		pitch[7] = 0.013889*s
+		volume[8] = 0.05*s - 3.5
+		pitch[8] = 0.0086806*s
+	end
+	for i = 1, 8 do
+		output.setNumber(2*i - 1, min(max((volume[i] or 0)*VOLUME, 0), 1))
+		output.setNumber(2*i, max(pitch[i] or 0, 0))
+	end
+end
+'>
+					<pos x="2.5" y="-1.75"/>
+					<in1 component_id="5"/>
+				</object>
+			</c>
+			<c type="19">
+				<object id="50" name="VVVF Sound Volume">
+					<pos x="-1" y="-2.5"/>
+					<min text="0"/>
+					<max text="1" value="1"/>
+					<int text="0.01" value="0.01"/>
+					<v text="0.7" value="0.7"/>
+				</object>
+			</c>
+			<c type="58">
+				<object id="51" n="Running Sound" v="4,6">
+					<pos x="-1" y="-3"/>
+				</object>
+			</c>
+			<c type="56">
+				<object id="54" script='local sch = property.getNumber"Speed Ch."
+local RUNNING_SOUND_INDICES = {}
+for s in (property.getText"Running Sound"):gmatch("([^,]+)") do
+	table.insert(RUNNING_SOUND_INDICES, tonumber(s))
+end
+
+function onTick()
+	local speed = input.getNumber(sch)
+	local volume = speed*3.6/60
+	for _, i in ipairs(RUNNING_SOUND_INDICES) do
+		output.setNumber(2*i - 1, volume)
+		output.setNumber(2*i, speed)
+	end
+end
+'>
+					<pos x="2.5" y="-2.5"/>
+					<in1 component_id="5"/>
+				</object>
+			</c>
+		</components>
+		<components_bridge>
+			<c type="4">
+				<object id="5">
+					<pos x="1.25" y="-1.5"/>
+				</object>
+			</c>
+			<c type="5">
+				<object id="8">
+					<pos x="3.75" y="-1.5"/>
+					<in1 component_id="3"/>
+				</object>
+			</c>
+			<c type="5">
+				<object id="11">
+					<pos x="3.75" y="-2.25"/>
+					<in1 component_id="54"/>
+				</object>
+			</c>
+		</components_bridge>
+		<groups/>
+		<component_states>
+			<c0 id="1" n="Speed Ch.">
+				<pos x="-1" y="-1.5"/>
+				<v text="7" value="7"/>
+			</c0>
+			<c1 id="2" n="Motor Current Ch.">
+				<pos x="-1" y="-2"/>
+				<v text="4" value="4"/>
+			</c1>
+			<c2 id="3" script='local cch, sch = property.getNumber"Motor Current Ch.", property.getNumber"Speed Ch."
+local VOLUME = property.getNumber"Volume"
+
+local abs, min, max = math.abs, math.min, math.max
+function onTick()
+	local c, s = input.getNumber(cch), input.getNumber(sch)*3.6
+	local volume, pitch = {}, {}
+	if abs(c) &gt; 0 then
+		volume[1] = min(min(2.5*s, 0.5), -1*s + 44.5)
+		pitch[1] = 1
+		if s &lt; 45 then
+			volume[2] = min(0.5*s, 1)
+		end
+		pitch[2] = 1
+		volume[3] = -0.2*s + 3
+		pitch[3] = 0.15432*s
+		volume[4] = -0.071429*s + 3.1429
+		pitch[4] = 0.041667*s
+		if s &lt; 45 then
+			volume[5] = min(0.25*s - 4, 1)
+		end
+		pitch[5] = 0.027778*s
+		if 45 &lt;= s then
+			volume[6] = min(1, -0.1*s + 6)
+		end
+		pitch[6] = 0.019183*s
+		if 45 &lt;= s then
+			volume[7] = min(1, -0.05*s + 5.25)
+		end
+		pitch[7] = 0.013889*s
+		volume[8] = 0.05*s - 3.5
+		pitch[8] = 0.0086806*s
+	end
+	for i = 1, 8 do
+		output.setNumber(2*i - 1, min(max((volume[i] or 0)*VOLUME, 0), 1))
+		output.setNumber(2*i, max(pitch[i] or 0, 0))
+	end
+end
+'>
+				<pos x="2.5" y="-1.75"/>
+				<in1 component_id="5"/>
+			</c2>
+			<c3 id="50" name="VVVF Sound Volume">
+				<pos x="-1" y="-2.5"/>
+				<min text="0"/>
+				<max text="1" value="1"/>
+				<int text="0.01" value="0.01"/>
+				<v text="0.7" value="0.7"/>
+			</c3>
+			<c4 id="51" n="Running Sound" v="4,6">
+				<pos x="-1" y="-3"/>
+			</c4>
+			<c5 id="54" script='local sch = property.getNumber"Speed Ch."
+local RUNNING_SOUND_INDICES = {}
+for s in (property.getText"Running Sound"):gmatch("([^,]+)") do
+	table.insert(RUNNING_SOUND_INDICES, tonumber(s))
+end
+
+function onTick()
+	local speed = input.getNumber(sch)
+	local volume = speed*3.6/60
+	for _, i in ipairs(RUNNING_SOUND_INDICES) do
+		output.setNumber(2*i - 1, volume)
+		output.setNumber(2*i, speed)
+	end
+end
+'>
+				<pos x="2.5" y="-2.5"/>
+				<in1 component_id="5"/>
+			</c5>
+		</component_states>
+		<component_bridge_states>
+			<c0 id="5">
+				<pos x="1.25" y="-1.5"/>
+			</c0>
+			<c1 id="8">
+				<pos x="3.75" y="-1.5"/>
+				<in1 component_id="3"/>
+			</c1>
+			<c2 id="11">
+				<pos x="3.75" y="-2.25"/>
+				<in1 component_id="54"/>
+			</c2>
+		</component_bridge_states>
+		<group_states/>
+	</group>
+</microprocessor>
+

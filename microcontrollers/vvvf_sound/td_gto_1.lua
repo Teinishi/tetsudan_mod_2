@@ -1,8 +1,9 @@
+local cch, sch = property.getNumber"Motor Current Ch.", property.getNumber"Speed Ch."
+local VOLUME = property.getNumber"Volume"
+
 local abs, min, max = math.abs, math.min, math.max
-local pN, gN, sN = property.getNumber, input.getNumber, output.setNumber
-local cch, sch = pN"Motor Current Ch.", pN"Speed Ch."
 function onTick()
-	local c, s = gN(cch), gN(sch)*3.6
+	local c, s = input.getNumber(cch), input.getNumber(sch)*3.6
 	local volume, pitch = {}, {}
 	if abs(c) > 0 then
 		if 20 <= s then
@@ -36,7 +37,7 @@ function onTick()
 		pitch[2] = max(max(0.0025*s + 0.77, 0.025625*s + 0.6775), 0.025625*s + 0.6775)
 	end
 	for i = 1, 7 do
-		sN(2*i - 1, min(max(volume[i] or 0, 0), 1))
-		sN(2*i, max(pitch[i] or 0, 0))
+		output.setNumber(2*i - 1, min(max((volume[i] or 0)*VOLUME, 0), 1))
+		output.setNumber(2*i, max(pitch[i] or 0, 0))
 	end
 end

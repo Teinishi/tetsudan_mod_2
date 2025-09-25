@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<microprocessor name="TETSUDAN Train Strap" width="2" length="3" id_counter="19" id_counter_node="5" sym1="960" sym2="1632" sym3="1056" sym4="1056" sym5="1632" sym6="960" sym7="384" sym8="384" sym9="384" sym10="384" sym11="384" sym12="384" sym13="65535" sym14="384">
+	<nodes>
+		<n id="1" component_id="2">
+			<node label="Physics Sensor" mode="1" type="5"/>
+		</n>
+		<n id="2" component_id="5">
+			<node label="Pivot Rotation (Right+)" type="1">
+				<position z="1"/>
+			</node>
+		</n>
+		<n id="3" component_id="8">
+			<node label="Pitch Rotation (Back+)" type="1">
+				<position z="2"/>
+			</node>
+		</n>
+		<n id="4" component_id="11">
+			<node label="Pivot Rotation (Forward+)" type="1">
+				<position x="1" z="1"/>
+			</node>
+		</n>
+		<n id="5" component_id="14">
+			<node label="Pitch Rotation (Right+)" type="1">
+				<position x="1" z="2"/>
+			</node>
+		</n>
+	</nodes>
+	<group>
+		<data>
+			<inputs/>
+			<outputs/>
+		</data>
+		<components>
+			<c type="56">
+				<object id="15" script="local GRAVITY = {0, -10, 0}
+local TAU = math.pi * 2
+
+local sin, cos = math.sin, math.cos
+
+local function dot(a, b) return a[1]*b[1] + a[2]*b[2] + a[3]*b[3] end
+
+local function cross(a, b)
+	return {
+		a[2]*b[3] - a[3]*b[2],
+		a[3]*b[1] - a[1]*b[3],
+		a[1]*b[2] - a[2]*b[1]
+	}
+end
+
+local function add(a, b)
+	return {a[1] + b[1], a[2] + b[2], a[3] + b[3]}
+end
+
+local function sub(a, b)
+	return {a[1] - b[1], a[2] - b[2], a[3] - b[3]}
+end
+
+local function mul(a, s)
+	return {a[1]*s, a[2]*s, a[3]*s}
+end
+
+local function norm(v)
+	return math.sqrt(dot(v, v))
+end
+
+local function normalize(v)
+	return mul(v, 1 / norm(v))
+end
+
+local function mat3_mul_vec3(M, v)
+	return {
+		M[1]*v[1] + M[2]*v[2] + M[3]*v[3],
+		M[4]*v[1] + M[5]*v[2] + M[6]*v[3],
+		M[7]*v[1] + M[8]*v[2] + M[9]*v[3]
+	}
+end
+
+local function mat3T_mul_vec3(M, v)
+	return {
+		M[1]*v[1] + M[4]*v[2] + M[7]*v[3],
+		M[2]*v[1] + M[5]*v[2] + M[8]*v[3],
+		M[3]*v[1] + M[6]*v[2] + M[9]*v[3]
+	}
+end
+
+function apparent_gravity(R, v_local, omega_local, a_local)
+	local omega_world = mat3_mul_vec3(R, omega_local)
+	local a_world = mat3_mul_vec3(R, a_local)
+
+	local a_inertial = a_world
+
+	local w2 = dot(omega_world, omega_world)
+	if w2 &gt; 1e-10 then
+		local v_world = mat3_mul_vec3(R, v_local)
+		local r_world = mul(cross(omega_world, v_world), -1/w2)
+		local a_centrifugal = cross(omega_world, cross(omega_world, r_world))
+		a_inertial = add(a_inertial, a_centrifugal)
+	end
+
+	return mat3T_mul_vec3(R, sub(GRAVITY, a_inertial))
+end
+
+local function rodrigues(axis, s)
+	if dot(axis, axis) &lt; 1e-10 then
+		return {
+			1, 0, 0,
+			0, 1, 0,
+			0, 0, 1,
+		}
+	end
+	axis = normalize(axis)
+
+	local c = math.sqrt(1 - s*s)
+	local one_c = 1 - c
+	local ux, uy, uz = axis[1], axis[2], axis[3]
+
+	local r00 = c + ux*ux*one_c
+	local r01 = ux*uy*one_c - uz*s
+	local r02 = ux*uz*one_c + uy*s
+	local r10 = uy*ux*one_c + uz*s
+	local r11 = c + uy*uy*one_c
+	local r12 = uy*uz*one_c - ux*s
+	local r20 = uz*ux*one_c - uy*s
+	local r21 = uz*uy*one_c + ux*s
+	local r22 = c + uz*uz*one_c
+
+	return {
+		r00, r01, r02,
+		r10, r11, r12,
+		r20, r21, r22,
+	}
+end
+
+local function simulate_pendulum(dir, omega, g, k, d, dt)
+	local axis = cross(dir, normalize(g))
+	local alpha = add(mul(axis, k), mul(omega, -d))
+	local omega_new = add(omega, mul(alpha, dt))
+	local omega2 = dot(omega_new, omega_new)
+	local dir_new = mat3_mul_vec3(rodrigues(omega, math.sin(math.sqrt(omega2) * dt)), dir)
+
+	return dir_new, omega_new
+end
+
+local function vector_to_angles(vec)
+	local x, y, z = vec[1], vec[2], vec[3]
+	local r_xy = math.sqrt(x*x + y*y)
+	local alpha = math.atan(-z, r_xy)
+	local beta = 0
+	if r_xy &gt; 1e-5 then
+		beta = math.atan(x, -y)
+	end
+	return alpha, beta
+end
+
+local v_local = {0, 0, 0}
+local p_omega = {0, 0, 0}
+local p_dir = {0, -1, 0}
+
+local gN = input.getNumber
+
+function onTick()
+	local euler_x, euler_y, euler_z = gN(4), gN(5), gN(6)
+	local sx, cx = sin(euler_x), cos(euler_x)
+	local sy, cy = sin(euler_y), cos(euler_y)
+	local sz, cz = sin(euler_z), cos(euler_z)
+	local R = {
+		cy*cz, sx*sy*cz - cx*sz, cx*sy*cz + sx*sz,
+		cy*sz, sx*sy*sz + cx*cz, cx*sy*sz - sx*cz,
+		-sy, sx*cy, cx*cy
+	}
+
+	local v_local_new = {gN(7), gN(8), gN(9)}
+	local a_local = mul(sub(v_local_new, v_local), 60)
+	v_local = v_local_new
+
+	local omega_local = {gN(10), gN(11), gN(12)}
+
+	local g = apparent_gravity(R, v_local, omega_local, a_local)
+	p_dir, p_omega = simulate_pendulum(p_dir, p_omega, g, 25, 2, 1/60)
+
+	local alpha1, beta1 = vector_to_angles(p_dir)
+	local alpha2, beta2 = vector_to_angles({p_dir[3], p_dir[2], -p_dir[1]})
+	output.setNumber(1, beta1 / TAU) -- Pivot Rotation (Right+)
+	output.setNumber(2, alpha1 / 2.1363) -- Pitch Rotation (Back+)
+	output.setNumber(3, beta2 / TAU) -- Pivot Rotation (Forward+)
+	output.setNumber(4, alpha2 / 2.1363) -- Pitch Rotation (Right+)
+end
+">
+					<pos x="-0.75" y="-1.75"/>
+					<in1 component_id="2"/>
+				</object>
+			</c>
+			<c type="31">
+				<object id="16">
+					<pos x="0.5" y="-1.5"/>
+					<in1 component_id="15"/>
+				</object>
+			</c>
+			<c type="31">
+				<object id="17" i="1">
+					<pos x="0.5" y="-2"/>
+					<in1 component_id="15"/>
+				</object>
+			</c>
+			<c type="31">
+				<object id="18" i="2">
+					<pos x="0.5" y="-2.5"/>
+					<in1 component_id="15"/>
+				</object>
+			</c>
+			<c type="31">
+				<object id="19" i="3">
+					<pos x="0.5" y="-3"/>
+					<in1 component_id="15"/>
+				</object>
+			</c>
+		</components>
+		<components_bridge>
+			<c type="4">
+				<object id="2">
+					<pos x="-2" y="-1.5"/>
+				</object>
+			</c>
+			<c type="3">
+				<object id="5">
+					<pos x="1.75" y="-1.5"/>
+					<in1 component_id="16"/>
+				</object>
+			</c>
+			<c type="3">
+				<object id="8">
+					<pos x="1.75" y="-2"/>
+					<in1 component_id="17"/>
+				</object>
+			</c>
+			<c type="3">
+				<object id="11">
+					<pos x="1.75" y="-2.5"/>
+					<in1 component_id="18"/>
+				</object>
+			</c>
+			<c type="3">
+				<object id="14">
+					<pos x="1.75" y="-3"/>
+					<in1 component_id="19"/>
+				</object>
+			</c>
+		</components_bridge>
+		<groups/>
+		<component_states>
+			<c0 id="15" script="local GRAVITY = {0, -10, 0}
+local TAU = math.pi * 2
+
+local sin, cos = math.sin, math.cos
+
+local function dot(a, b) return a[1]*b[1] + a[2]*b[2] + a[3]*b[3] end
+
+local function cross(a, b)
+	return {
+		a[2]*b[3] - a[3]*b[2],
+		a[3]*b[1] - a[1]*b[3],
+		a[1]*b[2] - a[2]*b[1]
+	}
+end
+
+local function add(a, b)
+	return {a[1] + b[1], a[2] + b[2], a[3] + b[3]}
+end
+
+local function sub(a, b)
+	return {a[1] - b[1], a[2] - b[2], a[3] - b[3]}
+end
+
+local function mul(a, s)
+	return {a[1]*s, a[2]*s, a[3]*s}
+end
+
+local function norm(v)
+	return math.sqrt(dot(v, v))
+end
+
+local function normalize(v)
+	return mul(v, 1 / norm(v))
+end
+
+local function mat3_mul_vec3(M, v)
+	return {
+		M[1]*v[1] + M[2]*v[2] + M[3]*v[3],
+		M[4]*v[1] + M[5]*v[2] + M[6]*v[3],
+		M[7]*v[1] + M[8]*v[2] + M[9]*v[3]
+	}
+end
+
+local function mat3T_mul_vec3(M, v)
+	return {
+		M[1]*v[1] + M[4]*v[2] + M[7]*v[3],
+		M[2]*v[1] + M[5]*v[2] + M[8]*v[3],
+		M[3]*v[1] + M[6]*v[2] + M[9]*v[3]
+	}
+end
+
+function apparent_gravity(R, v_local, omega_local, a_local)
+	local omega_world = mat3_mul_vec3(R, omega_local)
+	local a_world = mat3_mul_vec3(R, a_local)
+
+	local a_inertial = a_world
+
+	local w2 = dot(omega_world, omega_world)
+	if w2 &gt; 1e-10 then
+		local v_world = mat3_mul_vec3(R, v_local)
+		local r_world = mul(cross(omega_world, v_world), -1/w2)
+		local a_centrifugal = cross(omega_world, cross(omega_world, r_world))
+		a_inertial = add(a_inertial, a_centrifugal)
+	end
+
+	return mat3T_mul_vec3(R, sub(GRAVITY, a_inertial))
+end
+
+local function rodrigues(axis, s)
+	if dot(axis, axis) &lt; 1e-10 then
+		return {
+			1, 0, 0,
+			0, 1, 0,
+			0, 0, 1,
+		}
+	end
+	axis = normalize(axis)
+
+	local c = math.sqrt(1 - s*s)
+	local one_c = 1 - c
+	local ux, uy, uz = axis[1], axis[2], axis[3]
+
+	local r00 = c + ux*ux*one_c
+	local r01 = ux*uy*one_c - uz*s
+	local r02 = ux*uz*one_c + uy*s
+	local r10 = uy*ux*one_c + uz*s
+	local r11 = c + uy*uy*one_c
+	local r12 = uy*uz*one_c - ux*s
+	local r20 = uz*ux*one_c - uy*s
+	local r21 = uz*uy*one_c + ux*s
+	local r22 = c + uz*uz*one_c
+
+	return {
+		r00, r01, r02,
+		r10, r11, r12,
+		r20, r21, r22,
+	}
+end
+
+local function simulate_pendulum(dir, omega, g, k, d, dt)
+	local axis = cross(dir, normalize(g))
+	local alpha = add(mul(axis, k), mul(omega, -d))
+	local omega_new = add(omega, mul(alpha, dt))
+	local omega2 = dot(omega_new, omega_new)
+	local dir_new = mat3_mul_vec3(rodrigues(omega, math.sin(math.sqrt(omega2) * dt)), dir)
+
+	return dir_new, omega_new
+end
+
+local function vector_to_angles(vec)
+	local x, y, z = vec[1], vec[2], vec[3]
+	local r_xy = math.sqrt(x*x + y*y)
+	local alpha = math.atan(-z, r_xy)
+	local beta = 0
+	if r_xy &gt; 1e-5 then
+		beta = math.atan(x, -y)
+	end
+	return alpha, beta
+end
+
+local v_local = {0, 0, 0}
+local p_omega = {0, 0, 0}
+local p_dir = {0, -1, 0}
+
+local gN = input.getNumber
+
+function onTick()
+	local euler_x, euler_y, euler_z = gN(4), gN(5), gN(6)
+	local sx, cx = sin(euler_x), cos(euler_x)
+	local sy, cy = sin(euler_y), cos(euler_y)
+	local sz, cz = sin(euler_z), cos(euler_z)
+	local R = {
+		cy*cz, sx*sy*cz - cx*sz, cx*sy*cz + sx*sz,
+		cy*sz, sx*sy*sz + cx*cz, cx*sy*sz - sx*cz,
+		-sy, sx*cy, cx*cy
+	}
+
+	local v_local_new = {gN(7), gN(8), gN(9)}
+	local a_local = mul(sub(v_local_new, v_local), 60)
+	v_local = v_local_new
+
+	local omega_local = {gN(10), gN(11), gN(12)}
+
+	local g = apparent_gravity(R, v_local, omega_local, a_local)
+	p_dir, p_omega = simulate_pendulum(p_dir, p_omega, g, 25, 2, 1/60)
+
+	local alpha1, beta1 = vector_to_angles(p_dir)
+	local alpha2, beta2 = vector_to_angles({p_dir[3], p_dir[2], -p_dir[1]})
+	output.setNumber(1, beta1 / TAU) -- Pivot Rotation (Right+)
+	output.setNumber(2, alpha1 / 2.1363) -- Pitch Rotation (Back+)
+	output.setNumber(3, beta2 / TAU) -- Pivot Rotation (Forward+)
+	output.setNumber(4, alpha2 / 2.1363) -- Pitch Rotation (Right+)
+end
+">
+				<pos x="-0.75" y="-1.75"/>
+				<in1 component_id="2"/>
+			</c0>
+			<c1 id="16">
+				<pos x="0.5" y="-1.5"/>
+				<in1 component_id="15"/>
+			</c1>
+			<c2 id="17" i="1">
+				<pos x="0.5" y="-2"/>
+				<in1 component_id="15"/>
+			</c2>
+			<c3 id="18" i="2">
+				<pos x="0.5" y="-2.5"/>
+				<in1 component_id="15"/>
+			</c3>
+			<c4 id="19" i="3">
+				<pos x="0.5" y="-3"/>
+				<in1 component_id="15"/>
+			</c4>
+		</component_states>
+		<component_bridge_states>
+			<c0 id="2">
+				<pos x="-2" y="-1.5"/>
+			</c0>
+			<c1 id="5">
+				<pos x="1.75" y="-1.5"/>
+				<in1 component_id="16"/>
+			</c1>
+			<c2 id="8">
+				<pos x="1.75" y="-2"/>
+				<in1 component_id="17"/>
+			</c2>
+			<c3 id="11">
+				<pos x="1.75" y="-2.5"/>
+				<in1 component_id="18"/>
+			</c3>
+			<c4 id="14">
+				<pos x="1.75" y="-3"/>
+				<in1 component_id="19"/>
+			</c4>
+		</component_bridge_states>
+		<group_states/>
+	</group>
+</microprocessor>
+
