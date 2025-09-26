@@ -44,8 +44,10 @@ function onTick()
 		local npos = clamp(math.floor(value + 0.5), STEP_START, STEP_START + #STEP_ANGLES - 1)
 		if pos ~= nil and npos ~= pos then
 			if npos == 0 or npos == STEP_START then
+				component.sfxStop(1)
 				component.sfxPlayOnce(1, 1, 0, 0, 0, 1, 6, 1, 1, 0.5)
 			end
+			component.sfxStop(0)
 			component.sfxPlayOnce(0, 0, 0, 0, 0, 1, 6, 1, 1, 0.5)
 		end
 		update(npos)

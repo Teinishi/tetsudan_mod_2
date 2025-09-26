@@ -63,6 +63,7 @@ function onTick()
 	if success then
 		local npos = clamp(math.floor(value + 0.5), pos_a, pos_b)
 		if pos ~= nil and npos ~= pos then
+			component.sfxStop(0)
 			component.sfxPlayOnce(0, 0, 0, 0, 0, 1, 6, 1, 1.2, 0.5)
 		end
 		pos = npos
