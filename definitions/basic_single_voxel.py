@@ -112,6 +112,32 @@ definitions = {
         physics_shape=1,
         flags=DRAGGABLE_X | DRAGGABLE_Z
     ),
+    "m_tns_tetsudan_basic_wedge1_1q": template(
+        "Quarter Wedge",
+        0.25,
+        [
+            Surface(0),
+            Surface(1),
+            Surface(3),
+            Surface(4),
+        ],
+        "basic_wedge1_1q",
+        physics_shape=1,
+        flags=DRAGGABLE_X
+    ),
+    "m_tns_tetsudan_basic_wedge1_2q": template(
+        "Half Wedge",
+        0.25,
+        [
+            Surface(0),
+            Surface(1),
+            Surface(3),
+            Surface(4),
+        ],
+        "basic_wedge1_2q",
+        physics_shape=1,
+        flags=DRAGGABLE_X
+    ),
     "m_tns_tetsudan_basic_wedge2_1": template(
         "Wedge 1x2 Voxel 1",
         0.75,
