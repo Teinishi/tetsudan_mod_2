@@ -2,8 +2,8 @@
 -- include sfx 1 "m_tns_tetsudan_buzzer_2.ogg"
 -- include sfx 2 "m_tns_tetsudan_buzzer_2_400.ogg"
 
-RADIUS_INNER = 1
-RADIUS_OUTER = 5
+RADIUS_INNER = 2
+RADIUS_OUTER = 15
 
 local play_state = {}
 
