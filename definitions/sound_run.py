@@ -3,8 +3,8 @@ import glob
 import re
 
 RUN_TYPES = {
-    ("1", ""),
-    ("point", " Point")
+    ("1", "", False),
+    ("point", " Point", True)
 }
 
 
@@ -37,13 +37,13 @@ def template(name, n):
 '''
 
 
-def lua_prefix(sound_files: list[str], base_speed: list[tuple[int, float]]):
+def lua_prefix(sound_files: list[str], base_speed: list[tuple[int, float]], once: bool):
     lua = ""
     for i, file in enumerate(sound_files):
         lua += f'-- include sfx {i} "{file}"\n'
     lua += "BASE_SPEED = {"
     lua += ", ".join([f"[{k}] = {v}" for k, v in base_speed])
-    lua += "}\n"
+    lua += f"}}\nONCE = {"true" if once else "false"}\n"
     return lua
 
 
@@ -65,7 +65,7 @@ for file in glob.glob("m_tns_tetsudan_run_*.ogg", root_dir=audio_dir):
     data[name_raw][key] = (file, speed)
 
 definitions = {}
-for name_raw, name in RUN_TYPES:
+for name_raw, name, once in RUN_TYPES:
     items = data.get(name_raw)
     if items is None:
         continue
@@ -78,5 +78,5 @@ for name_raw, name in RUN_TYPES:
 
     definitions[f"m_tns_tetsudan_sound_run_{name_raw}"] = {
         "xml": template(name, len(sound_files)),
-        "luaPrefix": lua_prefix(sound_files, base_speed),
+        "luaPrefix": lua_prefix(sound_files, base_speed, once),
     }

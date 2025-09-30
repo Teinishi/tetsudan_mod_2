@@ -62,7 +62,7 @@ function onTick()
 			local volume, speed = clamp(fv[2 * i - 1], 0, 1), fv[2 * i]
 			local base = BASE_SPEED[i]
 			if base ~= nil then
-				sfx_update(i, volume, 3.6 * speed / base)
+				sfx_update(i, volume, 3.6 * speed / base, ONCE)
 			end
 		end
 	end
