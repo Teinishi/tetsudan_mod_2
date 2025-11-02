@@ -3,8 +3,7 @@ import glob
 import re
 
 RUN_TYPES = {
-    ("1", "", False),
-    ("point", " Point", True)
+    ("1", "", False)
 }
 
 

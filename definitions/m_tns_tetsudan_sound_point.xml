@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition name="(M)(TNS) Train Point Running Sound" category="6" type="66" lua_filename="m_tns_tetsudan_sound_point.lua" mass="1" value="10" flags="0" tags="mod,tetsudan,train,sound,buzzer" mesh_data_name="m_tns_tetsudan_buzzer_wide.mesh">
+    <surfaces>
+        <surface orientation="1" shape="1" />
+        <surface orientation="3" shape="1" />
+        <surface orientation="4" shape="1" />
+        <surface orientation="5" shape="1" />
+        <surface orientation="0" shape="1">
+            <position x="1" />
+        </surface>
+        <surface orientation="3" shape="1">
+            <position x="1" />
+        </surface>
+        <surface orientation="4" shape="1">
+            <position x="1" />
+        </surface>
+        <surface orientation="5" shape="1">
+            <position x="1" />
+        </surface>
+    </surfaces>
+    <buoyancy_surfaces>
+        <surface orientation="1" shape="1" />
+        <surface orientation="3" shape="1" />
+        <surface orientation="4" shape="1" />
+        <surface orientation="5" shape="1" />
+        <surface orientation="0" shape="1">
+            <position x="1" />
+        </surface>
+        <surface orientation="3" shape="1">
+            <position x="1" />
+        </surface>
+        <surface orientation="4" shape="1">
+            <position x="1" />
+        </surface>
+        <surface orientation="5" shape="1">
+            <position x="1" />
+        </surface>
+    </buoyancy_surfaces>
+    <logic_nodes>
+        <logic_node label="Physics Sensor 1" mode="1" type="5" description="Connect from physics sensor near front wheel." />
+        <logic_node label="Physics Sensor 2" mode="1" type="5" description="Connect from physics sensor near rear wheel.">
+            <position x="1" />
+        </logic_node>
+    </logic_nodes>
+    <voxels>
+        <voxel flags="1" />
+        <voxel flags="1">
+            <position x="1" />
+        </voxel>
+    </voxels>
+    <tooltip_properties short_description="Train running sound."/>
+    <reward_properties number_rewarded="10"/>
+</definition>
