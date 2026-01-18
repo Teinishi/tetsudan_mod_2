@@ -5,7 +5,8 @@ import glob
 VVVF_TYPES = [
     ("td_igbt_1", "TD IGBT"),
     ("td_gto_1", "TD GTO"),
-    ("me_igbt_1", "ME IGBT"),
+    ("me_igbt_1", "ME IGBT (1)"),
+    ("me_igbt_m1", "ME IGBT (M)"),
     ("me_sic_1", "ME SiC"),
     ("me_gto_1", "ME GTO")
 ]
